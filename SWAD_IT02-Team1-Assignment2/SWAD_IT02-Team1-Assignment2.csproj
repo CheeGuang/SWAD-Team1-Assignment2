@@ -50,7 +50,9 @@
     <Compile Include="Car.cs" />
     <Compile Include="Card.cs" />
     <Compile Include="CarOwner.cs" />
+    <Compile Include="CTL_ModifyBooking.cs" />
     <Compile Include="DigitalWallet.cs" />
+    <Compile Include="EmailSystem.cs" />
     <Compile Include="ICarAdmin.cs" />
     <Compile Include="Insurance.cs" />
     <Compile Include="Payment.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="Renter.cs" />
     <Compile Include="ReturnLocation.cs" />
     <Compile Include="ReturnTimeslot.cs" />
+    <Compile Include="UI_ModifyBooking.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>

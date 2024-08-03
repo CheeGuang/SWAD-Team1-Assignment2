@@ -112,6 +112,15 @@ namespace SWAD_IT02_Team1_Assignment2
         {
             return car.Id;
         }
+        public string GetRenterEmail()
+        {
+            return user.Email;
+        }
+
+        public string GetCarOwnerEmail()
+        {
+            return car.CarOwner.Email;
+        }
         public void CheckAvailability() { /* undefined */ }
         public void ModifyBooking() { /* undefined */ }
         public void GetFinalUSD() { /* undefined */ }
@@ -137,6 +146,14 @@ namespace SWAD_IT02_Team1_Assignment2
             {
                 return "Return location not found";
             }
+        }
+        public void ModifyBooking(DateTime newStartDateTime, DateTime newEndDateTime, PickupLocation newPickupLocation, ReturnLocation newReturnLocation, decimal newAmount)
+        {
+            this.RentStartDateTime = newStartDateTime;
+            this.RentEndDateTime = newEndDateTime;
+            this.PickupLocation = newPickupLocation;
+            this.ReturnLocation = newReturnLocation;
+            this.Amount = newAmount;            
         }
     }
 }

@@ -16,8 +16,9 @@ namespace SWAD_IT02_Team1_Assignment2
         private Insurance insurance;
         private List<Photo> photos;
         private List<AvailabilitySchedule> availabilitySchedules;
+        private CarOwner carOwner;
 
-        public Car(int id, string make, string model, int year, decimal mileage, decimal rentalPrice, string numberPlate, bool isVerified, bool isAvailable)
+        public Car(int id, string make, string model, int year, decimal mileage, decimal rentalPrice, string numberPlate, bool isVerified, bool isAvailable, CarOwner carOwner)
         {
             this.id = id;
             this.make = make;
@@ -30,6 +31,7 @@ namespace SWAD_IT02_Team1_Assignment2
             this.isAvailable = isAvailable;
             this.photos = new List<Photo>();
             this.availabilitySchedules = new List<AvailabilitySchedule>();
+            this.carOwner = carOwner;
         }
 
         public int Id
@@ -91,6 +93,11 @@ namespace SWAD_IT02_Team1_Assignment2
         {
             get { return availabilitySchedules; }
             set { availabilitySchedules = value; }
+        }
+        public CarOwner CarOwner
+        {
+            get { return carOwner; }
+            set { carOwner = value; }
         }
 
         public void AddPhoto(Photo photo)

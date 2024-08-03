@@ -46,5 +46,10 @@ namespace SWAD_IT02_Team1_Assignment2
             get { return card; }
             set { card = value; }
         }
+
+        public void MakePayment(decimal paymentAmount)
+        {
+            Console.WriteLine($"Payment ${paymentAmount} successful.");
+        }
     }
 }
