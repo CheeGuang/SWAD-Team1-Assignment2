@@ -11,10 +11,11 @@ namespace SWAD_IT02_Team1_Assignment2
             // Sender Email Details
             string fromMail = "jeffreyleeprg2@gmail.com";
             string fromPassword = "cuhmvmdqllulsucg";
+            string senderName = "ICar Car Rental Service";
 
             // Initialising and configuring message object
             MailMessage message = new MailMessage();
-            message.From = new MailAddress(fromMail);
+            message.From = new MailAddress(fromMail, senderName);
             message.Subject = "ICar Car Rental Service Booking Confirmation";
             try
             {
