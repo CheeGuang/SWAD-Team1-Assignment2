@@ -16,6 +16,8 @@ namespace SWAD_IT02_Team1_Assignment2
 
         static void Main(string[] args)
         {
+            Console.WriteLine("Test");
+
             // Adding dummy data
             AddDummyData();
 
