@@ -38,8 +38,7 @@ namespace SWAD_IT02_Team1_Assignment2
                 }
                 else
                 {
-                    int carId = booking.GetCarId();
-                    bool carIsAvailable = CheckCarAvailability(carId, newStartDateTime, newEndDateTime);
+                    bool carIsAvailable = booking.Car.CheckCarAvailability(newStartDateTime, newEndDateTime);
 
                     if (carIsAvailable)
                     {
@@ -69,6 +68,7 @@ namespace SWAD_IT02_Team1_Assignment2
                     else
                     {
                         DisplayCarNotAvailableErrorMessage();
+                        return false; // Early return to prevent further messages
                     }
                 }
 
@@ -82,18 +82,20 @@ namespace SWAD_IT02_Team1_Assignment2
                     string carOwnerEmail = booking.GetCarOwnerEmail();
                     EmailSystem.SendConfirmationEmail(renterEmail, booking.User.Name, originalBooking, booking);
                     Console.WriteLine("Renter confirmation email sent successfully.");
-                    
+
                     EmailSystem.SendConfirmationEmail(carOwnerEmail, booking.Car.CarOwner.Name, originalBooking, booking);
                     Console.WriteLine("Car Owner confirmation email sent successfully.");
                 }
                 else
                 {
                     DisplayGenericErrorMessage();
+                    return false; // Early return to prevent further messages
                 }
             }
             else
             {
                 DisplayGenericErrorMessage();
+                return false; // Early return to prevent further messages
             }
 
             return isSuccessful;
@@ -152,14 +154,6 @@ namespace SWAD_IT02_Team1_Assignment2
             }
 
             // All validations passed
-            return true;
-        }
-
-        public bool CheckCarAvailability(int carId, DateTime newStartDateTime, DateTime newEndDateTime)
-        {
-            // Implement your logic to check car availability based on carId, newStartDateTime, and newEndDateTime
-            // Return true if the car is available, otherwise return false
-            // For now, let's assume the car is available for simplicity
             return true;
         }
 

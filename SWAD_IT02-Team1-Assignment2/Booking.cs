@@ -120,33 +120,8 @@ namespace SWAD_IT02_Team1_Assignment2
         public string GetCarOwnerEmail()
         {
             return car.CarOwner.Email;
-        }
-        public void CheckAvailability() { /* undefined */ }
-        public void ModifyBooking() { /* undefined */ }
-        public void GetFinalUSD() { /* undefined */ }
-        public string GetPickupAddress(int pickupLocationId)
-        {
-            if (pickupLocation.Id == pickupLocationId)
-            {
-                return pickupLocation.Address;
-            }
-            else
-            {
-                return "Pickup location not found";
-            }
-        }
-
-        public string GetReturnAddress(int returnLocationId)
-        {
-            if (returnLocation.Id == returnLocationId)
-            {
-                return returnLocation.Address;
-            }
-            else
-            {
-                return "Return location not found";
-            }
-        }
+        }     
+        
         public void ModifyBooking(DateTime newStartDateTime, DateTime newEndDateTime, PickupLocation newPickupLocation, ReturnLocation newReturnLocation, decimal newAmount)
         {
             this.RentStartDateTime = newStartDateTime;

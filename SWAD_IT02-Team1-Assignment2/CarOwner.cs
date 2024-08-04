@@ -40,33 +40,5 @@ namespace SWAD_IT02_Team1_Assignment2
         {
             cars.Add(car);
         }
-
-        // Display CarOwner Menu
-        public void CarOwnerMenu()
-        {
-            while (true)
-            {
-                Console.WriteLine("\nCarOwner Menu:");
-                Console.WriteLine("1. Register Car");
-                Console.WriteLine("0. Logout");
-                Console.Write("\nPlease select an option: ");
-
-                string choice = Console.ReadLine();
-
-                switch (choice)
-                {
-                    case "1":
-                        // Implement Register Car functionality here
-                        Console.WriteLine("\n");
-                        continue;
-                    case "0":
-                        Console.WriteLine("Log out successful. You have been securely signed out.\n");
-                        return;
-                    default:
-                        Console.WriteLine("\nInvalid option. Please try again.\n");
-                        continue;
-                }
-            }
-        }
     }
 }

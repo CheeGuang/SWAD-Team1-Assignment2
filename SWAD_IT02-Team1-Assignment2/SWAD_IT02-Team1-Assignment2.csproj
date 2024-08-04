@@ -64,7 +64,11 @@
     <Compile Include="Renter.cs" />
     <Compile Include="ReturnLocation.cs" />
     <Compile Include="ReturnTimeslot.cs" />
+    <Compile Include="UI_CarOwner.cs" />
+    <Compile Include="UI_ICarAdmin.cs" />
+    <Compile Include="UI_Main.cs" />
     <Compile Include="UI_ModifyBooking.cs" />
+    <Compile Include="UI_Renter.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
