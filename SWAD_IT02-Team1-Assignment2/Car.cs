@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SWAD_IT02_Team1_Assignment2
 {
@@ -108,6 +109,18 @@ namespace SWAD_IT02_Team1_Assignment2
         public void AddAvailabilitySchedule(AvailabilitySchedule availabilitySchedule)
         {
             availabilitySchedules.Add(availabilitySchedule);
+        }
+
+        public bool CheckCarAvailability(DateTime newStartDateTime, DateTime newEndDateTime)
+        {
+            foreach (var schedule in availabilitySchedules)
+            {
+                if (newStartDateTime >= schedule.StartDate && newEndDateTime <= schedule.EndDate)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

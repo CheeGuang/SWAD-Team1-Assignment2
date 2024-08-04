@@ -16,46 +16,12 @@ namespace SWAD_IT02_Team1_Assignment2
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Test");
-
             // Adding dummy data
             AddDummyData();
 
             // Main menu
-            MainMenu();
-        }
-
-        public static void MainMenu()
-        {
-            while (true)
-            {
-                Console.WriteLine("Welcome to iCar Car Rental System");
-                Console.WriteLine("1. Login as Renter");
-                Console.WriteLine("2. Login as CarOwner");
-                Console.WriteLine("3. Login as iCarAdmin");
-                Console.WriteLine("0. Exit");
-                Console.Write("\nPlease select an option: ");
-
-                string choice = Console.ReadLine();
-
-                switch (choice)
-                {
-                    case "1":
-                        LoginAsRenter();
-                        break;
-                    case "2":
-                        LoginAsCarOwner();
-                        break;
-                    case "3":
-                        LoginAsICarAdmin();
-                        break;
-                    case "0":
-                        return;
-                    default:
-                        Console.WriteLine("\nInvalid option. Please try again.\n");
-                        break;
-                }
-            }
+            UI_Main uiMain = new UI_Main();
+            uiMain.MainMenu(dummyRenter, dummyCarOwner, dummyICarAdmin, pickupLocations, returnLocations);
         }
 
         public static void AddDummyData()
@@ -123,26 +89,6 @@ namespace SWAD_IT02_Team1_Assignment2
             Accident accident1 = new Accident(1, "Minor collision", new DateTime(2024, 07, 01, 10, 0, 0), true);
             AssistanceReport report1 = new AssistanceReport(1, "Assistance required", new DateTime(2024, 07, 01, 10, 30, 0));
             accident1.AddAssistanceReport(report1);
-        }
-
-        public static void LoginAsRenter()
-        {
-            Console.WriteLine($"Logged in as Renter: {dummyRenter.Name}");
-            UI_ModifyBooking uiModifyBooking = new UI_ModifyBooking();
-            CTL_ModifyBooking ctlModifyBooking = new CTL_ModifyBooking();
-            uiModifyBooking.RenterMenu(dummyRenter, ctlModifyBooking, pickupLocations, returnLocations);
-        }
-
-        public static void LoginAsCarOwner()
-        {
-            Console.WriteLine($"Logged in as Car Owner: {dummyCarOwner.Name}");
-            dummyCarOwner.CarOwnerMenu();
-        }
-
-        public static void LoginAsICarAdmin()
-        {
-            Console.WriteLine($"Logged in as ICarAdmin: {dummyICarAdmin.Name}");
-            dummyICarAdmin.ICarAdminMenu();
         }
     }
 }

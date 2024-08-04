@@ -33,15 +33,5 @@ namespace SWAD_IT02_Team1_Assignment2
         {
             cars.Add(car);
         }
-
-        // ICarAdmin Menu
-        public void ICarAdminMenu()
-        {
-            while (true)
-            {
-                Console.WriteLine("ICarAdmin use cases are not in scope for this programme.\n\n");
-                break;
-            }
-        }
     }
 }
