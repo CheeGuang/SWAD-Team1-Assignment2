@@ -23,7 +23,7 @@ namespace SWAD_IT02_Team1_Assignment2
         private List<AvailabilitySchedule> availabilitySchedules;
         private CarOwner carOwner;
 
-        public Car(int id, string make, string model, int year, decimal mileage, decimal rentalPrice, string numberPlate, bool isVerified, bool isAvailable, CarOwner carOwner)
+        public Car(int id, string make, string model, int year, decimal mileage, decimal rentalPrice, string numberPlate, bool isVerified, CarOwner carOwner)
         {
             this.id = id;
             this.make = make;
@@ -33,7 +33,6 @@ namespace SWAD_IT02_Team1_Assignment2
             this.rentalPrice = rentalPrice;
             this.numberPlate = numberPlate;
             this.isVerified = isVerified;
-            this.isAvailable = isAvailable;
             this.photos = new List<Photo>();
             this.availabilitySchedules = new List<AvailabilitySchedule>();
             this.carOwner = carOwner;
@@ -78,11 +77,6 @@ namespace SWAD_IT02_Team1_Assignment2
         {
             get { return isVerified; }
             set { isVerified = value; }
-        }
-        public bool IsAvailable
-        {
-            get { return isAvailable; }
-            set { isAvailable = value; }
         }
         public Insurance Insurance
         {
