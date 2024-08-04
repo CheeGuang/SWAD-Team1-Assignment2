@@ -51,17 +51,5 @@ namespace SWAD_IT02_Team1_Assignment2
             get { return pickupTimeslots; }
             set { pickupTimeslots = value; }
         }
-
-
-        /// <summary>
-        /// Adds a pickup timeslot to the PickupLocation.
-        /// Creator: Lee Guang Le, Jeffrey
-        /// Student ID: S10258143A
-        /// </summary>
-        /// <param name="pickupTimeslot">The pickup timeslot to add.</param>
-        public void AddPickupTimeslot(PickupTimeslot pickupTimeslot)
-        {
-            pickupTimeslots.Add(pickupTimeslot);
-        }
     }
 }

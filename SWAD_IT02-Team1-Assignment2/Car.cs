@@ -18,7 +18,6 @@ namespace SWAD_IT02_Team1_Assignment2
         private decimal rentalPrice;
         private string numberPlate;
         private bool isVerified;
-        private bool isAvailable;
         private Insurance insurance;
         private List<Photo> photos;
         private List<AvailabilitySchedule> availabilitySchedules;

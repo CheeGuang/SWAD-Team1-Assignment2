@@ -42,7 +42,7 @@ namespace SWAD_IT02_Team1_Assignment2
             dummyICarAdmin = new ICarAdmin(1, "Emily Tan", "emilytan@example.com", "6677889900", "1988-04-04", true);
 
             // Create instance of Car
-            Car dummyCar = new Car(1, "Toyota", "Camry", 2020, 15000.0m, 50.0m, "SGX1234A", true, true, dummyCarOwner);
+            Car dummyCar = new Car(1, "Toyota", "Camry", 2020, 15000.0m, 50.0m, "SGX1234A", true, dummyCarOwner);
 
             // Create instance of Insurance
             Insurance dummyInsurance = new Insurance(1, 10000.0m, dummyCar, new DateTime(2024, 12, 31));
@@ -70,17 +70,6 @@ namespace SWAD_IT02_Team1_Assignment2
                 new ReturnLocation(2, "456 Bukit Timah Road", true, 20),
                 new ReturnLocation(3, "789 iCar Station", true, 30)
             };
-
-            // Create instances of PickupTimeslot and ReturnTimeslot
-            PickupTimeslot pickupTimeslot1 = new PickupTimeslot(1, new DateTime(2024, 08, 01, 9, 0, 0), new DateTime(2024, 08, 01, 11, 0, 0), true, 5);
-            PickupTimeslot pickupTimeslot2 = new PickupTimeslot(2, new DateTime(2024, 08, 01, 11, 0, 0), new DateTime(2024, 08, 01, 13, 0, 0), true, 5);
-            ReturnTimeslot returnTimeslot1 = new ReturnTimeslot(1, new DateTime(2024, 08, 02, 9, 0, 0), new DateTime(2024, 08, 02, 11, 0, 0), true, 5);
-            ReturnTimeslot returnTimeslot2 = new ReturnTimeslot(2, new DateTime(2024, 08, 02, 11, 0, 0), new DateTime(2024, 08, 02, 13, 0, 0), true, 5);
-
-            pickupLocations[0].AddPickupTimeslot(pickupTimeslot1);
-            pickupLocations[1].AddPickupTimeslot(pickupTimeslot2);
-            returnLocations[0].AddReturnTimeslot(returnTimeslot1);
-            returnLocations[1].AddReturnTimeslot(returnTimeslot2);
 
             // Create instances of Card and DigitalWallet
             DigitalWallet wallet1 = new DigitalWallet(1, 100.00m);

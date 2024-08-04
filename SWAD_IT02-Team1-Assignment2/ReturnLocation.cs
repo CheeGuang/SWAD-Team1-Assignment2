@@ -51,17 +51,5 @@ namespace SWAD_IT02_Team1_Assignment2
             get { return returnTimeslots; }
             set { returnTimeslots = value; }
         }
-
-
-        /// <summary>
-        /// Adds a return timeslot to the ReturnLocation.
-        /// Creator: Lee Guang Le, Jeffrey
-        /// Student ID: S10258143A
-        /// </summary>
-        /// <param name="returnTimeslot">The return timeslot to add.</param>
-        public void AddReturnTimeslot(ReturnTimeslot returnTimeslot)
-        {
-            returnTimeslots.Add(returnTimeslot);
-        }
     }
 }
