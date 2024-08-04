@@ -2,8 +2,19 @@
 
 namespace SWAD_IT02_Team1_Assignment2
 {
+    /// <summary>
+    /// Creation of class according to class diagram done by Jeffrey.
+    /// Creator: Lee Guang Le, Jeffrey
+    /// Student ID: S10258143A
+    /// </summary>
     public class UI_CarOwner
     {
+        /// <summary>
+        /// Displays the Car Owner menu.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="carOwner">The car owner object.</param>
         public void CarOwnerMenu(CarOwner carOwner)
         {
             while (true)

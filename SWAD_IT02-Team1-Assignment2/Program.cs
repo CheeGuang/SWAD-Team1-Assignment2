@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace SWAD_IT02_Team1_Assignment2
 {
+    /// <summary>
+    /// Creation of class according to class diagram done by Jeffrey.
+    /// Creator: Lee Guang Le, Jeffrey
+    /// Student ID: S10258143A
+    /// </summary>
     internal class Program
     {
         private static Renter dummyRenter;
@@ -24,6 +29,11 @@ namespace SWAD_IT02_Team1_Assignment2
             uiMain.MainMenu(dummyRenter, dummyCarOwner, dummyICarAdmin, pickupLocations, returnLocations);
         }
 
+        /// <summary>
+        /// Function to add dummy data for testing purposes.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
         public static void AddDummyData()
         {
             // Initialize existing variables

@@ -2,6 +2,11 @@
 
 namespace SWAD_IT02_Team1_Assignment2
 {
+    /// <summary>
+    /// Creation of class according to class diagram done by Jeffrey.
+    /// Creator: Lee Guang Le, Jeffrey
+    /// Student ID: S10258143A
+    /// </summary>
     public class Payment
     {
         private int id;
@@ -47,6 +52,12 @@ namespace SWAD_IT02_Team1_Assignment2
             set { card = value; }
         }
 
+        /// <summary>
+        /// Makes a payment of the specified amount.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="paymentAmount">The amount to pay.</param>
         public void MakePayment(decimal paymentAmount)
         {
             Console.WriteLine($"Payment ${paymentAmount} successful.");

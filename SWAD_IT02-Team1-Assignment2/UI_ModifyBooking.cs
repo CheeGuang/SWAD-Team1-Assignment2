@@ -3,6 +3,11 @@ using System.Collections.Generic;
 
 namespace SWAD_IT02_Team1_Assignment2
 {
+    /// <summary>
+    /// Creation of class according to class diagram done by Jeffrey.
+    /// Creator: Lee Guang Le, Jeffrey
+    /// Student ID: S10258143A
+    /// </summary>
     public class UI_ModifyBooking
     {
         private CTL_ModifyBooking ctlModifyBooking;
@@ -12,6 +17,12 @@ namespace SWAD_IT02_Team1_Assignment2
             ctlModifyBooking = new CTL_ModifyBooking();
         }
 
+        /// <summary>
+        /// Displays booking details.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="aBooking">The booking to display.</param>
         public void DisplayBookingDetails(Booking aBooking)
         {
             Console.WriteLine("\n\n===============================================");
@@ -27,6 +38,12 @@ namespace SWAD_IT02_Team1_Assignment2
             Console.WriteLine("===============================================\n");
         }
 
+        /// <summary>
+        /// Displays a success message after booking is updated.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="aBooking">The booking that was updated.</param>
         public void DisplaySuccessMessage(Booking aBooking)
         {
             Console.WriteLine("\n===============================================");
@@ -35,6 +52,13 @@ namespace SWAD_IT02_Team1_Assignment2
             DisplayBookingDetails(aBooking);
         }
 
+        /// <summary>
+        /// Displays the list of pickup and return locations.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="pickupLocations">List of pickup locations.</param>
+        /// <param name="returnLocations">List of return locations.</param>
         public void DisplayLocations(List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             Console.WriteLine("\n===============================================");
@@ -55,6 +79,14 @@ namespace SWAD_IT02_Team1_Assignment2
             Console.WriteLine("===============================================\n");
         }
 
+        /// <summary>
+        /// Requests updated booking details from the user.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="pickupLocations">List of pickup locations.</param>
+        /// <param name="returnLocations">List of return locations.</param>
+        /// <returns>Dictionary of updated booking details.</returns>
         public Dictionary<string, string> RequestUpdatedBookingDetails(List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             Dictionary<string, string> updatedDetails = new Dictionary<string, string>();
@@ -81,12 +113,29 @@ namespace SWAD_IT02_Team1_Assignment2
             return updatedDetails;
         }
 
+        /// <summary>
+        /// Prompts the user to enter updated booking details.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="aBooking">The booking to update.</param>
+        /// <param name="pickupLocations">List of pickup locations.</param>
+        /// <param name="returnLocations">List of return locations.</param>
+        /// <returns>Dictionary of updated booking details.</returns>
         public Dictionary<string, string> EnterUpdatedBookingDetails(Booking aBooking, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             DisplayBookingDetails(aBooking);
             return RequestUpdatedBookingDetails(pickupLocations, returnLocations);
         }
 
+        /// <summary>
+        /// Modifies a booking for the renter.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="renter">The renter object.</param>
+        /// <param name="pickupLocations">List of pickup locations.</param>
+        /// <param name="returnLocations">List of return locations.</param>
         public void ModifyBooking(Renter renter, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             if (renter.Bookings.Count > 0)
@@ -137,5 +186,4 @@ namespace SWAD_IT02_Team1_Assignment2
             }
         }
     }
-
 }

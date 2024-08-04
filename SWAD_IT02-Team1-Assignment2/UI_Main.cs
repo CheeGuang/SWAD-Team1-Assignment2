@@ -3,8 +3,23 @@ using System.Collections.Generic;
 
 namespace SWAD_IT02_Team1_Assignment2
 {
+    /// <summary>
+    /// Creation of class according to class diagram done by Jeffrey.
+    /// Creator: Lee Guang Le, Jeffrey
+    /// Student ID: S10258143A
+    /// </summary>
     public class UI_Main
     {
+        /// <summary>
+        /// Displays the main menu.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="dummyRenter">The dummy renter object.</param>
+        /// <param name="dummyCarOwner">The dummy car owner object.</param>
+        /// <param name="dummyICarAdmin">The dummy ICarAdmin object.</param>
+        /// <param name="pickupLocations">List of pickup locations.</param>
+        /// <param name="returnLocations">List of return locations.</param>
         public void MainMenu(Renter dummyRenter, CarOwner dummyCarOwner, ICarAdmin dummyICarAdmin, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             while (true)
@@ -41,6 +56,14 @@ namespace SWAD_IT02_Team1_Assignment2
             }
         }
 
+        /// <summary>
+        /// Logs in as Renter.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="dummyRenter">The dummy renter object.</param>
+        /// <param name="pickupLocations">List of pickup locations.</param>
+        /// <param name="returnLocations">List of return locations.</param>
         public void LoginAsRenter(Renter dummyRenter, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             Console.WriteLine($"Logged in as Renter: {dummyRenter.Name}");
@@ -48,6 +71,12 @@ namespace SWAD_IT02_Team1_Assignment2
             uiRenter.RenterMenu(dummyRenter, pickupLocations, returnLocations);
         }
 
+        /// <summary>
+        /// Logs in as Car Owner.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="dummyCarOwner">The dummy car owner object.</param>
         public void LoginAsCarOwner(CarOwner dummyCarOwner)
         {
             Console.WriteLine($"Logged in as Car Owner: {dummyCarOwner.Name}");
@@ -55,6 +84,12 @@ namespace SWAD_IT02_Team1_Assignment2
             uiCarOwner.CarOwnerMenu(dummyCarOwner);
         }
 
+        /// <summary>
+        /// Logs in as ICarAdmin.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="dummyICarAdmin">The dummy ICarAdmin object.</param>
         public void LoginAsICarAdmin(ICarAdmin dummyICarAdmin)
         {
             Console.WriteLine($"Logged in as ICarAdmin: {dummyICarAdmin.Name}");

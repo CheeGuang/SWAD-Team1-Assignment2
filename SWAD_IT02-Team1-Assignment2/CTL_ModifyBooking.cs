@@ -4,8 +4,23 @@ using System.Linq;
 
 namespace SWAD_IT02_Team1_Assignment2
 {
+    /// <summary>
+    /// Creation of class according to class diagram done by Jeffrey.
+    /// Creator: Lee Guang Le, Jeffrey
+    /// Student ID: S10258143A
+    /// </summary>
     public class CTL_ModifyBooking
     {
+        /// <summary>
+        /// Enter updated booking details.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="updatedDetails">The updated booking details.</param>
+        /// <param name="pickupLocations">The list of pickup locations.</param>
+        /// <param name="returnLocations">The list of return locations.</param>
+        /// <param name="booking">The booking to modify.</param>
+        /// <returns>True if the update is successful, otherwise false.</returns>
         public bool EnterUpdated(Dictionary<string, string> updatedDetails, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations, Booking booking)
         {
             bool isSuccessful = false;
@@ -101,6 +116,15 @@ namespace SWAD_IT02_Team1_Assignment2
             return isSuccessful;
         }
 
+        /// <summary>
+        /// Validates the updated booking details.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="updatedDetails">The updated booking details.</param>
+        /// <param name="pickupLocations">The list of pickup locations.</param>
+        /// <param name="returnLocations">The list of return locations.</param>
+        /// <returns>True if the details are valid, otherwise false.</returns>
         public bool ValidateUpdatedBookingDetails(Dictionary<string, string> updatedDetails, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             DateTime newStartDateTime;
@@ -157,11 +181,21 @@ namespace SWAD_IT02_Team1_Assignment2
             return true;
         }
 
+        /// <summary>
+        /// Displays an error message when the car is not available.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
         public void DisplayCarNotAvailableErrorMessage()
         {
             Console.WriteLine("The car is not available for the selected time period.");
         }
 
+        /// <summary>
+        /// Displays a generic error message.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
         public void DisplayGenericErrorMessage()
         {
             Console.WriteLine("An error occurred while updating the booking. Please try again.");

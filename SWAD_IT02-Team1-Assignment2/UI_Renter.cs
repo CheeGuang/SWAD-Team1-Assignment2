@@ -3,8 +3,21 @@ using System.Collections.Generic;
 
 namespace SWAD_IT02_Team1_Assignment2
 {
+    /// <summary>
+    /// Creation of class according to class diagram done by Jeffrey.
+    /// Creator: Lee Guang Le, Jeffrey
+    /// Student ID: S10258143A
+    /// </summary>
     public class UI_Renter
     {
+        /// <summary>
+        /// Displays the renter menu.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="renter">The renter object.</param>
+        /// <param name="pickupLocations">List of pickup locations.</param>
+        /// <param name="returnLocations">List of return locations.</param>
         public void RenterMenu(Renter renter, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             UI_ModifyBooking uiModifyBooking = new UI_ModifyBooking();

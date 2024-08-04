@@ -2,6 +2,11 @@
 
 namespace SWAD_IT02_Team1_Assignment2
 {
+    /// <summary>
+    /// Creation of class according to class diagram done by Jeffrey.
+    /// Creator: Lee Guang Le, Jeffrey
+    /// Student ID: S10258143A
+    /// </summary>
     public class PickupLocation
     {
         private int id;
@@ -47,7 +52,13 @@ namespace SWAD_IT02_Team1_Assignment2
             set { pickupTimeslots = value; }
         }
 
-        // Add a pickup timeslot to the PickupLocation
+
+        /// <summary>
+        /// Adds a pickup timeslot to the PickupLocation.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="pickupTimeslot">The pickup timeslot to add.</param>
         public void AddPickupTimeslot(PickupTimeslot pickupTimeslot)
         {
             pickupTimeslots.Add(pickupTimeslot);

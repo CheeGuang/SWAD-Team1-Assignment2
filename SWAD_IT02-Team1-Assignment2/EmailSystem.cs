@@ -4,8 +4,22 @@ using System.Net;
 
 namespace SWAD_IT02_Team1_Assignment2
 {
+    /// <summary>
+    /// Creation of class according to class diagram done by Jeffrey.
+    /// Creator: Lee Guang Le, Jeffrey
+    /// Student ID: S10258143A
+    /// </summary>
     public class EmailSystem
     {
+        /// <summary>
+        /// Sends a confirmation email.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="receiverEmail">The receiver's email address.</param>
+        /// <param name="userName">The user's name.</param>
+        /// <param name="originalBooking">The original booking details.</param>
+        /// <param name="updatedBooking">The updated booking details.</param>
         static public void SendConfirmationEmail(string receiverEmail, string userName, Booking originalBooking, Booking updatedBooking)
         {
             // Sender Email Details

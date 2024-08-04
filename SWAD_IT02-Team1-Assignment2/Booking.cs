@@ -3,6 +3,11 @@ using System.Collections.Generic;
 
 namespace SWAD_IT02_Team1_Assignment2
 {
+    /// <summary>
+    /// Creation of class according to class diagram done by Jeffrey.
+    /// Creator: Lee Guang Le, Jeffrey
+    /// Student ID: S10258143A
+    /// </summary>
     public class Booking
     {
         private int id;
@@ -88,40 +93,75 @@ namespace SWAD_IT02_Team1_Assignment2
             set { returnTimeslots = value; }
         }
 
+        /// <summary>
+        /// Adds a pickup timeslot to the Booking.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
         public void AddPickupTimeslot(PickupTimeslot pickupTimeslot)
         {
             pickupTimeslots.Add(pickupTimeslot);
         }
 
+        /// <summary>
+        /// Adds a return timeslot to the Booking.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
         public void AddReturnTimeslot(ReturnTimeslot returnTimeslot)
         {
             returnTimeslots.Add(returnTimeslot);
         }
 
+        /// <summary>
+        /// Gets the start date and time of the Booking.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <returns>The start date and time.</returns>
         public DateTime GetStartDateTime()
         {
             return rentStartDateTime;
         }
 
+        /// <summary>
+        /// Gets the end date and time of the Booking.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <returns>The end date and time.</returns>
         public DateTime GetEndDateTime()
         {
             return rentEndDateTime;
         }
 
-        public int GetCarId()
-        {
-            return car.Id;
-        }
+        /// <summary>
+        /// Gets the renter's email of the Booking.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <returns>The renter's email.</returns>
         public string GetRenterEmail()
         {
             return user.Email;
         }
 
+        /// <summary>
+        /// Gets the car owner's email of the Booking.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <returns>The car owner's email.</returns>
         public string GetCarOwnerEmail()
         {
             return car.CarOwner.Email;
-        }     
-        
+        }
+
+        /// <summary>
+        /// Modifies the booking details.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
         public void ModifyBooking(DateTime newStartDateTime, DateTime newEndDateTime, PickupLocation newPickupLocation, ReturnLocation newReturnLocation, decimal newAmount)
         {
             this.RentStartDateTime = newStartDateTime;

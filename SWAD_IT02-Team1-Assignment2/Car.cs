@@ -3,6 +3,11 @@ using System.Collections.Generic;
 
 namespace SWAD_IT02_Team1_Assignment2
 {
+    /// <summary>
+    /// Creation of class according to class diagram done by Jeffrey.
+    /// Creator: Lee Guang Le, Jeffrey
+    /// Student ID: S10258143A
+    /// </summary>
     public class Car
     {
         private int id;
@@ -101,16 +106,36 @@ namespace SWAD_IT02_Team1_Assignment2
             set { carOwner = value; }
         }
 
+        /// <summary>
+        /// Adds a photo to the Car.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="photo">The photo to add.</param>
         public void AddPhoto(Photo photo)
         {
             photos.Add(photo);
         }
 
+        /// <summary>
+        /// Adds an availability schedule to the Car.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="availabilitySchedule">The availability schedule to add.</param>
         public void AddAvailabilitySchedule(AvailabilitySchedule availabilitySchedule)
         {
             availabilitySchedules.Add(availabilitySchedule);
         }
 
+        /// <summary>
+        /// Checks the car availability for a given time period.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="newStartDateTime">The start date and time for the check.</param>
+        /// <param name="newEndDateTime">The end date and time for the check.</param>
+        /// <returns>True if the car is available, otherwise false.</returns>
         public bool CheckCarAvailability(DateTime newStartDateTime, DateTime newEndDateTime)
         {
             foreach (var schedule in availabilitySchedules)

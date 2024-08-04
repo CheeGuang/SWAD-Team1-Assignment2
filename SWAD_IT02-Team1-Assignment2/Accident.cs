@@ -3,6 +3,11 @@ using System.Collections.Generic;
 
 namespace SWAD_IT02_Team1_Assignment2
 {
+    /// <summary>
+    /// Creation of class according to class diagram done by Jeffrey.
+    /// Creator: Lee Guang Le, Jeffrey
+    /// Student ID: S10258143A
+    /// </summary>
     public class Accident
     {
         private int id;
@@ -48,7 +53,11 @@ namespace SWAD_IT02_Team1_Assignment2
             set { assistanceReports = value; }
         }
 
-        // Add an assistance report to the Accident
+        /// <summary>
+        /// Adds an assistance report to the Accident.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
         public void AddAssistanceReport(AssistanceReport assistanceReport)
         {
             assistanceReports.Add(assistanceReport);

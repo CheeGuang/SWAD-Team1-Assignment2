@@ -3,6 +3,11 @@ using System.Collections.Generic;
 
 namespace SWAD_IT02_Team1_Assignment2
 {
+    /// <summary>
+    /// Creation of class according to class diagram done by Jeffrey.
+    /// Creator: Lee Guang Le, Jeffrey
+    /// Student ID: S10258143A
+    /// </summary>
     public class Renter : User
     {
         private string driverLicenseNumber;
@@ -56,7 +61,13 @@ namespace SWAD_IT02_Team1_Assignment2
             set { bookings = value; }
         }
 
-        // Add a booking to the Renter
+
+        /// <summary>
+        /// Adds a booking to the Renter.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="booking">The booking to add.</param>
         public void AddBooking(Booking booking)
         {
             bookings.Add(booking);

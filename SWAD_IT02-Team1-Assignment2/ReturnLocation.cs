@@ -2,6 +2,11 @@
 
 namespace SWAD_IT02_Team1_Assignment2
 {
+    /// <summary>
+    /// Creation of class according to class diagram done by Jeffrey.
+    /// Creator: Lee Guang Le, Jeffrey
+    /// Student ID: S10258143A
+    /// </summary>
     public class ReturnLocation
     {
         private int id;
@@ -47,7 +52,13 @@ namespace SWAD_IT02_Team1_Assignment2
             set { returnTimeslots = value; }
         }
 
-        // Add a return timeslot to the ReturnLocation
+
+        /// <summary>
+        /// Adds a return timeslot to the ReturnLocation.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="returnTimeslot">The return timeslot to add.</param>
         public void AddReturnTimeslot(ReturnTimeslot returnTimeslot)
         {
             returnTimeslots.Add(returnTimeslot);
