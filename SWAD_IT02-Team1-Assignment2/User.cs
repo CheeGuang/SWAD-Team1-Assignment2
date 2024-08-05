@@ -1,9 +1,9 @@
 ﻿namespace SWAD_IT02_Team1_Assignment2
 {
     /// <summary>
-    /// Creation of class according to class diagram done by Jeffrey.
-    /// Creator: Lee Guang Le, Jeffrey
-    /// Student ID: S10258143A
+    /// Creation of class according to class diagram done by Raeanne.
+    /// Creator: Zou Ruining, Raeanne
+    /// Student ID: S10258772G
     /// </summary>
     public class User
     {

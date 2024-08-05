@@ -3,9 +3,9 @@
 namespace SWAD_IT02_Team1_Assignment2
 {
     /// <summary>
-    /// Creation of class according to class diagram done by Jeffrey.
-    /// Creator: Lee Guang Le, Jeffrey
-    /// Student ID: S10258143A
+    /// Creation of class according to class diagram done by Yee Hen.
+    /// Creator: Ong Yee Hen
+    /// Student ID: S10258759D
     /// </summary>
     public class ReturnLocation
     {

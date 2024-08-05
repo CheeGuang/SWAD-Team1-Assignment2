@@ -3,10 +3,10 @@
 namespace SWAD_IT02_Team1_Assignment2
 {
     /// <summary>
-    /// Creation of class according to class diagram done by Jeffrey.
-    /// Creator: Lee Guang Le, Jeffrey
-    /// Student ID: S10258143A
-    /// </summary> 
+    /// Creation of class according to class diagram done by Jason.
+    /// Creator: Wang Po Yen Jason
+    /// Student ID: S10255872A
+    /// </summary>
     public class Card
     {
         private int id;
