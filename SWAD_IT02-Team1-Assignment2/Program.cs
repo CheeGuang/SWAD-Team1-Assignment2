@@ -79,7 +79,7 @@ namespace SWAD_IT02_Team1_Assignment2
             Payment payment1 = new Payment(1, 120.00m, "Credit Card", DateTime.Now, card1);
 
             // Create instances of Booking
-            Booking booking1 = new Booking(1, dummyRenter, dummyCar, new DateTime(2024, 08, 01, 9, 0, 0), new DateTime(2024, 08, 02, 9, 0, 0), 120.00m, payment1, pickupLocations[0], returnLocations[0]);
+            Booking booking1 = new Booking(1, dummyRenter, dummyCar, new DateTime(2024, 08, 01, 9, 0, 0), new DateTime(2024, 08, 02, 9, 0, 0), 120.00m, payment1, pickupLocations[0], returnLocations[0], "Created Successfully");
 
             // Add bookings to renter
             dummyRenter.AddBooking(booking1);
