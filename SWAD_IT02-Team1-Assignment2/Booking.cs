@@ -200,7 +200,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="newStatus">The new status to be set for the booking.</param>
         public void updateBookingStatus(string newStatus)
         {
-            this.Status = newStatus
+            this.Status = newStatus;
         }
     }
 }
