@@ -29,7 +29,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="car">The car selected.</param>
         /// <param name="renter">The renter making the booking.</param>
         /// <returns>True if the update is successful, otherwise false.</returns> 
-        public bool ProcessBookingRequest(Renter renter, Car car)
+        public bool ProcessBookingRequest(Renter renter, Car car, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             try
             {
@@ -54,12 +54,12 @@ namespace SWAD_IT02_Team1_Assignment2
                 
 
                 //validate pickup/return locations
-                uiBookCar.DisplayLocations(Program.pickupLocations, Program.returnLocations);
+                uiBookCar.DisplayLocations(pickupLocations, returnLocations);
                 do
                 {
                     bookingDetails = uiBookCar.PromptSelectedLocations();
 
-                } while (!ValidateBookingLocations(bookingDetails));
+                } while (!ValidateBookingLocations(bookingDetails, pickupLocations, returnLocations));
 
 
                 // Call UI to confirm payment
@@ -76,7 +76,7 @@ namespace SWAD_IT02_Team1_Assignment2
                 Payment payment = PaymentModel.Instance.MakePayment(totalCost);
 
                 Booking aBooking = CreateBooking(renter.Bookings.Count, renter, car, DateTime.Parse(bookingDetails["startDateTime"]), DateTime.Parse(bookingDetails["endDateTime"]), totalCost,
-                payment, getPickupLocationById(int.Parse(bookingDetails["pickupLocation"])), getReturnLocationById(int.Parse(bookingDetails["returnLocation"])), "Created Successfully");
+                payment, getPickupLocationById(int.Parse(bookingDetails["pickupLocation"]), pickupLocations), getReturnLocationById(int.Parse(bookingDetails["returnLocation"]), returnLocations), "Created Successfully");
 
                 //Console print booking summary
                 uiBookCar.PrintBookingSummary(aBooking);
@@ -175,7 +175,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// </summary>
         /// <param name="bookingDetails">The updated booking details.</param>
         /// <returns>True if the details are valid, otherwise false.</returns>
-        public bool ValidateBookingLocations(Dictionary<string, string> bookingDetails)
+        public bool ValidateBookingLocations(Dictionary<string, string> bookingDetails, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             int pickupLocation;
             int returnLocation;
@@ -193,8 +193,8 @@ namespace SWAD_IT02_Team1_Assignment2
             }
 
             // Check if locations exists
-            bool pickupLocationExists = Program.pickupLocations.Any(p => p.Id == pickupLocation);
-            bool returnLocationExists = Program.returnLocations.Any(r => r.Id == returnLocation);
+            bool pickupLocationExists = pickupLocations.Any(p => p.Id == pickupLocation);
+            bool returnLocationExists = returnLocations.Any(r => r.Id == returnLocation);
 
             if (!pickupLocationExists)
             {
@@ -217,9 +217,9 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10258772G
         /// </summary>
         /// <param name="id">Return location ID</param>
-        private ReturnLocation getReturnLocationById(int id)
+        private ReturnLocation getReturnLocationById(int id, List<ReturnLocation> returnLocations)
         {
-            foreach(ReturnLocation location in Program.returnLocations) 
+            foreach(ReturnLocation location in returnLocations) 
             { 
                 if(id == location.Id)
                 {
@@ -235,9 +235,9 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10258772G
         /// </summary>
         /// <param name="id">Pickup location ID</param>
-        private PickupLocation getPickupLocationById(int id)
+        private PickupLocation getPickupLocationById(int id, List<PickupLocation> pickupLocations)
         {
-            foreach (PickupLocation location in Program.pickupLocations)
+            foreach (PickupLocation location in pickupLocations)
             {
                 if (id == location.Id)
                 {

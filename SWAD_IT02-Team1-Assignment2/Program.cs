@@ -19,8 +19,8 @@ namespace SWAD_IT02_Team1_Assignment2
         private static CarOwner dummyCarOwner;
         private static ICarAdmin dummyICarAdmin;
         private static Car dummyCar;
-        public static List<PickupLocation> pickupLocations;
-        public static List<ReturnLocation> returnLocations;
+        private static List<PickupLocation> pickupLocations;
+        private static List<ReturnLocation> returnLocations;
 
         static void Main(string[] args)
         {

@@ -56,7 +56,7 @@ namespace SWAD_IT02_Team1_Assignment2
                         }
                         break;
                     case "2":
-                        ctlBookCar.ProcessBookingRequest(renter, dummyCar);
+                        ctlBookCar.ProcessBookingRequest(renter, dummyCar, pickupLocations, returnLocations);
                         break;
                     case "3":
                         uiModifyBooking.ModifyBooking(renter, pickupLocations, returnLocations);
