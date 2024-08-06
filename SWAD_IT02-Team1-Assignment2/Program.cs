@@ -39,8 +39,8 @@ namespace SWAD_IT02_Team1_Assignment2
         public static void AddDummyData()
         {
             // Initialize existing variables
-            dummyCarOwner = new CarOwner(1, "Benjamin Lau", "s10258143@connect.np.edu.sg", "0987654321", "1985-02-02", 100.0m, 500.0m);
-            dummyRenter = new Renter(1, "Jeffrey Lee", "s10258143@connect.np.edu.sg", "1122334455", "1992-03-03", "DL123456", 50.0m, 200.0m, true, true);
+            dummyCarOwner = new CarOwner(1, "Benjamin Lau", "jeffreylimtino@gmail.com", "0987654321", "1985-02-02", 100.0m, 500.0m);
+            dummyRenter = new Renter(1, "Jeffrey Lee", "jeffreyleetino@gmail.com", "1122334455", "1992-03-03", "DL123456", 50.0m, 200.0m, true, true);
             dummyICarAdmin = new ICarAdmin(1, "Emily Tan", "emilytan@example.com", "6677889900", "1988-04-04", true);
 
             // Create instance of Car
