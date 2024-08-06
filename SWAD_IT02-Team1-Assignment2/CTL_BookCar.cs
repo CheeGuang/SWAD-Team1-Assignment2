@@ -64,7 +64,7 @@ namespace SWAD_IT02_Team1_Assignment2
 
                 // Call UI to confirm payment
                 decimal totalCost = CalculateCost(DateTime.Parse(bookingDetails["startDateTime"]), DateTime.Parse(bookingDetails["endDateTime"]));
-                bool commitPayment = uiBookCar.DisplayPaymentOption(totalCost);
+                bool commitPayment = uiBookCar.PromptPaymentConfirmation(totalCost);
 
                 if (!commitPayment)
                 {

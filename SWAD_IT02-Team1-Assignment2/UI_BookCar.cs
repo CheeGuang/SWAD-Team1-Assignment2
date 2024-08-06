@@ -118,7 +118,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10258772G
         /// </summary>
         /// <param name="totalCost">Booking total cost</param>
-        public bool DisplayPaymentOption(decimal totalCost)
+        public bool PromptPaymentConfirmation(decimal totalCost)
         {
             bool response = false;
             bool commitPayment = false;
