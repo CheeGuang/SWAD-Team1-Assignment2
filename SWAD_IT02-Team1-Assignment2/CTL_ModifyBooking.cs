@@ -32,7 +32,7 @@ namespace SWAD_IT02_Team1_Assignment2
 
                 DateTime newStartDateTime = DateTime.ParseExact(updatedDetails["newStartDateTime"], "dd/MM/yyyy h:mm:ss tt", null);
                 DateTime newEndDateTime = DateTime.ParseExact(updatedDetails["newEndDateTime"], "dd/MM/yyyy h:mm:ss tt", null);
-
+                
                 Booking originalBooking = new Booking(
                     booking.Id,
                     booking.User,
@@ -45,6 +45,7 @@ namespace SWAD_IT02_Team1_Assignment2
                     booking.ReturnLocation,
                     booking.Status
                 );
+
 
                 decimal newAmount = booking.Amount;
 

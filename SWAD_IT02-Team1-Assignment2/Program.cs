@@ -95,6 +95,7 @@ namespace SWAD_IT02_Team1_Assignment2
             Bookings.Add(booking1);
             Bookings.Add(booking2);
 
+
             // Add bookings to renter
             dummyRenter.AddBooking(booking1);
             dummyRenter.AddBooking(booking2);
