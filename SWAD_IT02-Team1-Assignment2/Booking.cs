@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SWAD_IT02_Team1_Assignment2
 {
@@ -21,8 +22,9 @@ namespace SWAD_IT02_Team1_Assignment2
         private ReturnLocation returnLocation;
         private List<PickupTimeslot> pickupTimeslots;
         private List<ReturnTimeslot> returnTimeslots;
+        private string status;
 
-        public Booking(int id, User user, Car car, DateTime rentStartDateTime, DateTime rentEndDateTime, decimal amount, Payment payment, PickupLocation pickupLocation, ReturnLocation returnLocation)
+        public Booking(int id, User user, Car car, DateTime rentStartDateTime, DateTime rentEndDateTime, decimal amount, Payment payment, PickupLocation pickupLocation, ReturnLocation returnLocation, string status)
         {
             this.id = id;
             this.user = user;
@@ -35,6 +37,7 @@ namespace SWAD_IT02_Team1_Assignment2
             this.returnLocation = returnLocation;
             this.pickupTimeslots = new List<PickupTimeslot>();
             this.returnTimeslots = new List<ReturnTimeslot>();
+            this.status = status;
         }
 
         public int Id
@@ -91,6 +94,11 @@ namespace SWAD_IT02_Team1_Assignment2
         {
             get { return returnTimeslots; }
             set { returnTimeslots = value; }
+        }
+        public string Status
+        {
+            get { return status; }
+            set { status = value; }
         }
 
         /// <summary>
@@ -169,6 +177,26 @@ namespace SWAD_IT02_Team1_Assignment2
             this.PickupLocation = newPickupLocation;
             this.ReturnLocation = newReturnLocation;
             this.Amount = newAmount;            
+        }
+
+        /// <summary>
+        /// Get the booking details using the booking ID.
+        /// Creator: Ong Yee Hen
+        /// Student ID: S10258759D
+        /// </summary>
+        public static Booking getBookingDetails(int id)
+        {
+            return Program.Bookings.FirstOrDefault(b => b.Id == id);
+        }
+
+        /// <summary>
+        /// Update the booking status.
+        /// Creator: Ong Yee Hen
+        /// Student ID: S10258759D
+        /// </summary>
+        public void updateBookingStatus(string newStatus)
+        {
+            this.status = newStatus;
         }
     }
 }

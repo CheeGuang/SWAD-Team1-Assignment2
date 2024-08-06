@@ -42,7 +42,8 @@ namespace SWAD_IT02_Team1_Assignment2
                     booking.Amount,
                     booking.Payment,
                     booking.PickupLocation,
-                    booking.ReturnLocation
+                    booking.ReturnLocation,
+                    booking.Status
                 );
 
                 decimal newAmount = booking.Amount;
