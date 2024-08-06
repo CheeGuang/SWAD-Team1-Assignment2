@@ -180,23 +180,27 @@ namespace SWAD_IT02_Team1_Assignment2
         }
 
         /// <summary>
-        /// Get the booking details using the booking ID.
-        /// Creator: Ong Yee Hen
-        /// Student ID: S10258759D
+        /// Gets the booking details based on the provided booking ID.
+        /// Creator: Wang Po Yen Jason & Ong Yee Hen
+        /// Student ID: S10255872A & S10258759D
         /// </summary>
+        /// <param name="id">The booking ID.</param>
+        /// <returns>The booking object if found; otherwise, null.</returns>
+
         public static Booking getBookingDetails(int id)
         {
             return Program.Bookings.FirstOrDefault(b => b.Id == id);
         }
 
         /// <summary>
-        /// Update the booking status.
-        /// Creator: Ong Yee Hen
-        /// Student ID: S10258759D
+        /// Updates the status of the booking.
+        /// Creator: Wang Po Yen Jason & Ong Yee Hen
+        /// Student ID: S10255872A & S10258759D
         /// </summary>
+        /// <param name="newStatus">The new status to be set for the booking.</param>
         public void updateBookingStatus(string newStatus)
         {
-            this.status = newStatus;
+            this.Status = newStatus
         }
     }
 }

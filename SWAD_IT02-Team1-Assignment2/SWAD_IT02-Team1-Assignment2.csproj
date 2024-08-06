@@ -51,6 +51,7 @@
     <Compile Include="Card.cs" />
     <Compile Include="CarOwner.cs" />
     <Compile Include="CTL_ModifyBooking.cs" />
+    <Compile Include="CTL_ReturnCar.cs" />
     <Compile Include="CTL_PickupAtiCarStation.cs" />
     <Compile Include="DigitalWallet.cs" />
     <Compile Include="EmailSystem.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="UI_ModifyBooking.cs" />
     <Compile Include="UI_PickupAtiCarStation.cs" />
     <Compile Include="UI_Renter.cs" />
+    <Compile Include="UI_ReturnCar.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -49,5 +49,16 @@ namespace SWAD_IT02_Team1_Assignment2
             get { return carCount; }
             set { carCount = value; }
         }
+
+        /// <summary>
+        /// Gets the end date and time of the return timeslot.
+        /// Creator: Wang Po Yen Jason
+        /// Student ID: S10255872A
+        /// </summary>
+        /// <returns>The end date and time of the return timeslot.</returns>
+        public DateTime getReturnDateTime()
+        {
+            return endDateTime;
+        }
     }
 }

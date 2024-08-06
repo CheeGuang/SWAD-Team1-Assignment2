@@ -14,7 +14,6 @@ namespace SWAD_IT02_Team1_Assignment2
     internal class Program
     {
         public static List<Booking> Bookings = new List<Booking>();
-
         private static Renter dummyRenter;
         private static CarOwner dummyCarOwner;
         private static ICarAdmin dummyICarAdmin;
@@ -83,14 +82,23 @@ namespace SWAD_IT02_Team1_Assignment2
             // Create instances of PickupTimeslot
             PickupTimeslot pickupTimeslot1 = new PickupTimeslot(1, new DateTime(2024, 08, 05, 20, 0, 0), new DateTime(2024, 08, 05, 23, 0, 0), true, 1);
             PickupTimeslot pickupTimeslot2 = new PickupTimeslot(1, new DateTime(2024, 08, 10, 20, 0, 0), new DateTime(2024, 08, 10, 23, 0, 0), true, 1);
+          
+            // Create instances of ReturnTimeSlot
+            ReturnTimeslot returnTimeslot1 = new ReturnTimeslot(1, new DateTime(2024, 08, 05, 9, 0, 0), new DateTime(2024, 08, 08, 23, 0, 0), true, 1);
+            ReturnTimeslot returnTimeslot2 = new ReturnTimeslot(2, new DateTime(2024, 08, 05, 9, 0, 0), new DateTime(2024, 08, 05, 20, 0, 0), true, 1);
 
             // Create instances of Booking
             Booking booking1 = new Booking(1, dummyRenter, dummyCar, new DateTime(2024, 08, 01, 9, 0, 0), new DateTime(2024, 08, 02, 9, 0, 0), 120.00m, payment1, pickupLocations[0], returnLocations[0], "Created Successfully");
             Booking booking2 = new Booking(2, dummyRenter, dummyCar, new DateTime(2024, 08, 07, 9, 0, 0), new DateTime(2024, 08, 12, 9, 0, 0), 120.00m, payment1, pickupLocations[0], returnLocations[0], "Created Successfully");
-
+            
 
             booking1.PickupTimeslots.Add(pickupTimeslot1);
             booking2.PickupTimeslots.Add(pickupTimeslot2);
+          
+            
+            booking1.AddReturnTimeslot(returnTimeslot1);
+            booking2.AddReturnTimeslot(returnTimeslot2);
+
 
             Bookings.Add(booking1);
             Bookings.Add(booking2);
