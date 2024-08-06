@@ -21,7 +21,7 @@ namespace SWAD_IT02_Team1_Assignment2
         }
 
         /// <summary>
-        /// Create new booking object.
+        /// Processes all the booking requests and validate data
         /// Creator: Zou Ruining, Raeanne
         /// Student ID: S10258772G
         /// </summary>
@@ -95,6 +95,13 @@ namespace SWAD_IT02_Team1_Assignment2
            
         }
 
+        /// <summary>
+        /// Get the availability schedule based on user's selected slot ID
+        /// Creator: Zou Ruining, Raeanne
+        /// Student ID: S10258772G
+        /// </summary>
+        /// <param name="slotID">Availability Schedule ID</param>
+        /// <param name="availabilities">List of selected car's availability schedule</param>
         private AvailabilitySchedule GetAvailabilitySlot(int slotID, List<AvailabilitySchedule> availabilities)
         {
             foreach (AvailabilitySchedule availability in availabilities)
@@ -198,6 +205,12 @@ namespace SWAD_IT02_Team1_Assignment2
             return true;
         }
 
+        /// <summary>
+        /// Get the return location by ID
+        /// Creator: Zou Ruining, Raeanne
+        /// Student ID: S10258772G
+        /// </summary>
+        /// <param name="id">Return location ID</param>
         private ReturnLocation getReturnLocationById(int id)
         {
             foreach(ReturnLocation location in Program.returnLocations) 
@@ -209,6 +222,13 @@ namespace SWAD_IT02_Team1_Assignment2
             }
             return null;
         }
+
+        /// <summary>
+        /// Get the pickup location by ID
+        /// Creator: Zou Ruining, Raeanne
+        /// Student ID: S10258772G
+        /// </summary>
+        /// <param name="id">Pickup location ID</param>
         private PickupLocation getPickupLocationById(int id)
         {
             foreach (PickupLocation location in Program.pickupLocations)
@@ -221,6 +241,13 @@ namespace SWAD_IT02_Team1_Assignment2
             return null;
         }
 
+        /// <summary>
+        /// Calculate total cost of current booking request: assumption $5/hr
+        /// Creator: Zou Ruining, Raeanne
+        /// Student ID: S10258772G
+        /// </summary>
+        /// <param name="endDate">Booking End DateTime</param>
+        /// <param name="startDate">Booking Start DateTime</param>
         public decimal CalculateCost(DateTime endDate, DateTime startDate)
         {
             return 5 * Math.Abs((decimal)(endDate - startDate).TotalHours);

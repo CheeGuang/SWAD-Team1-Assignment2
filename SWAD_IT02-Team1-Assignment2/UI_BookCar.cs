@@ -18,17 +18,12 @@ namespace SWAD_IT02_Team1_Assignment2
         private Dictionary<string, string> bookingDetails = new Dictionary<string, string>();
 
         /// <summary>
-        /// Select Car
+        /// Display all Availability Schedule of selected car
         /// Creator: Zou Ruining, Raeanne
         /// Student ID: S10258772G
         /// </summary>
-        /// <param name="">Detail on the param name</param>
-        public Dictionary<string, string> BookCar(Renter renter, Car dummyCar)
-        {
-            
-            return bookingDetails;
-        }
-
+        /// <param name="numberPlate">Selected car liscense plate</param>
+        /// <param name="availabilitySchedules">All availability schedules of selected car</param>
         public void DisplayAvailabilitySchedule(string numberPlate, List<AvailabilitySchedule> availabilitySchedules)
         { 
             Console.WriteLine("Selected Car License Plate: " + numberPlate);
@@ -46,12 +41,22 @@ namespace SWAD_IT02_Team1_Assignment2
 
         }
 
+        /// <summary>
+        /// Get user to select availability slot
+        /// Creator: Zou Ruining, Raeanne
+        /// Student ID: S10258772G
+        /// </summary>
         public int GetSelectedAvailabilitySlot()
         {
             Console.Write("Please enter availability slot ID: ");
             return int.Parse(Console.ReadLine());
         }
 
+        /// <summary>
+        /// Get user to input booking dates
+        /// Creator: Zou Ruining, Raeanne
+        /// Student ID: S10258772G
+        /// </summary>
         public Dictionary<string, string> GetBookingDates()
         {
             Console.Write("\nBooking Start Date and Time (dd/MM/yyyy h:mm:ss tt): ");
@@ -91,7 +96,11 @@ namespace SWAD_IT02_Team1_Assignment2
             Console.WriteLine("===============================================\n");
         }
 
-
+        /// <summary>
+        /// Get user to input pickup and return locations
+        /// Creator: Zou Ruining, Raeanne
+        /// Student ID: S10258772G
+        /// </summary>
         public Dictionary<string, string> GetSelectedLocations()
         {
             Console.Write("\nEnter Pickup Location ID: ");
@@ -103,7 +112,12 @@ namespace SWAD_IT02_Team1_Assignment2
 
         }
 
-        
+        /// <summary>
+        /// Get user to confirm payment
+        /// Creator: Zou Ruining, Raeanne
+        /// Student ID: S10258772G
+        /// </summary>
+        /// <param name="totalCost">Booking total cost</param>
         public bool DisplayPaymentOption(decimal totalCost)
         {
             bool response = false;
@@ -134,6 +148,12 @@ namespace SWAD_IT02_Team1_Assignment2
             return commitPayment;
         }
 
+        /// <summary>
+        /// Print the booking details after booking is confirmed
+        /// Creator: Zou Ruining, Raeanne
+        /// Student ID: S10258772G
+        /// </summary>
+        /// <param name="booking">Booking made</param>
         public void PrintBookingSummary(Booking booking)
         {
             Console.WriteLine("\n****** Booking Summary ********");

@@ -6,12 +6,22 @@ using System.Threading.Tasks;
 
 namespace SWAD_IT02_Team1_Assignment2
 {
+    /// <summary>
+    /// Creation of class according to class diagram done by Raeanne.
+    /// Creator: Zou Ruining, Raeanne
+    /// Student ID: S10258772G
+    /// </summary>
     public sealed class PaymentModel
     {
         private List<Payment> payments;
         private static PaymentModel instance = null;
         private int cardIdx = 2;
 
+        /// <summary>
+        /// Dummy data instantiation
+        /// Creator: Zou Ruining, Raeanne
+        /// Student ID: S10258772G
+        /// </summary>
         private PaymentModel() 
         {
             // Create instances of Card and DigitalWallet
@@ -26,6 +36,12 @@ namespace SWAD_IT02_Team1_Assignment2
                
         }
 
+        /// <summary>
+        /// Get Instance of the PaymentModel
+        /// Creator: Zou Ruining, Raeanne
+        /// Student ID: S10258772G
+        /// </summary>
+        /// <param name="">Detail on the param name</param>
         public static PaymentModel Instance
         {
             get
@@ -37,17 +53,7 @@ namespace SWAD_IT02_Team1_Assignment2
                 return instance;
             }
         }
-        public Payment GetPayment(int id)
-        {
-            foreach (Payment payment in payments)
-            {
-                if (payment.Id == id)
-                {
-                    return payment;
-                }
-            }
-            return null;
-        }
+
 
         /// <summary>
         /// Create payment object after payment made.
@@ -69,6 +75,12 @@ namespace SWAD_IT02_Team1_Assignment2
             return payment;
         }
 
+        /// <summary>
+        /// Add payment object to the payment model
+        /// Creator: Zou Ruining, Raeanne
+        /// Student ID: S10258772G
+        /// </summary>
+        /// <param name="payment">The created payment object</param>
         public int AddPayment(Payment payment)
         {
             payments.Add(payment);
