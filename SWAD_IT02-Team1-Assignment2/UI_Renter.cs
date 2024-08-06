@@ -18,9 +18,10 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="renter">The renter object.</param>
         /// <param name="pickupLocations">List of pickup locations.</param>
         /// <param name="returnLocations">List of return locations.</param>
-        public void RenterMenu(Renter renter, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
+        public void RenterMenu(Renter renter, Car dummyCar, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             UI_ModifyBooking uiModifyBooking = new UI_ModifyBooking();
+            CTL_BookCar ctlBookCar = new CTL_BookCar();
 
             while (true)
             {
@@ -55,8 +56,7 @@ namespace SWAD_IT02_Team1_Assignment2
                         }
                         break;
                     case "2":
-                        // Implement Book Car functionality here
-                        Console.WriteLine("\n");
+                        ctlBookCar.ProcessBookingRequest(renter, dummyCar);
                         break;
                     case "3":
                         uiModifyBooking.ModifyBooking(renter, pickupLocations, returnLocations);

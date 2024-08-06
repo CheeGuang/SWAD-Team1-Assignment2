@@ -104,6 +104,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="booking">The original booking details.</param>
         static public void SendBookingConfirmationEmail(string receiverEmail, string userName, Booking booking)
         {
+            Console.WriteLine($"Sending {receiverEmail}");
             // Sender Email Details
             string fromMail = "jeffreyleeprg2@gmail.com";
             string fromPassword = "cuhmvmdqllulsucg";
@@ -132,7 +133,7 @@ namespace SWAD_IT02_Team1_Assignment2
             <h2>Original Booking Details</h2>
             <ul>
                 <li>Booking ID: {booking.Id}</li>
-                <li>Car: {booking.Car.Make} {booking.Car.Model} ({booking.Car.Year})</li>
+                <li>Car: {booking.Car.Make} {booking.Car.Model} ({booking.Car.NumberPlate})</li>
                 <li>Start Date: {booking.RentStartDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}</li>
                 <li>End Date: {booking.RentEndDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}</li>
                 <li>Pickup Location: {booking.PickupLocation.Address}</li>

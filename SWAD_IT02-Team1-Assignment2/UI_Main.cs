@@ -14,13 +14,16 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Displays the main menu.
         /// Creator: Lee Guang Le, Jeffrey
         /// Student ID: S10258143A
+        /// Modified By: Zou Ruining, Raeanne
+        /// Student ID: S10258772G
         /// </summary>
         /// <param name="dummyRenter">The dummy renter object.</param>
         /// <param name="dummyCarOwner">The dummy car owner object.</param>
         /// <param name="dummyICarAdmin">The dummy ICarAdmin object.</param>
+        /// <param name="dummyCar">The dummy car object.</param>
         /// <param name="pickupLocations">List of pickup locations.</param>
         /// <param name="returnLocations">List of return locations.</param>
-        public void MainMenu(Renter dummyRenter, CarOwner dummyCarOwner, ICarAdmin dummyICarAdmin, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
+        public void MainMenu(Renter dummyRenter, CarOwner dummyCarOwner, ICarAdmin dummyICarAdmin, Car dummyCar, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             while (true)
             {
@@ -39,7 +42,7 @@ namespace SWAD_IT02_Team1_Assignment2
                 switch (choice)
                 {
                     case "1":
-                        LoginAsRenter(dummyRenter, pickupLocations, returnLocations);
+                        LoginAsRenter(dummyRenter, dummyCar, pickupLocations, returnLocations);
                         break;
                     case "2":
                         LoginAsCarOwner(dummyCarOwner);
@@ -60,15 +63,17 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Logs in as Renter.
         /// Creator: Lee Guang Le, Jeffrey
         /// Student ID: S10258143A
+        /// Modified By: Zou Ruining, Raeanne
+        /// Student ID: S10258772G
         /// </summary>
         /// <param name="dummyRenter">The dummy renter object.</param>
         /// <param name="pickupLocations">List of pickup locations.</param>
         /// <param name="returnLocations">List of return locations.</param>
-        public void LoginAsRenter(Renter dummyRenter, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
+        public void LoginAsRenter(Renter dummyRenter, Car dummyCar, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             Console.WriteLine($"Logged in as Renter: {dummyRenter.Name}");
             UI_Renter uiRenter = new UI_Renter();
-            uiRenter.RenterMenu(dummyRenter, pickupLocations, returnLocations);
+            uiRenter.RenterMenu(dummyRenter, dummyCar, pickupLocations, returnLocations); // added dummyCar
         }
 
         /// <summary>

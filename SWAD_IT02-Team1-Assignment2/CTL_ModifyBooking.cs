@@ -42,7 +42,8 @@ namespace SWAD_IT02_Team1_Assignment2
                     booking.Amount,
                     booking.Payment,
                     booking.PickupLocation,
-                    booking.ReturnLocation
+                    booking.ReturnLocation,
+                    booking.Status
                 );
 
                 decimal newAmount = booking.Amount;
@@ -68,7 +69,7 @@ namespace SWAD_IT02_Team1_Assignment2
 
                             if (userConfirmation.ToLower() == "yes")
                             {
-                                booking.Payment.MakePayment(paymentAmount);
+                                booking.Payment.DisplayPaymentStatus(paymentAmount);
                                 newAmount += paymentAmount;
                                 isSuccessful = true;
                                 break;
