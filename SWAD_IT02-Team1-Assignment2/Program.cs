@@ -97,6 +97,7 @@ namespace SWAD_IT02_Team1_Assignment2
 
             // Add bookings to renter
             dummyRenter.AddBooking(booking1);
+            dummyRenter.AddBooking(booking2);
 
             // Create instances of Accident and AssistanceReport
             Accident accident1 = new Accident(1, "Minor collision", new DateTime(2024, 07, 01, 10, 0, 0), true);
