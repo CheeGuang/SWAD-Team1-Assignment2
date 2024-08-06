@@ -21,6 +21,7 @@ namespace SWAD_IT02_Team1_Assignment2
         public void RenterMenu(Renter renter, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             UI_ModifyBooking uiModifyBooking = new UI_ModifyBooking();
+            UI_PickupAtiCarStation uiPickupAtiCarStation = new UI_PickupAtiCarStation();
 
             while (true)
             {
@@ -63,7 +64,7 @@ namespace SWAD_IT02_Team1_Assignment2
                         break;
                     case "4":
                         // Implement Pickup Car functionality here
-                        Console.WriteLine("\n");
+                        uiPickupAtiCarStation.startPickupAtiCarStation();
                         break;
                     case "5":
                         // Implement Return Car functionality here
