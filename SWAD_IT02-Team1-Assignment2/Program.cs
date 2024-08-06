@@ -38,8 +38,8 @@ namespace SWAD_IT02_Team1_Assignment2
         public static void AddDummyData()
         {
             // Initialize existing variables
-            dummyCarOwner = new CarOwner(1, "Benjamin Lau", "s10258143@connect.np.edu.sg", "0987654321", "1985-02-02", 100.0m, 500.0m);
-            dummyRenter = new Renter(1, "Jeffrey Lee", "s10258143@connect.np.edu.sg", "1122334455", "1992-03-03", "DL123456", 50.0m, 200.0m, true, true);
+            dummyCarOwner = new CarOwner(1, "Benjamin Lau", "jeffreylimtino@gmail.com", "0987654321", "1985-02-02", 100.0m, 500.0m);
+            dummyRenter = new Renter(1, "Jeffrey Lee", "jeffreyleetino@gmail.com", "1122334455", "1992-03-03", "DL123456", 50.0m, 200.0m, true, true);
             dummyICarAdmin = new ICarAdmin(1, "Emily Tan", "emilytan@example.com", "6677889900", "1988-04-04", true);
 
             // Create instance of Car
@@ -79,21 +79,34 @@ namespace SWAD_IT02_Team1_Assignment2
             // Create instances of Payment
             Payment payment1 = new Payment(1, 120.00m, "Credit Card", DateTime.Now, card1);
 
+            // Create instances of PickupTimeslot
+            PickupTimeslot pickupTimeslot1 = new PickupTimeslot(1, new DateTime(2024, 08, 05, 20, 0, 0), new DateTime(2024, 08, 05, 23, 0, 0), true, 1);
+            PickupTimeslot pickupTimeslot2 = new PickupTimeslot(1, new DateTime(2024, 08, 10, 20, 0, 0), new DateTime(2024, 08, 10, 23, 0, 0), true, 1);
+          
             // Create instances of ReturnTimeSlot
             ReturnTimeslot returnTimeslot1 = new ReturnTimeslot(1, new DateTime(2024, 08, 05, 9, 0, 0), new DateTime(2024, 08, 08, 23, 0, 0), true, 1);
-            ReturnTimeslot returnTimeslot2 = new ReturnTimeslot(1, new DateTime(2024, 08, 05, 9, 0, 0), new DateTime(2024, 08, 05, 20, 0, 0), true, 1);
+            ReturnTimeslot returnTimeslot2 = new ReturnTimeslot(2, new DateTime(2024, 08, 05, 9, 0, 0), new DateTime(2024, 08, 05, 20, 0, 0), true, 1);
 
             // Create instances of Booking
             Booking booking1 = new Booking(1, dummyRenter, dummyCar, new DateTime(2024, 08, 01, 9, 0, 0), new DateTime(2024, 08, 02, 9, 0, 0), 120.00m, payment1, pickupLocations[0], returnLocations[0], "Created Successfully");
-            Booking booking2 = new Booking(2, dummyRenter, dummyCar, new DateTime(2024, 08, 01, 9, 0, 0), new DateTime(2024, 08, 02, 9, 0, 0), 120.00m, payment1, pickupLocations[0], returnLocations[0], "Created Successfully");
+            Booking booking2 = new Booking(2, dummyRenter, dummyCar, new DateTime(2024, 08, 07, 9, 0, 0), new DateTime(2024, 08, 12, 9, 0, 0), 120.00m, payment1, pickupLocations[0], returnLocations[0], "Created Successfully");
+            
+
+            booking1.PickupTimeslots.Add(pickupTimeslot1);
+            booking2.PickupTimeslots.Add(pickupTimeslot2);
+          
+            
             booking1.AddReturnTimeslot(returnTimeslot1);
             booking2.AddReturnTimeslot(returnTimeslot2);
+
+
             Bookings.Add(booking1);
             Bookings.Add(booking2);
 
 
             // Add bookings to renter
             dummyRenter.AddBooking(booking1);
+            dummyRenter.AddBooking(booking2);
 
             // Create instances of Accident and AssistanceReport
             Accident accident1 = new Accident(1, "Minor collision", new DateTime(2024, 07, 01, 10, 0, 0), true);
