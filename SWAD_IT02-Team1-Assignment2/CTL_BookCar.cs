@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,7 +39,7 @@ namespace SWAD_IT02_Team1_Assignment2
                 AvailabilitySchedule selectedSlot = null;
                 do
                 {
-                    slotID = uiBookCar.GetSelectedAvailabilitySlot();
+                    slotID = uiBookCar.PromptSelectedAvailabilitySlot();
                     selectedSlot = GetAvailabilitySlot(slotID, car.AvailabilitySchedules);
 
                 } while (selectedSlot == null);
@@ -47,7 +48,7 @@ namespace SWAD_IT02_Team1_Assignment2
                 Dictionary<string, string> bookingDetails;
                 do
                 {
-                    bookingDetails = uiBookCar.GetBookingDates();
+                    bookingDetails = uiBookCar.PromptBookingDates();
 
                 } while (!ValidateBookingDates(selectedSlot, bookingDetails));
                 
@@ -56,7 +57,7 @@ namespace SWAD_IT02_Team1_Assignment2
                 uiBookCar.DisplayLocations(Program.pickupLocations, Program.returnLocations);
                 do
                 {
-                    bookingDetails = uiBookCar.GetSelectedLocations();
+                    bookingDetails = uiBookCar.PromptSelectedLocations();
 
                 } while (!ValidateBookingLocations(bookingDetails));
 
@@ -73,18 +74,15 @@ namespace SWAD_IT02_Team1_Assignment2
 
                 // Assume Payment handled
                 Payment payment = PaymentModel.Instance.MakePayment(totalCost);
-                
 
-                // Commit the new booking
-                Booking booking = new Booking(renter.Bookings.Count, renter, car, DateTime.Parse(bookingDetails["startDateTime"]), DateTime.Parse(bookingDetails["endDateTime"]), totalCost, 
-                    payment, getPickupLocationById(int.Parse(bookingDetails["pickupLocation"])), getReturnLocationById(int.Parse(bookingDetails["returnLocation"])), "Created Successfully");
-                renter.AddBooking(booking);
+                Booking aBooking = CreateBooking(renter.Bookings.Count, renter, car, DateTime.Parse(bookingDetails["startDateTime"]), DateTime.Parse(bookingDetails["endDateTime"]), totalCost,
+                payment, getPickupLocationById(int.Parse(bookingDetails["pickupLocation"])), getReturnLocationById(int.Parse(bookingDetails["returnLocation"])), "Created Successfully");
 
                 //Console print booking summary
-                uiBookCar.PrintBookingSummary(booking);
+                uiBookCar.PrintBookingSummary(aBooking);
 
                 // Send an Email
-                EmailSystem.SendBookingConfirmationEmail(renter.Email, renter.Name, booking);
+                EmailSystem.SendBookingConfirmationEmail(renter.Email, renter.Name, aBooking);
 
                 return true;
             } catch
@@ -93,6 +91,14 @@ namespace SWAD_IT02_Team1_Assignment2
                 return false;
             }
            
+        }
+
+        private Booking CreateBooking(int id, Renter renter, Car car, DateTime rentStartDateTime, DateTime rentEndDateTime, decimal amount, Payment payment, PickupLocation pickupLocation, ReturnLocation returnLocation, string status)
+        {
+            // Commit the new booking
+            Booking booking = new Booking(id, renter, car, rentStartDateTime, rentEndDateTime,amount, payment, pickupLocation, returnLocation, status);
+            renter.AddBooking(booking);
+            return booking;
         }
 
         /// <summary>

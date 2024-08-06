@@ -46,7 +46,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Creator: Zou Ruining, Raeanne
         /// Student ID: S10258772G
         /// </summary>
-        public int GetSelectedAvailabilitySlot()
+        public int PromptSelectedAvailabilitySlot()
         {
             Console.Write("Please enter availability slot ID: ");
             return int.Parse(Console.ReadLine());
@@ -57,7 +57,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Creator: Zou Ruining, Raeanne
         /// Student ID: S10258772G
         /// </summary>
-        public Dictionary<string, string> GetBookingDates()
+        public Dictionary<string, string> PromptBookingDates()
         {
             Console.Write("\nBooking Start Date and Time (dd/MM/yyyy h:mm:ss tt): ");
             bookingDetails["startDateTime"] = Console.ReadLine();
@@ -101,7 +101,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Creator: Zou Ruining, Raeanne
         /// Student ID: S10258772G
         /// </summary>
-        public Dictionary<string, string> GetSelectedLocations()
+        public Dictionary<string, string> PromptSelectedLocations()
         {
             Console.Write("\nEnter Pickup Location ID: ");
             bookingDetails["pickupLocation"] = Console.ReadLine();
