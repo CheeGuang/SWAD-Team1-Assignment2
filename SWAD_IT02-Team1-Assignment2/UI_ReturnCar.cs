@@ -145,6 +145,7 @@ namespace SWAD_IT02_Team1_Assignment2
             }
             else
             {
+                Console.WriteLine("Return is on time.");
                 promptConfirmReturn(id);
             }
         }
