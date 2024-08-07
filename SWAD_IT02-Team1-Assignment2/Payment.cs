@@ -54,13 +54,15 @@ namespace SWAD_IT02_Team1_Assignment2
 
         /// <summary>
         /// Makes a payment of the specified amount.
-        /// Creator: Zou Ruining, Raeanne
-        /// Student ID: S10258772G
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
         /// </summary>
         /// <param name="paymentAmount">The amount to pay.</param>
         public void DisplayPaymentStatus(decimal paymentAmount)
         {
-            Console.WriteLine($"Payment ${paymentAmount} successful.");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"\nPayment ${paymentAmount} successful.");
+            Console.ResetColor();
         }
     }
 }

@@ -27,14 +27,14 @@ namespace SWAD_IT02_Team1_Assignment2
         public void DisplayAvailabilitySchedule(string numberPlate, List<AvailabilitySchedule> availabilitySchedules)
         { 
             Console.WriteLine("Selected Car License Plate: " + numberPlate);
-       
+        
             Console.WriteLine("\n===============================================");
             Console.WriteLine("            Availability Schedules");
             Console.WriteLine("===============================================\n");
 
             foreach (AvailabilitySchedule availability in availabilitySchedules)
             {
-                Console.WriteLine($"ID: {availability.Id} - Slot: {availability.StartDate} to {availability.EndDate}");
+                Console.WriteLine($"ID: {availability.Id} - Slot: {availability.StartDate.ToString("dd/MM/yyyy h:mm:ss tt")} to {availability.EndDate.ToString("dd/MM/yyyy h:mm:ss tt")}");
             }
 
             Console.WriteLine("===============================================\n");

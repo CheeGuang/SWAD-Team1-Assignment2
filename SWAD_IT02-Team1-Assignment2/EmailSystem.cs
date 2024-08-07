@@ -90,8 +90,6 @@ namespace SWAD_IT02_Team1_Assignment2
 
             // Display Confirmation Message
             Console.WriteLine();
-            Console.WriteLine("Confirmation Email Sent!!");
-            Console.WriteLine();
         }
 
         /// <summary>

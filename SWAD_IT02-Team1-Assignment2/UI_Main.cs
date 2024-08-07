@@ -25,10 +25,12 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="returnLocations">List of return locations.</param>
         public void MainMenu(Renter dummyRenter, CarOwner dummyCarOwner, ICarAdmin dummyICarAdmin, Car dummyCar, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
+            DisplayWelcomeScreen(); // Display the ASCII art welcome screen
+
             while (true)
             {
                 Console.WriteLine("\n===============================================");
-                Console.WriteLine("         Welcome to iCar Car Rental System");
+                Console.WriteLine("                  Main Menu");
                 Console.WriteLine("===============================================");
                 Console.WriteLine("1. Login as Renter");
                 Console.WriteLine("2. Login as CarOwner");
@@ -100,6 +102,26 @@ namespace SWAD_IT02_Team1_Assignment2
             Console.WriteLine($"Logged in as ICarAdmin: {dummyICarAdmin.Name}");
             UI_ICarAdmin uiICarAdmin = new UI_ICarAdmin();
             uiICarAdmin.ICarAdminMenu(dummyICarAdmin);
+        }
+
+        /// <summary>
+        /// Displays the ASCII art welcome screen.
+        /// </summary>
+        private void DisplayWelcomeScreen()
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(@"
+ ___ ____              ____             ____            _        _ 
+|_ _/ ___|__ _ _ __   / ___|__ _ _ __  |  _ \ ___ _ __ | |_ __ _| |
+ | | |   / _` | '__| | |   / _` | '__| | |_) / _ \ '_ \| __/ _` | |
+ | | |__| (_| | |    | |__| (_| | |    |  _ <  __/ | | | || (_| | |
+|___\____\__,_|_|     \____\__,_|_|    |_| \_\___|_| |_|\__\__,_|_|
+/ ___|  ___ _ ____   _(_) ___ ___                                  
+\___ \ / _ \ '__\ \ / / |/ __/ _ \                                 
+ ___) |  __/ |   \ V /| | (_|  __/                                 
+|____/ \___|_|    \_/ |_|\___\___|                                 
+            ");
+            Console.ResetColor();
         }
     }
 }

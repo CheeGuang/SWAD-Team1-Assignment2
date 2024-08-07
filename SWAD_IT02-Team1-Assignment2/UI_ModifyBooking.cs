@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace SWAD_IT02_Team1_Assignment2
 {
@@ -18,68 +19,6 @@ namespace SWAD_IT02_Team1_Assignment2
         }
 
         /// <summary>
-        /// Displays booking details.
-        /// Creator: Lee Guang Le, Jeffrey
-        /// Student ID: S10258143A
-        /// </summary>
-        /// <param name="aBooking">The booking to display.</param>
-        public void DisplayBookingDetails(Booking aBooking)
-        {
-            Console.WriteLine("\n\n===============================================");
-            Console.WriteLine($"             Booking {aBooking.Id} Details");
-            Console.WriteLine("===============================================");
-            Console.WriteLine($"Booking ID:         {aBooking.Id}");
-            Console.WriteLine($"Car ID:             {aBooking.Car.Id}");
-            Console.WriteLine($"Start Date:         {aBooking.RentStartDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}");
-            Console.WriteLine($"End Date:           {aBooking.RentEndDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}");
-            Console.WriteLine($"Amount:             {aBooking.Amount}");
-            Console.WriteLine($"Pickup Location:    {aBooking.PickupLocation.Address}");
-            Console.WriteLine($"Return Location:    {aBooking.ReturnLocation.Address}");
-            Console.WriteLine("===============================================\n");
-        }
-
-        /// <summary>
-        /// Displays a success message after booking is updated.
-        /// Creator: Lee Guang Le, Jeffrey
-        /// Student ID: S10258143A
-        /// </summary>
-        /// <param name="aBooking">The booking that was updated.</param>
-        public void DisplaySuccessMessage(Booking aBooking)
-        {
-            Console.WriteLine("\n===============================================");
-            Console.WriteLine("         Booking Updated Successfully!");
-            Console.WriteLine("===============================================");
-            DisplayBookingDetails(aBooking);
-        }
-
-        /// <summary>
-        /// Displays the list of pickup and return locations.
-        /// Creator: Lee Guang Le, Jeffrey
-        /// Student ID: S10258143A
-        /// </summary>
-        /// <param name="pickupLocations">List of pickup locations.</param>
-        /// <param name="returnLocations">List of return locations.</param>
-        public void DisplayLocations(List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
-        {
-            Console.WriteLine("\n===============================================");
-            Console.WriteLine("                Pickup Locations");
-            Console.WriteLine("===============================================");
-            foreach (var location in pickupLocations)
-            {
-                Console.WriteLine($"ID: {location.Id} - Address: {location.Address}");
-            }
-
-            Console.WriteLine("\n===============================================");
-            Console.WriteLine("                Return Locations");
-            Console.WriteLine("===============================================");
-            foreach (var location in returnLocations)
-            {
-                Console.WriteLine($"ID: {location.Id} - Address: {location.Address}");
-            }
-            Console.WriteLine("===============================================\n");
-        }
-
-        /// <summary>
         /// Requests updated booking details from the user.
         /// Creator: Lee Guang Le, Jeffrey
         /// Student ID: S10258143A
@@ -87,13 +26,19 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="pickupLocations">List of pickup locations.</param>
         /// <param name="returnLocations">List of return locations.</param>
         /// <returns>Dictionary of updated booking details.</returns>
-        public Dictionary<string, string> RequestUpdatedBookingDetails(List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
+        public Dictionary<string, string> RequestUpdatedBookingDetails(Booking aBooking, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             Dictionary<string, string> updatedDetails = new Dictionary<string, string>();
 
+            // Display availability schedule for the selected car
+            DisplayAvailabilitySchedule(aBooking.Car.NumberPlate, aBooking.Car.AvailabilitySchedules);
+
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\n===============================================");
             Console.WriteLine("           Enter Updated Booking Details");
             Console.WriteLine("===============================================");
+            Console.ResetColor();
+
             Console.Write("New Start Date and Time (dd/MM/yyyy h:mm:ss tt): ");
             updatedDetails["newStartDateTime"] = Console.ReadLine();
 
@@ -125,7 +70,7 @@ namespace SWAD_IT02_Team1_Assignment2
         public Dictionary<string, string> EnterUpdatedBookingDetails(Booking aBooking, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             DisplayBookingDetails(aBooking);
-            return RequestUpdatedBookingDetails(pickupLocations, returnLocations);
+            return RequestUpdatedBookingDetails(aBooking, pickupLocations, returnLocations);
         }
 
         /// <summary>
@@ -140,9 +85,11 @@ namespace SWAD_IT02_Team1_Assignment2
         {
             if (renter.Bookings.Count > 0)
             {
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("\n===============================================");
                 Console.WriteLine("                All Bookings");
                 Console.WriteLine("===============================================");
+                Console.ResetColor();
                 foreach (var booking in renter.Bookings)
                 {
                     DisplayBookingDetails(booking);
@@ -184,6 +131,99 @@ namespace SWAD_IT02_Team1_Assignment2
             {
                 Console.WriteLine("No bookings found.");
             }
+        }
+
+        /// <summary>
+        /// Displays booking details.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="aBooking">The booking to display.</param>
+        public void DisplayBookingDetails(Booking aBooking)
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("\n\n===============================================");
+            Console.WriteLine($"             Booking {aBooking.Id} Details");
+            Console.WriteLine("===============================================");
+            Console.ResetColor();
+            Console.WriteLine($"Booking ID:         {aBooking.Id}");
+            Console.WriteLine($"Car ID:             {aBooking.Car.Id}");
+            Console.WriteLine($"Start Date:         {aBooking.RentStartDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}");
+            Console.WriteLine($"End Date:           {aBooking.RentEndDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}");
+            Console.WriteLine($"Amount:             {aBooking.Amount}");
+            Console.WriteLine($"Pickup Location:    {aBooking.PickupLocation.Address}");
+            Console.WriteLine($"Return Location:    {aBooking.ReturnLocation.Address}");
+            Console.WriteLine($"Status:             {aBooking.Status}");
+            Console.WriteLine("===============================================\n");
+        }
+
+        /// <summary>
+        /// Displays a success message after booking is updated.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="aBooking">The booking that was updated.</param>
+        public void DisplaySuccessMessage(Booking aBooking)
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("\n===============================================");
+            Console.WriteLine("         Booking Updated Successfully!");
+            Console.WriteLine("===============================================");
+            Console.ResetColor();
+            DisplayBookingDetails(aBooking);
+        }
+
+        /// <summary>
+        /// Displays the availability schedule for a car.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="numberPlate">The number plate of the car.</param>
+        /// <param name="availabilitySchedules">List of availability schedules.</param>
+        public void DisplayAvailabilitySchedule(string numberPlate, List<AvailabilitySchedule> availabilitySchedules)
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("\n===============================================");
+            Console.WriteLine("            Availability Schedules");
+            Console.WriteLine("===============================================\n");
+            Console.ResetColor();
+
+            foreach (AvailabilitySchedule availability in availabilitySchedules)
+            {
+                Console.WriteLine($"ID: {availability.Id} - Slot: {availability.StartDate.ToString("dd/MM/yyyy h:mm:ss tt")} to {availability.EndDate.ToString("dd/MM/yyyy h:mm:ss tt")}");
+            }
+
+            Console.WriteLine("===============================================\n");
+        }
+
+        /// <summary>
+        /// Displays the list of pickup and return locations.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="pickupLocations">List of pickup locations.</param>
+        /// <param name="returnLocations">List of return locations.</param>
+        public void DisplayLocations(List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("\n===============================================");
+            Console.WriteLine("                Pickup Locations");
+            Console.WriteLine("===============================================");
+            Console.ResetColor();
+            foreach (var location in pickupLocations)
+            {
+                Console.WriteLine($"ID: {location.Id} - Address: {location.Address}");
+            }
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("\n===============================================");
+            Console.WriteLine("                Return Locations");
+            Console.WriteLine("===============================================");
+            Console.ResetColor();
+            foreach (var location in returnLocations)
+            {
+                Console.WriteLine($"ID: {location.Id} - Address: {location.Address}");
+            }
+            Console.WriteLine("===============================================\n");
         }
     }
 }

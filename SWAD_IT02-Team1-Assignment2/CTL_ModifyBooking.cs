@@ -65,7 +65,7 @@ namespace SWAD_IT02_Team1_Assignment2
                         while (true)
                         {
                             Console.WriteLine($"The total extra amount needed to pay is: ${paymentAmount}. It is $5 per additional hour.");
-                            Console.Write("Do you want to proceed with the payment? (yes to confirm): ");
+                            Console.Write("Do you want to proceed with the payment? (yes or no): ");
                             string userConfirmation = Console.ReadLine();
 
                             if (userConfirmation.ToLower() == "yes")
@@ -75,9 +75,14 @@ namespace SWAD_IT02_Team1_Assignment2
                                 isSuccessful = true;
                                 break;
                             }
+                            else if (userConfirmation.ToLower() == "no")
+                            {
+                                DisplayUnsuccessfulPayment();
+                                return false; // Early return to prevent further messages
+                            }
                             else
                             {
-                                Console.WriteLine("Invalid input. Please enter 'yes' to confirm the payment.");
+                                Console.WriteLine("Invalid input. Please enter 'yes' to confirm the payment or 'no' to cancel.");
                             }
                         }
 
@@ -97,11 +102,18 @@ namespace SWAD_IT02_Team1_Assignment2
                     // Send confirmation emails
                     string renterEmail = booking.GetRenterEmail();
                     string carOwnerEmail = booking.GetCarOwnerEmail();
+
+
+
                     EmailSystem.SendConfirmationEmail(renterEmail, booking.User.Name, originalBooking, booking);
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Renter confirmation email sent successfully.");
+                    Console.ResetColor();
 
                     EmailSystem.SendConfirmationEmail(carOwnerEmail, booking.Car.CarOwner.Name, originalBooking, booking);
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Car Owner confirmation email sent successfully.");
+                    Console.ResetColor();
                 }
                 else
                 {
@@ -201,6 +213,16 @@ namespace SWAD_IT02_Team1_Assignment2
         public void DisplayGenericErrorMessage()
         {
             Console.WriteLine("An error occurred while updating the booking. Please try again.");
+        }
+
+        /// <summary>
+        /// Displays an error message when the payment is unsuccessful.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        public void DisplayUnsuccessfulPayment()
+        {
+            Console.WriteLine("Payment was unsuccessful. Booking update has been cancelled.");
         }
     }
 }

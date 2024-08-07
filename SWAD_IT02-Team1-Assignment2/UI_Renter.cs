@@ -30,12 +30,15 @@ namespace SWAD_IT02_Team1_Assignment2
                 Console.WriteLine("\n===============================================");
                 Console.WriteLine("                  Renter Menu");
                 Console.WriteLine("===============================================");
+
+                // Display menu options with colours
                 Console.WriteLine("1. View Bookings");
                 Console.WriteLine("2. Book Car");
                 Console.WriteLine("3. Modify Booking");
                 Console.WriteLine("4. Pickup Car");
                 Console.WriteLine("5. Return Car");
                 Console.WriteLine("0. Logout");
+
                 Console.WriteLine("===============================================\n");
                 Console.Write("Please select an option: ");
 
@@ -49,7 +52,7 @@ namespace SWAD_IT02_Team1_Assignment2
                         {
                             foreach (var booking in renter.Bookings)
                             {
-                                uiModifyBooking.DisplayBookingDetails(booking);
+                                DisplayBookingDetails(booking);
                             }
                         }
                         else
@@ -80,6 +83,28 @@ namespace SWAD_IT02_Team1_Assignment2
                         break;
                 }
             }
+        }
+
+        /// <summary>
+        /// Displays booking details.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="aBooking">The booking to display.</param>
+        public void DisplayBookingDetails(Booking aBooking)
+        {
+            Console.WriteLine("\n\n===============================================");
+            Console.WriteLine($"             Booking {aBooking.Id} Details");
+            Console.WriteLine("===============================================");
+            Console.WriteLine($"Booking ID:         {aBooking.Id}");
+            Console.WriteLine($"Car ID:             {aBooking.Car.Id}");
+            Console.WriteLine($"Start Date:         {aBooking.RentStartDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}");
+            Console.WriteLine($"End Date:           {aBooking.RentEndDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}");
+            Console.WriteLine($"Amount:             {aBooking.Amount}");
+            Console.WriteLine($"Pickup Location:    {aBooking.PickupLocation.Address}");
+            Console.WriteLine($"Return Location:    {aBooking.ReturnLocation.Address}");
+            Console.WriteLine($"Status:             {aBooking.Status}");
+            Console.WriteLine("===============================================\n");
         }
     }
 }

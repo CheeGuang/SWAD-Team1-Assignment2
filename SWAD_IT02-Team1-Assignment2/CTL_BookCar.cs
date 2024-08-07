@@ -75,7 +75,7 @@ namespace SWAD_IT02_Team1_Assignment2
                 // Assume Payment handled
                 Payment payment = PaymentModel.Instance.MakePayment(totalCost);
 
-                Booking aBooking = CreateBooking(renter.Bookings.Count, renter, car, DateTime.Parse(bookingDetails["startDateTime"]), DateTime.Parse(bookingDetails["endDateTime"]), totalCost,
+                Booking aBooking = CreateBooking(renter.Bookings.Count + 1, renter, car, DateTime.Parse(bookingDetails["startDateTime"]), DateTime.Parse(bookingDetails["endDateTime"]), totalCost,
                 payment, getPickupLocationById(int.Parse(bookingDetails["pickupLocation"]), pickupLocations), getReturnLocationById(int.Parse(bookingDetails["returnLocation"]), returnLocations), "Created Successfully");
 
                 //Console print booking summary

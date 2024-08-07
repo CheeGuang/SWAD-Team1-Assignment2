@@ -47,6 +47,9 @@ namespace SWAD_IT02_Team1_Assignment2
             // Create instance of Car
             dummyCar = new Car(1, "Toyota", "Camry", 2020, 15000.0m, 50.0m, "SGX1234A", true, dummyCarOwner);
 
+            // Add dummyCar to dummyCarOwner's list of cars
+            dummyCarOwner.AddCar(dummyCar);
+
             // Create instance of Insurance
             Insurance dummyInsurance = new Insurance(1, 10000.0m, dummyCar, new DateTime(2024, 12, 31));
             dummyCar.Insurance = dummyInsurance;

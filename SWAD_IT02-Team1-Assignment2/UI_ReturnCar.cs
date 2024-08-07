@@ -201,20 +201,13 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="id">The booking ID.</param>
         public void confirmReturn(int id)
         {
-            Console.Write("Do you want to finalize the return? (Yes/No): ");
-            string response = Console.ReadLine();
+            Console.Write("Press Enter to finalize the return: ");
+            Console.ReadLine();
             Console.WriteLine();
-            if (response.Equals("yes", StringComparison.OrdinalIgnoreCase))
-            {
-                ctlReturnCar.updateBookingStatus(id, "Car Returned");
-                var bookingDetails = ctlReturnCar.getBookingDetails(id); // Fetch the updated booking details
-                displayBookingFinalized(bookingDetails.Item1);
-            }
-            else
-            {
-                Console.WriteLine("Process cancelled. Ending use case.");
-                Console.WriteLine();
-            }
+
+            ctlReturnCar.updateBookingStatus(id, "Car Returned");
+            var bookingDetails = ctlReturnCar.getBookingDetails(id); // Fetch the updated booking details
+            displayBookingFinalized(bookingDetails.Item1);
         }
 
         /// <summary>
