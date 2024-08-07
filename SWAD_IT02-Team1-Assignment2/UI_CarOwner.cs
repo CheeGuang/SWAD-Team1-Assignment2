@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using SWAD_IT02_Team1_Assignment2;
 
 namespace SWAD_IT02_Team1_Assignment2
 {
@@ -17,8 +19,11 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="carOwner">The car owner object.</param>
         public void CarOwnerMenu(CarOwner carOwner)
         {
+            UI_RegisterCar uiRegisterCar = new UI_RegisterCar();
+
             while (true)
             {
+
                 Console.WriteLine("\n===============================================");
                 Console.WriteLine("                CarOwner Menu");
                 Console.WriteLine("===============================================");
@@ -33,8 +38,8 @@ namespace SWAD_IT02_Team1_Assignment2
                 switch (choice)
                 {
                     case "1":
-                        // Implement Register Car functionality here
-                        Console.WriteLine("\n");
+                        // Where the Register Car functionality starts.
+                        uiRegisterCar.registerCar(carOwner);
                         continue;
                     case "0":
                         Console.WriteLine("\nLog out successful. You have been securely signed out.\n");

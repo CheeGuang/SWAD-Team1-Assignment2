@@ -101,6 +101,7 @@ namespace SWAD_IT02_Team1_Assignment2
             set { status = value; }
         }
 
+
         /// <summary>
         /// Adds a pickup timeslot to the Booking.
         /// Creator: Lee Guang Le, Jeffrey
