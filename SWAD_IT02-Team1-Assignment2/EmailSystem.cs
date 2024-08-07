@@ -20,7 +20,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="userName">The user's name.</param>
         /// <param name="originalBooking">The original booking details.</param>
         /// <param name="updatedBooking">The updated booking details.</param>
-        static public void SendConfirmationEmail(string receiverEmail, string userName, Booking originalBooking, Booking updatedBooking)
+        static public void sendModifyReservationConfirmationEmail(string receiverEmail, string userName, Booking originalBooking, Booking updatedBooking)
         {
             // Sender Email Details
             string fromMail = "jeffreyleeprg2@gmail.com";

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace SWAD_IT02_Team1_Assignment2
 {
@@ -81,7 +80,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="renter">The renter object.</param>
         /// <param name="pickupLocations">List of pickup locations.</param>
         /// <param name="returnLocations">List of return locations.</param>
-        public void ModifyBooking(Renter renter, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
+        public void InitialiseModifyBooking(Renter renter, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             if (renter.Bookings.Count > 0)
             {
@@ -95,42 +94,51 @@ namespace SWAD_IT02_Team1_Assignment2
                     DisplayBookingDetails(booking);
                 }
 
-                Console.Write("Enter the Booking ID you want to modify: ");
-                int bookingId;
-                if (int.TryParse(Console.ReadLine(), out bookingId))
+                int bookingId = SelectBooking();
+                Booking aBooking = renter.Bookings.Find(b => b.Id == bookingId);
+                if (aBooking != null)
                 {
-                    Booking selectedBooking = renter.Bookings.Find(b => b.Id == bookingId);
-                    if (selectedBooking != null)
+                    bool isSuccessful = false;
+                    while (!isSuccessful)
                     {
-                        bool isSuccessful = false;
-                        while (!isSuccessful)
+                        var updatedDetails = EnterUpdatedBookingDetails(aBooking, pickupLocations, returnLocations);
+                        isSuccessful = ctlModifyBooking.EnterUpdated(updatedDetails, pickupLocations, returnLocations, aBooking);
+                        if (!isSuccessful)
                         {
-                            var updatedDetails = EnterUpdatedBookingDetails(selectedBooking, pickupLocations, returnLocations);
-                            isSuccessful = ctlModifyBooking.EnterUpdated(updatedDetails, pickupLocations, returnLocations, selectedBooking);
-                            if (!isSuccessful)
-                            {
-                                Console.WriteLine("Failed to update booking. Please try again.");
-                            }
-                            else
-                            {
-                                DisplaySuccessMessage(selectedBooking);
-                            }
+                            Console.WriteLine("Failed to update booking. Please try again.");
                         }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Booking ID not found.");
+                        else
+                        {
+                            DisplaySuccessMessage(aBooking);
+                        }
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Invalid Booking ID format.");
+                    Console.WriteLine("Booking ID not found.");
                 }
             }
             else
             {
                 Console.WriteLine("No bookings found.");
             }
+        }
+
+        /// <summary>
+        /// Prompts the user to enter the Booking ID they want to modify.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <returns>The Booking ID entered by the user.</returns>
+        private int SelectBooking()
+        {
+            Console.Write("Enter the Booking ID you want to modify: ");
+            int bookingId;
+            while (!int.TryParse(Console.ReadLine(), out bookingId))
+            {
+                Console.Write("Invalid Booking ID format. Please enter a numeric value: ");
+            }
+            return bookingId;
         }
 
         /// <summary>

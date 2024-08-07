@@ -25,7 +25,9 @@ namespace SWAD_IT02_Team1_Assignment2
         {
             bool isSuccessful = false;
 
-            if (ValidateUpdatedBookingDetails(updatedDetails, pickupLocations, returnLocations))
+            bool isValid = ValidateUpdatedBookingDetails(updatedDetails, pickupLocations, returnLocations);
+
+            if (isValid)
             {
                 DateTime originalStartDateTime = booking.GetStartDateTime();
                 DateTime originalEndDateTime = booking.GetEndDateTime();
@@ -46,7 +48,6 @@ namespace SWAD_IT02_Team1_Assignment2
                     booking.Status
                 );
 
-
                 decimal newAmount = booking.Amount;
 
                 if (originalEndDateTime - originalStartDateTime >= newEndDateTime - newStartDateTime)
@@ -55,7 +56,9 @@ namespace SWAD_IT02_Team1_Assignment2
                 }
                 else
                 {
-                    bool carIsAvailable = booking.Car.CheckCarAvailability(newStartDateTime, newEndDateTime);
+                    Car aCar = booking.Car;
+
+                    bool carIsAvailable = aCar.CheckCarAvailability(newStartDateTime, newEndDateTime);
 
                     if (carIsAvailable)
                     {
@@ -85,7 +88,6 @@ namespace SWAD_IT02_Team1_Assignment2
                                 Console.WriteLine("Invalid input. Please enter 'yes' to confirm the payment or 'no' to cancel.");
                             }
                         }
-
                     }
                     else
                     {
@@ -96,21 +98,23 @@ namespace SWAD_IT02_Team1_Assignment2
 
                 if (isSuccessful)
                 {
+                    // Retrieve new pickup and return location objects
+                    PickupLocation newPickupLocation = GetNewPickupLocationObject(updatedDetails, pickupLocations);
+                    ReturnLocation newReturnLocation = GetNewReturnLocationObject(updatedDetails, returnLocations);
+
                     // Proceed with updating the booking using valid details
-                    booking.ModifyBooking(newStartDateTime, newEndDateTime, pickupLocations.First(p => p.Id == int.Parse(updatedDetails["newPickupLocationId"])), returnLocations.First(r => r.Id == int.Parse(updatedDetails["newReturnLocationId"])), newAmount);
+                    booking.ModifyBooking(newStartDateTime, newEndDateTime, newPickupLocation, newReturnLocation, newAmount);
 
                     // Send confirmation emails
                     string renterEmail = booking.GetRenterEmail();
                     string carOwnerEmail = booking.GetCarOwnerEmail();
 
-
-
-                    EmailSystem.SendConfirmationEmail(renterEmail, booking.User.Name, originalBooking, booking);
+                    EmailSystem.sendModifyReservationConfirmationEmail(renterEmail, booking.User.Name, originalBooking, booking);
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Renter confirmation email sent successfully.");
                     Console.ResetColor();
 
-                    EmailSystem.SendConfirmationEmail(carOwnerEmail, booking.Car.CarOwner.Name, originalBooking, booking);
+                    EmailSystem.sendModifyReservationConfirmationEmail(carOwnerEmail, booking.Car.CarOwner.Name, originalBooking, booking);
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Car Owner confirmation email sent successfully.");
                     Console.ResetColor();
@@ -128,6 +132,34 @@ namespace SWAD_IT02_Team1_Assignment2
             }
 
             return isSuccessful;
+        }
+
+        /// <summary>
+        /// Retrieves the new pickup location object based on the updated details.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="updatedDetails">The updated booking details.</param>
+        /// <param name="pickupLocations">The list of pickup locations.</param>
+        /// <returns>The new pickup location object.</returns>
+        private PickupLocation GetNewPickupLocationObject(Dictionary<string, string> updatedDetails, List<PickupLocation> pickupLocations)
+        {
+            int pickupLocationId = int.Parse(updatedDetails["newPickupLocationId"]);
+            return pickupLocations.FirstOrDefault(p => p.Id == pickupLocationId);
+        }
+
+        /// <summary>
+        /// Retrieves the new return location object based on the updated details.
+        /// Creator: Lee Guang Le, Jeffrey
+        /// Student ID: S10258143A
+        /// </summary>
+        /// <param name="updatedDetails">The updated booking details.</param>
+        /// <param name="returnLocations">The list of return locations.</param>
+        /// <returns>The new return location object.</returns>
+        private ReturnLocation GetNewReturnLocationObject(Dictionary<string, string> updatedDetails, List<ReturnLocation> returnLocations)
+        {
+            int returnLocationId = int.Parse(updatedDetails["newReturnLocationId"]);
+            return returnLocations.FirstOrDefault(r => r.Id == returnLocationId);
         }
 
         /// <summary>

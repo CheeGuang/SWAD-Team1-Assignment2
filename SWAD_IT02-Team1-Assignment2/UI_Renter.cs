@@ -27,9 +27,11 @@ namespace SWAD_IT02_Team1_Assignment2
 
             while (true)
             {
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("\n===============================================");
                 Console.WriteLine("                  Renter Menu");
                 Console.WriteLine("===============================================");
+                Console.ResetColor();
 
                 // Display menu options with colours
                 Console.WriteLine("1. View Bookings");
@@ -64,7 +66,7 @@ namespace SWAD_IT02_Team1_Assignment2
                         ctlBookCar.ProcessBookingRequest(renter, dummyCar, pickupLocations, returnLocations);
                         break;
                     case "3":
-                        uiModifyBooking.ModifyBooking(renter, pickupLocations, returnLocations);
+                        uiModifyBooking.InitialiseModifyBooking(renter, pickupLocations, returnLocations);
                         break;
                     case "4":
                         // Implement Pickup Car functionality here
