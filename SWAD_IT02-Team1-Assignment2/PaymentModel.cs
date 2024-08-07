@@ -71,7 +71,7 @@ namespace SWAD_IT02_Team1_Assignment2
             Payment payment = new Payment(payments.Count, amount, "Credit Card", DateTime.Now, card);
             AddPayment(payment);
 
-            payment.DisplayPaymentStatus(amount);
+            payment.MakePayment(amount);
             return payment;
         }
 

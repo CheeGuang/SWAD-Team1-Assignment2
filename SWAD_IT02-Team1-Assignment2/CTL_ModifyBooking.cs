@@ -70,7 +70,7 @@ namespace SWAD_IT02_Team1_Assignment2
 
                             if (userConfirmation.ToLower() == "yes")
                             {
-                                booking.Payment.DisplayPaymentStatus(paymentAmount);
+                                booking.Payment.MakePayment(paymentAmount);
                                 newAmount += paymentAmount;
                                 isSuccessful = true;
                                 break;

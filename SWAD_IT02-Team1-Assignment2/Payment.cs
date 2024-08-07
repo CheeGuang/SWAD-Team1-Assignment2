@@ -58,7 +58,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10258143A
         /// </summary>
         /// <param name="paymentAmount">The amount to pay.</param>
-        public void DisplayPaymentStatus(decimal paymentAmount)
+        public void MakePayment(decimal paymentAmount)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"\nPayment ${paymentAmount} successful.");
