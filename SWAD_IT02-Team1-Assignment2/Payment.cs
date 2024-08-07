@@ -58,7 +58,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10258772G
         /// </summary>
         /// <param name="paymentAmount">The amount to pay.</param>
-        public void MakePayment(decimal paymentAmount)
+        public void DisplayPaymentStatus(decimal paymentAmount)
         {
             Console.WriteLine($"Payment ${paymentAmount} successful.");
         }

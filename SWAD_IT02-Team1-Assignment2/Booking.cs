@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SWAD_IT02_Team1_Assignment2
 {
@@ -94,7 +95,6 @@ namespace SWAD_IT02_Team1_Assignment2
             get { return returnTimeslots; }
             set { returnTimeslots = value; }
         }
-
         public string Status
         {
             get { return status; }
@@ -178,6 +178,30 @@ namespace SWAD_IT02_Team1_Assignment2
             this.PickupLocation = newPickupLocation;
             this.ReturnLocation = newReturnLocation;
             this.Amount = newAmount;            
+        }
+
+        /// <summary>
+        /// Gets the booking details based on the provided booking ID.
+        /// Creator: Wang Po Yen Jason & Ong Yee Hen
+        /// Student ID: S10255872A & S10258759D
+        /// </summary>
+        /// <param name="id">The booking ID.</param>
+        /// <returns>The booking object if found; otherwise, null.</returns>
+
+        public static Booking getBookingDetails(int id)
+        {
+            return Program.Bookings.FirstOrDefault(b => b.Id == id);
+        }
+
+        /// <summary>
+        /// Updates the status of the booking.
+        /// Creator: Wang Po Yen Jason & Ong Yee Hen
+        /// Student ID: S10255872A & S10258759D
+        /// </summary>
+        /// <param name="newStatus">The new status to be set for the booking.</param>
+        public void updateBookingStatus(string newStatus)
+        {
+            this.Status = newStatus;
         }
     }
 }

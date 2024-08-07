@@ -93,5 +93,77 @@ namespace SWAD_IT02_Team1_Assignment2
             Console.WriteLine("Confirmation Email Sent!!");
             Console.WriteLine();
         }
+
+        /// <summary>
+        /// Sends a confirmation email after successful booking creation.
+        /// Creator: Zou Ruining, Raeanne
+        /// Student ID: S10258772G
+        /// </summary>
+        /// <param name="receiverEmail">The receiver's email address.</param>
+        /// <param name="userName">The user's name.</param>
+        /// <param name="booking">The original booking details.</param>
+        static public void SendBookingConfirmationEmail(string receiverEmail, string userName, Booking booking)
+        {
+            Console.WriteLine($"Sending {receiverEmail}");
+            // Sender Email Details
+            string fromMail = "jeffreyleeprg2@gmail.com";
+            string fromPassword = "cuhmvmdqllulsucg";
+            string senderName = "ICar Car Rental Service";
+
+            // Initialising and configuring message object
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(fromMail, senderName);
+            message.Subject = "ICar Car Rental Service Booking Confirmation";
+            try
+            {
+                message.To.Add(new MailAddress(receiverEmail));
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException();
+            }
+
+            message.Body = $@"
+    <html>
+        <body>
+            <h1>ICar Car Rental Service Booking Confirmation</h1>
+            <p>Dear {userName},</p>
+            <p>You have successfully made a booking. Below are the details of your booking:</p>
+            
+            <h2>Original Booking Details</h2>
+            <ul>
+                <li>Booking ID: {booking.Id}</li>
+                <li>Car: {booking.Car.Make} {booking.Car.Model} ({booking.Car.NumberPlate})</li>
+                <li>Start Date: {booking.RentStartDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}</li>
+                <li>End Date: {booking.RentEndDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}</li>
+                <li>Pickup Location: {booking.PickupLocation.Address}</li>
+                <li>Return Location: {booking.ReturnLocation.Address}</li>
+                <li>Amount: {booking.Amount:C}</li>
+            </ul>
+            
+            <p>Thank you for choosing ICar Car Rental Service!</p>
+            <p>If you have any questions or need further assistance, please don't hesitate to contact our support team at jeffreyleeprg2@gmail.com.</p>
+            <p>Best regards,<br>ICar Car Rental Service Team</p>
+        </body>
+    </html>";
+
+            message.IsBodyHtml = true;
+
+            // Setting up Simple Mail Transfer Protocol client to send the Email
+            var smtpClient = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential(fromMail, fromPassword),
+                EnableSsl = true,
+            };
+
+            // Sending Email
+            smtpClient.Send(message);
+
+            // Display Confirmation Message
+            Console.WriteLine();
+            Console.WriteLine("Confirmation Email Sent!");
+            Console.WriteLine();
+        }
     }
 }
