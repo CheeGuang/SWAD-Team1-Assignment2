@@ -10,6 +10,8 @@ namespace SWAD_IT02_Team1_Assignment2
     /// Creation of class according to class diagram done by Jeffrey.
     /// Creator: Lee Guang Le, Jeffrey
     /// Student ID: S10258143A
+    /// Modified By: Zou Ruining, Raeanne
+    /// Student ID: S10258772G
     /// </summary>
     internal class Program
     {
@@ -17,6 +19,7 @@ namespace SWAD_IT02_Team1_Assignment2
         private static Renter dummyRenter;
         private static CarOwner dummyCarOwner;
         private static ICarAdmin dummyICarAdmin;
+        private static Car dummyCar;
         private static List<PickupLocation> pickupLocations;
         private static List<ReturnLocation> returnLocations;
 
@@ -27,7 +30,7 @@ namespace SWAD_IT02_Team1_Assignment2
 
             // Main menu
             UI_Main uiMain = new UI_Main();
-            uiMain.MainMenu(dummyRenter, dummyCarOwner, dummyICarAdmin, pickupLocations, returnLocations);
+            uiMain.MainMenu(dummyRenter, dummyCarOwner, dummyICarAdmin, dummyCar, pickupLocations, returnLocations);
         }
 
         /// <summary>
@@ -43,7 +46,7 @@ namespace SWAD_IT02_Team1_Assignment2
             dummyICarAdmin = new ICarAdmin(1, "Emily Tan", "emilytan@example.com", "6677889900", "1988-04-04", true);
 
             // Create instance of Car
-            Car dummyCar = new Car(1, "Toyota", "Camry", 2020, 15000.0m, 50.0m, "SGX1234A", true, dummyCarOwner);
+            dummyCar = new Car(1, "Toyota", "Camry", 2020, 15000.0m, 50.0m, "SGX1234A", true, dummyCarOwner);
 
             // Create instance of Insurance
             Insurance dummyInsurance = new Insurance(1, 10000.0m, dummyCar, new DateTime(2024, 12, 31));
@@ -102,7 +105,6 @@ namespace SWAD_IT02_Team1_Assignment2
 
             Bookings.Add(booking1);
             Bookings.Add(booking2);
-
 
             // Add bookings to renter
             dummyRenter.AddBooking(booking1);
