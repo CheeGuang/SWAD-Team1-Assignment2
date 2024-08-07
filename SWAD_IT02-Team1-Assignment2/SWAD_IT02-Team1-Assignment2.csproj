@@ -52,6 +52,7 @@
     <Compile Include="CarOwner.cs" />
     <Compile Include="CTL_BookCar.cs" />
     <Compile Include="CTL_ModifyBooking.cs" />
+    <Compile Include="CTL_RegisterCar.cs" />
     <Compile Include="CTL_ReturnCar.cs" />
     <Compile Include="CTL_PickupAtiCarStation.cs" />
     <Compile Include="DigitalWallet.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="UI_ICarAdmin.cs" />
     <Compile Include="UI_Main.cs" />
     <Compile Include="UI_ModifyBooking.cs" />
+    <Compile Include="UI_RegisterCar.cs" />
     <Compile Include="UI_PickupAtiCarStation.cs" />
     <Compile Include="UI_Renter.cs" />
     <Compile Include="UI_ReturnCar.cs" />

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SWAD_IT02_Team1_Assignment2
 {
-    /// <summary>
+    //// <summary>
     /// Creation of class according to class diagram done by Jeffrey.
     /// Creator: Lee Guang Le, Jeffrey
     /// Student ID: S10258143A
