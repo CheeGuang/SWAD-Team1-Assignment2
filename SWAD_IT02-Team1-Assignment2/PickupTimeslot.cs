@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace SWAD_IT02_Team1_Assignment2
 {
@@ -49,5 +50,16 @@ namespace SWAD_IT02_Team1_Assignment2
             get { return carCount; }
             set { carCount = value; }
         }
+
+        /// <summary>
+        /// Get the start date time of the pickup timeslot.
+        /// Creator: Ong Yee Hen
+        /// Student ID: S10258759D
+        /// </summary>
+        public DateTime getStartDateTime()
+        {
+            return startDateTime;
+        }
+        
     }
 }
