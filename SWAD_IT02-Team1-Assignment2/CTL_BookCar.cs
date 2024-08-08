@@ -29,18 +29,18 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="car">The car selected.</param>
         /// <param name="renter">The renter making the booking.</param>
         /// <returns>True if the update is successful, otherwise false.</returns> 
-        public bool ProcessBookingRequest(Renter renter, Car car, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
+        public bool processBookingRequest(Renter renter, Car car, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             try
             {
                 //validate booking availability slot
-                uiBookCar.DisplayAvailabilitySchedule(car.NumberPlate, car.AvailabilitySchedules);
+                uiBookCar.displayAvailabilitySchedule(car.NumberPlate, car.AvailabilitySchedules);
                 int slotID;
                 AvailabilitySchedule selectedSlot = null;
                 do
                 {
-                    slotID = uiBookCar.PromptSelectedAvailabilitySlot();
-                    selectedSlot = GetAvailabilitySlot(slotID, car.AvailabilitySchedules);
+                    slotID = uiBookCar.promptSelectedAvailabilitySlot();
+                    selectedSlot = getAvailabilitySlot(slotID, car.AvailabilitySchedules);
 
                 } while (selectedSlot == null);
 
@@ -48,23 +48,23 @@ namespace SWAD_IT02_Team1_Assignment2
                 Dictionary<string, string> bookingDetails;
                 do
                 {
-                    bookingDetails = uiBookCar.PromptBookingDates();
+                    bookingDetails = uiBookCar.promptBookingDates();
 
-                } while (!ValidateBookingDates(selectedSlot, bookingDetails));
+                } while (!validateBookingDates(selectedSlot, bookingDetails));
                 
 
                 //validate pickup/return locations
-                uiBookCar.DisplayLocations(pickupLocations, returnLocations);
+                uiBookCar.displayLocations(pickupLocations, returnLocations);
                 do
                 {
-                    bookingDetails = uiBookCar.PromptSelectedLocations();
+                    bookingDetails = uiBookCar.promptSelectedLocations();
 
-                } while (!ValidateBookingLocations(bookingDetails, pickupLocations, returnLocations));
+                } while (!validateBookingLocations(bookingDetails, pickupLocations, returnLocations));
 
 
                 // Call UI to confirm payment
-                decimal totalCost = CalculateCost(DateTime.Parse(bookingDetails["startDateTime"]), DateTime.Parse(bookingDetails["endDateTime"]));
-                bool commitPayment = uiBookCar.PromptPaymentConfirmation(totalCost);
+                decimal totalCost = calculateCost(DateTime.Parse(bookingDetails["startDateTime"]), DateTime.Parse(bookingDetails["endDateTime"]));
+                bool commitPayment = uiBookCar.promptPaymentConfirmation(totalCost);
 
                 if (!commitPayment)
                 {
@@ -75,14 +75,14 @@ namespace SWAD_IT02_Team1_Assignment2
                 // Assume Payment handled
                 Payment payment = PaymentModel.Instance.MakePayment(totalCost);
 
-                Booking aBooking = CreateBooking(renter.Bookings.Count + 1, renter, car, DateTime.Parse(bookingDetails["startDateTime"]), DateTime.Parse(bookingDetails["endDateTime"]), totalCost,
+                Booking aBooking = createBooking(renter.Bookings.Count + 1, renter, car, DateTime.Parse(bookingDetails["startDateTime"]), DateTime.Parse(bookingDetails["endDateTime"]), totalCost,
                 payment, getPickupLocationById(int.Parse(bookingDetails["pickupLocation"]), pickupLocations), getReturnLocationById(int.Parse(bookingDetails["returnLocation"]), returnLocations), "Created Successfully");
 
                 //Console print booking summary
-                uiBookCar.PrintBookingSummary(aBooking);
+                uiBookCar.printBookingSummary(aBooking);
 
                 // Send an Email
-                EmailSystem.SendBookingConfirmationEmail(renter.Email, renter.Name, aBooking);
+                EmailSystem.sendBookingConfirmationEmail(renter.Email, renter.Name, aBooking);
 
                 return true;
             } catch
@@ -93,7 +93,7 @@ namespace SWAD_IT02_Team1_Assignment2
            
         }
 
-        private Booking CreateBooking(int id, Renter renter, Car car, DateTime rentStartDateTime, DateTime rentEndDateTime, decimal amount, Payment payment, PickupLocation pickupLocation, ReturnLocation returnLocation, string status)
+        private Booking createBooking(int id, Renter renter, Car car, DateTime rentStartDateTime, DateTime rentEndDateTime, decimal amount, Payment payment, PickupLocation pickupLocation, ReturnLocation returnLocation, string status)
         {
             // Commit the new booking
             Booking booking = new Booking(id, renter, car, rentStartDateTime, rentEndDateTime,amount, payment, pickupLocation, returnLocation, status);
@@ -108,7 +108,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// </summary>
         /// <param name="slotID">Availability Schedule ID</param>
         /// <param name="availabilities">List of selected car's availability schedule</param>
-        private AvailabilitySchedule GetAvailabilitySlot(int slotID, List<AvailabilitySchedule> availabilities)
+        private AvailabilitySchedule getAvailabilitySlot(int slotID, List<AvailabilitySchedule> availabilities)
         {
             foreach (AvailabilitySchedule availability in availabilities)
             {
@@ -128,7 +128,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="availability">The updated booking details.</param>
         /// <param name="bookingDetails">The updated booking details.</param>
         /// <returns>True if the details are valid, otherwise false.</returns>
-        public bool ValidateBookingDates(AvailabilitySchedule availability, Dictionary<string, string> bookingDetails)
+        public bool validateBookingDates(AvailabilitySchedule availability, Dictionary<string, string> bookingDetails)
         {
             DateTime startDateTime;
             DateTime endDateTime;
@@ -175,7 +175,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// </summary>
         /// <param name="bookingDetails">The updated booking details.</param>
         /// <returns>True if the details are valid, otherwise false.</returns>
-        public bool ValidateBookingLocations(Dictionary<string, string> bookingDetails, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
+        public bool validateBookingLocations(Dictionary<string, string> bookingDetails, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             int pickupLocation;
             int returnLocation;
@@ -254,7 +254,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// </summary>
         /// <param name="endDate">Booking End DateTime</param>
         /// <param name="startDate">Booking Start DateTime</param>
-        public decimal CalculateCost(DateTime endDate, DateTime startDate)
+        public decimal calculateCost(DateTime endDate, DateTime startDate)
         {
             return 5 * Math.Abs((decimal)(endDate - startDate).TotalHours);
         }
