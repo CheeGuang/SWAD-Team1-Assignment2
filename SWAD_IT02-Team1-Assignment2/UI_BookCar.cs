@@ -141,11 +141,17 @@ namespace SWAD_IT02_Team1_Assignment2
                 }
                 else
                 {
-                    Console.WriteLine("Invalid input. Please enter 'y' or 'n'.");
+                    response = false;
+                    printInvalidInputNotification();
                 }
             } while (!response);
 
             return commitPayment;
+        }
+
+        public void printInvalidInputNotification()
+        {
+            Console.WriteLine("Invalid input. Please enter 'y' or 'n'.");
         }
 
         /// <summary>

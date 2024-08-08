@@ -35,7 +35,7 @@ namespace SWAD_IT02_Team1_Assignment2
             {
                 //validate booking availability slot
                 uiBookCar.displayAvailabilitySchedule(car.NumberPlate, car.AvailabilitySchedules);
-                int slotID;
+                int slotID = -1;
                 AvailabilitySchedule selectedSlot = null;
                 do
                 {
@@ -45,21 +45,23 @@ namespace SWAD_IT02_Team1_Assignment2
                 } while (selectedSlot == null);
 
                 //validate bookingdates
-                Dictionary<string, string> bookingDetails;
+                Dictionary<string, string> bookingDetails = null;
+                bool isBookingDatesValid = false;
                 do
                 {
                     bookingDetails = uiBookCar.promptBookingDates();
+                    isBookingDatesValid = validateBookingDates(selectedSlot, bookingDetails);
+                } while (!isBookingDatesValid);
 
-                } while (!validateBookingDates(selectedSlot, bookingDetails));
-                
 
                 //validate pickup/return locations
+                bool isLocValid = false;
                 uiBookCar.displayLocations(pickupLocations, returnLocations);
                 do
                 {
                     bookingDetails = uiBookCar.promptSelectedLocations();
-
-                } while (!validateBookingLocations(bookingDetails, pickupLocations, returnLocations));
+                    isLocValid = validateBookingLocations(bookingDetails, pickupLocations, returnLocations);
+                } while (!isLocValid);
 
 
                 // Call UI to confirm payment
@@ -73,12 +75,14 @@ namespace SWAD_IT02_Team1_Assignment2
                 }
 
                 // Assume Payment handled
-                Payment payment = PaymentModel.Instance.MakePayment(totalCost);
+                Card card1 = new Card(1, "5520728801926284", "John Doe", new DateTime(2025, 12, 31), "Visa", "DBS");
+                Payment payment = new Payment(1, 120.00m, "Credit Card", DateTime.Now, card1);
 
+                // Call method to create booking
                 Booking aBooking = createBooking(renter.Bookings.Count + 1, renter, car, DateTime.Parse(bookingDetails["startDateTime"]), DateTime.Parse(bookingDetails["endDateTime"]), totalCost,
                 payment, getPickupLocationById(int.Parse(bookingDetails["pickupLocation"]), pickupLocations), getReturnLocationById(int.Parse(bookingDetails["returnLocation"]), returnLocations), "Created Successfully");
 
-                //Console print booking summary
+                // Console print booking summary
                 uiBookCar.printBookingSummary(aBooking);
 
                 // Send an Email
