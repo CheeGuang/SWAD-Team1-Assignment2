@@ -59,9 +59,9 @@ namespace SWAD_IT02_Team1_Assignment2
 
             if (returnTimeslot != null)
             {
-                DateTime returnDateTime = returnTimeslot.getReturnDateTime();
-                bool lateReturn = !checkLateReturn(returnDateTime);
-                return (returnDateTime, lateReturn);
+                DateTime endDateTime = returnTimeslot.getReturnDateTime();
+                bool lateReturn = !checkLateReturn(endDateTime);
+                return (endDateTime, lateReturn);
             }
             else
             {
