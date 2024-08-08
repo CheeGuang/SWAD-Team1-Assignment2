@@ -26,30 +26,49 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="rentalPrice">The rental price of the car.</param>
         /// <param name="numberPlate">The number plate of the car.</param>
         /// <returns>True if the details are valid, otherwise false.</returns>
-        public bool ValidateCarDetails(string make, string model, int year, decimal mileage, decimal rentalPrice, string numberPlate)
+
+        public bool ValidateCarDetails(string make, string model, string year, string mileage, string rentalPrice, string numberPlate)
         {
             bool isValid = false;
 
-            if (string.IsNullOrWhiteSpace(make) || string.IsNullOrWhiteSpace(model))
+            if (string.IsNullOrWhiteSpace(make) || string.IsNullOrWhiteSpace(model) || string.IsNullOrWhiteSpace(year) || string.IsNullOrWhiteSpace(mileage) || string.IsNullOrWhiteSpace(rentalPrice) || string.IsNullOrWhiteSpace(numberPlate))
             {
-                Console.WriteLine("Make and Model cannot be empty.");
+                Console.WriteLine("All fields must be filled.");
+                return isValid;
+            }
+
+            if (!int.TryParse(year, out int parsedYear))
+            {
+                Console.WriteLine("Year must be a valid integer.");
                 return isValid;
             }
 
             int currentYear = DateTime.Now.Year;
-            if (year < 1886 || year > currentYear)
+            if (parsedYear < 1886 || parsedYear > currentYear)
             {
                 Console.WriteLine($"Year must be between 1886 and {currentYear}.");
                 return isValid;
             }
 
-            if (mileage < 0)
+            if (!decimal.TryParse(mileage, out decimal parsedMileage))
+            {
+                Console.WriteLine("Mileage must be a valid decimal number.");
+                return isValid;
+            }
+
+            if (parsedMileage < 0)
             {
                 Console.WriteLine("Mileage cannot be negative.");
                 return isValid;
             }
 
-            if (rentalPrice <= 0)
+            if (!decimal.TryParse(rentalPrice, out decimal parsedRentalPrice))
+            {
+                Console.WriteLine("Rental Price must be a valid decimal number.");
+                return isValid;
+            }
+
+            if (parsedRentalPrice <= 0)
             {
                 Console.WriteLine("Rental Price must be more than zero.");
                 return isValid;

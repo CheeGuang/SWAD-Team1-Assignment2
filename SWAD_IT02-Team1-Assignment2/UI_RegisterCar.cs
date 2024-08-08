@@ -31,16 +31,12 @@ namespace SWAD_IT02_Team1_Assignment2
         }
 
         /// <summary>
-        /// Displays car registration form for users to input their information.
+        /// Registers a car for the car owner.
         /// Creator: Cing Sian Kim
         /// Student ID: S10257716F
         /// </summary>
         private void displayCarRegistrationForm(CarOwner carOwner)
         {
-
-            int year;
-            decimal mileage;
-            decimal rentalPrice;
 
             // Get car details from user input
             Console.WriteLine("\n\n===============================================");
@@ -50,33 +46,12 @@ namespace SWAD_IT02_Team1_Assignment2
             string make = Console.ReadLine();
             Console.Write($"Model: ");
             string model = Console.ReadLine();
-            while (true)
-            {
-                Console.Write($"Year: ");
-                if (int.TryParse(Console.ReadLine(), out year))
-                {
-                    break;
-                }
-                Console.WriteLine("Invalid input. Please enter a valid integer.");
-            }
-            while (true)
-            {
-                Console.Write("Mileage (km): ");
-                if (decimal.TryParse(Console.ReadLine(), out mileage))
-                {
-                    break;
-                }
-                Console.WriteLine("Invalid input. Please enter a valid decimal number.");
-            }
-            while (true)
-            {
-                Console.Write("Rental Price (SGD): ");
-                if (decimal.TryParse(Console.ReadLine(), out rentalPrice))
-                {
-                    break;
-                }
-                Console.WriteLine("Invalid input. Please enter a valid decimal number.");
-            }
+            Console.Write($"Year: ");
+            string year = Console.ReadLine();
+            Console.Write($"Mileage (km): ");
+            string mileage = Console.ReadLine();
+            Console.Write($"Rental Price (SGD): ");
+            string rentalPrice = Console.ReadLine();
             Console.Write($"Number Plate: ");
             string numberPlate = Console.ReadLine();
 
@@ -84,10 +59,11 @@ namespace SWAD_IT02_Team1_Assignment2
 
             if (isVerified)
             {
-                ctlRegisterCar.CreateCar(carOwner, make, model, year, mileage, rentalPrice, numberPlate, isVerified);
+                ctlRegisterCar.CreateCar(carOwner, make, model, Convert.ToInt32(year), Convert.ToDecimal(mileage), Convert.ToDecimal(rentalPrice), numberPlate, isVerified);
                 uploadPhotos();
                 submitAvailabilitySchedule();
-                submitInsuranceChoice();
+                string choice = displayInsuranceForm();
+                submitInsuranceChoice(choice);
                 displayRegistrationSuccess();
             }
             else
@@ -95,6 +71,7 @@ namespace SWAD_IT02_Team1_Assignment2
                 displayErrorMessage();
             }
         }
+
 
         /// <summary>
         /// Informs user of error in registration
@@ -113,7 +90,6 @@ namespace SWAD_IT02_Team1_Assignment2
         /// </summary>
         private void uploadPhotos()
         {
-            Console.WriteLine("\n\n===============================================");
             int photoId = 1;
             while (true)
             {
@@ -165,7 +141,6 @@ namespace SWAD_IT02_Team1_Assignment2
         /// </summary>
         private void submitAvailabilitySchedule()
         {
-            Console.WriteLine("\n\n===============================================");
             while (true)
             {
                 Console.WriteLine("Provide dates to add a schedule:");
@@ -209,14 +184,23 @@ namespace SWAD_IT02_Team1_Assignment2
         }
 
         /// <summary>
-        /// Allows user to choose if they want to register for insurance.
+        /// Display form for users to enter input
         /// Creator: Cing Sian Kim
         /// Student ID: S10257716F
         /// </summary>
-        private void submitInsuranceChoice()
+        private string displayInsuranceForm()
         {
             Console.Write("Do you want to apply for insurance? (yes/no): ");
-            string choice = Console.ReadLine();
+            return Console.ReadLine();
+        }
+
+        /// <summary>
+        /// Submits the user's insurance choice
+        /// Creator: Cing Sian Kim
+        /// Student ID: S10257716F
+        /// </summary>
+        public void submitInsuranceChoice(string choice)
+        {
             ctlRegisterCar.submitInsuranceChoice(choice.ToLower() == "yes");
         }
 
