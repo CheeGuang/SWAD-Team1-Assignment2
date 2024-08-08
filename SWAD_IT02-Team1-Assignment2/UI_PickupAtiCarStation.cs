@@ -27,7 +27,40 @@ namespace SWAD_IT02_Team1_Assignment2
         /// </summary>
         public void startPickupAtiCarStation()
         {
-           initPickupForm();
+           displayAllBooking();
+           displayPickupForm();
+        }
+
+        /// <summary>
+        /// Displays all bookings.
+        /// Creator: Ong Yee Hen
+        /// Student ID: S10258759D
+        /// </summary>
+        public void displayAllBooking()
+        {
+            if (Program.Bookings.Count > 0)
+            {
+                foreach (var booking in Program.Bookings)
+                {
+                    Console.WriteLine("\n\n===============================================");
+                    Console.WriteLine($"             Booking {booking.Id} Details");
+                    Console.WriteLine("===============================================");
+                    Console.WriteLine($"Booking ID:         {booking.Id}");
+                    Console.WriteLine($"Car ID:             {booking.Car.Id}");
+                    Console.WriteLine($"Start Date:         {booking.RentStartDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}");
+                    Console.WriteLine($"End Date:           {booking.RentEndDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}");
+                    Console.WriteLine($"Amount (SGD):       {booking.Amount}");
+                    Console.WriteLine($"Pickup Location:    {booking.PickupLocation.Address}");
+                    Console.WriteLine($"Return Location:    {booking.ReturnLocation.Address}");
+                    Console.WriteLine($"Status:             {booking.Status}");
+                    Console.WriteLine($"Pickup Timeslot:    {booking.PickupTimeslots.First().StartDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}");
+                    Console.WriteLine("===============================================\n");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No bookings found.");
+            }
         }
 
         /// <summary>
@@ -35,7 +68,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Creator: Ong Yee Hen
         /// Student ID: S10258759D
         /// </summary>
-        public void initPickupForm()
+        public void displayPickupForm()
         {
             Console.WriteLine("\n\n===============================================");
             Console.WriteLine("                  Pickup Car");
@@ -58,15 +91,15 @@ namespace SWAD_IT02_Team1_Assignment2
             {
                 if (int.TryParse(Console.ReadLine(), out int id))
                 {
-                    var (bookingDetails, validity) = ctlPickupAtiCarStation.getBookingDetails(id);
+                    var (booking, validity) = ctlPickupAtiCarStation.getBookingDetails(id);
 
                     
                     if (validity) 
                     { 
-                        displayBookingDetails(bookingDetails);
+                        displayBookingDetails(booking);
                         
                         Console.WriteLine("Booking found. Proceeding with car pickup.");
-                        confirmPickup(bookingDetails);
+                        confirmPickup(booking);
                         return;
                     }
                     else
@@ -96,36 +129,37 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Creator: Ong Yee Hen
         /// Student ID: S10258143A
         /// </summary>
-        /// <param name="b">The booking to display.</param>
-        public void displayBookingDetails(Booking b)
+        /// <param name="booking">The booking to display.</param>
+        public void displayBookingDetails(Booking booking)
         {
             Console.WriteLine("\n\n===============================================");
-            Console.WriteLine($"             Booking {b.Id} Details");
+            Console.WriteLine($"             Booking {booking.Id} Details");
             Console.WriteLine("===============================================");
-            Console.WriteLine($"Booking ID:         {b.Id}");
-            Console.WriteLine($"Car ID:             {b.Car.Id}");
-            Console.WriteLine($"Start Date:         {b.RentStartDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}");
-            Console.WriteLine($"End Date:           {b.RentEndDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}");
-            Console.WriteLine($"Amount (SGD):       {b.Amount}");
-            Console.WriteLine($"Pickup Location:    {b.PickupLocation.Address}");
-            Console.WriteLine($"Return Location:    {b.ReturnLocation.Address}");
-            Console.WriteLine($"Status:             {b.Status}");
+            Console.WriteLine($"Booking ID:         {booking.Id}");
+            Console.WriteLine($"Car ID:             {booking.Car.Id}");
+            Console.WriteLine($"Start Date:         {booking.RentStartDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}");
+            Console.WriteLine($"End Date:           {booking.RentEndDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}");
+            Console.WriteLine($"Amount (SGD):       {booking.Amount}");
+            Console.WriteLine($"Pickup Location:    {booking.PickupLocation.Address}");
+            Console.WriteLine($"Return Location:    {booking.ReturnLocation.Address}");
+            Console.WriteLine($"Status:             {booking.Status}");
+            Console.WriteLine($"Pickup Timeslot:    {booking.PickupTimeslots.First().StartDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}");
             Console.WriteLine("===============================================\n");
         }
 
-            /// <summary>
-            /// Displays booking details.
-            /// Creator: Ong Yee Hen
-            /// Student ID: S10258759D
-            /// </summary>
-            /// <param name="b">The booking to confirm the pickup.</param>
-            public void confirmPickup(Booking b)
+        /// <summary>
+        /// Displays booking details.
+        /// Creator: Ong Yee Hen
+        /// Student ID: S10258759D
+        /// </summary>
+        /// <param name="booking">The booking to confirm the pickup.</param>
+        public void confirmPickup(Booking booking)
         {
             Console.Write("Do you want to continue with the pickup process? (Yes/No): ");
             string response = Console.ReadLine();
             if (response.Equals("yes", StringComparison.OrdinalIgnoreCase))
             {
-                string pickupResult = ctlPickupAtiCarStation.processPickup(b);
+                string pickupResult = ctlPickupAtiCarStation.processPickup(booking);
                 displayPickupResult(pickupResult);
                 
             }

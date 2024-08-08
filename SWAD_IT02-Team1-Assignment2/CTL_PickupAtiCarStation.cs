@@ -19,12 +19,12 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10258759D
         /// </summary>
         /// <param name="id">The booking ID</param>
-        /// <returns>bookingDetails and Validity = True if the details exists, otherwise false.</returns>
+        /// <returns>booking and Validity = True if the details exists, otherwise false.</returns>
         public (Booking, bool) getBookingDetails(int id)
         {
-            Booking bookingDetails = Booking.getBookingDetails(id);
-            bool validity = checkBookingValidity(bookingDetails);
-            return (bookingDetails, validity);
+            Booking booking = Booking.getBookingDetails(id);
+            bool validity = checkBookingValidity(booking);
+            return (booking, validity);
             
         }
 
@@ -33,12 +33,12 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Creator: Ong Yee Hen
         /// Student ID: S10258759D
         /// </summary>
-        /// <param name="b">The booking details</param>
+        /// <param name="booking">The booking details</param>
         /// <returns>Validity = True if the details exists, otherwise false.</returns>
-        public bool checkBookingValidity(Booking b)
+        public bool checkBookingValidity(Booking booking)
         {
             bool validity = false;
-            if (b != null)
+            if (booking != null)
             {
                 validity = true;
                 Console.WriteLine($"Booking Validity is {validity}.");
@@ -56,11 +56,11 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Creator: Ong Yee Hen
         /// Student ID: S10258759D
         /// </summary>
-        /// <param name="b">The booking details</param>
+        /// <param name="booking">The booking details</param>
         /// <returns>start date time, otherwise DateTime.MinValue.</returns>
-        public DateTime getStartDateTime(Booking b)
+        public DateTime getStartDateTime(Booking booking)
         {
-            PickupTimeslot pickupTimeslot = b.PickupTimeslots.FirstOrDefault();
+            PickupTimeslot pickupTimeslot = booking.PickupTimeslots.FirstOrDefault();
             if (pickupTimeslot != null)
             {
                 DateTime startDateTime = pickupTimeslot.getStartDateTime();
@@ -78,16 +78,16 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Creator: Ong Yee Hen
         /// Student ID: S10258759D
         /// </summary>
-        /// <param name="b">The booking details</param>
+        /// <param name="booking">The booking details</param>
         /// <returns>pickupResult = success if time has passed the start date time, otherwise failure.</returns>
-        public string processPickup(Booking b)
+        public string processPickup(Booking booking)
         {
             string pickupResult;
-            DateTime startDateTime = getStartDateTime(b);
+            DateTime startDateTime = getStartDateTime(booking);
             if (DateTime.Now >= startDateTime)
             {
-                b.updateBookingStatus("Car picked up");
-                Console.WriteLine($"Your booking status is now updated to {b.Status}.");
+                booking.updateBookingStatus("Car picked up");
+                Console.WriteLine($"Your booking status is now updated to {booking.Status}.");
                 pickupResult = "success";
                 return pickupResult;
             }
