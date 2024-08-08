@@ -99,11 +99,9 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="b">The booking to display.</param>
         public void displayBookingDetails(Booking b)
         {
-            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\n\n===============================================");
             Console.WriteLine($"             Booking {b.Id} Details");
             Console.WriteLine("===============================================");
-            Console.ResetColor();
             Console.WriteLine($"Booking ID:         {b.Id}");
             Console.WriteLine($"Car ID:             {b.Car.Id}");
             Console.WriteLine($"Start Date:         {b.RentStartDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}");
