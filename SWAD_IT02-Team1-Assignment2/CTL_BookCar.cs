@@ -74,9 +74,12 @@ namespace SWAD_IT02_Team1_Assignment2
                     return false; // Abort the booking
                 }
 
-                // Assume Payment handled
+                // Dummy Data
                 Card card1 = new Card(1, "5520728801926284", "John Doe", new DateTime(2025, 12, 31), "Visa", "DBS");
                 Payment payment = new Payment(1, 120.00m, "Credit Card", DateTime.Now, card1);
+
+                // Assume Payment made
+                payment.makePayment(totalCost);
 
                 // Call method to create booking
                 Booking aBooking = createBooking(renter.Bookings.Count + 1, renter, car, DateTime.Parse(bookingDetails["startDateTime"]), DateTime.Parse(bookingDetails["endDateTime"]), totalCost,
