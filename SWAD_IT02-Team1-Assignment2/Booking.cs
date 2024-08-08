@@ -190,7 +190,7 @@ namespace SWAD_IT02_Team1_Assignment2
 
         public static Booking getBookingDetails(int id)
         {
-            return Program.Bookings.FirstOrDefault(b => b.Id == id);
+            return Program.Bookings.FirstOrDefault(booking => booking.Id == id);
         }
 
         /// <summary>
