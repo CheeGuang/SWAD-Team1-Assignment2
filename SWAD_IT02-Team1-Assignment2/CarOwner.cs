@@ -47,7 +47,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10257716F
         /// </summary>
         /// <param name="car">The car to add.</param>
-        public void AddCar(Car car)
+        public void addCar(Car car)
         {
             cars.Add(car);
         }

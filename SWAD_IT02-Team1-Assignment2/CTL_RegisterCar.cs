@@ -93,7 +93,7 @@ namespace SWAD_IT02_Team1_Assignment2
         public void CreateCar(CarOwner carOwner, string make, string model, int year, decimal mileage, decimal rentalPrice, string numberPlate, bool isVerified)
         {
             newCar = new Car(carId++, make, model, year, mileage, rentalPrice, numberPlate, isVerified, carOwner);
-            carOwner.AddCar(newCar);
+            carOwner.addCar(newCar);
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace SWAD_IT02_Team1_Assignment2
         public bool processPhotoUpload(int photoId, string url, string caption)
         {
             Photo photo = new Photo(photoId, caption, url);
-            newCar.AddPhoto(photo);
+            newCar.addPhoto(photo);
             return true;
         }
 
@@ -123,7 +123,7 @@ namespace SWAD_IT02_Team1_Assignment2
             if (startDate == null || endDate == null || startDate < endDate)
             {
                 AvailabilitySchedule schedule = new AvailabilitySchedule(scheduleId++, startDate, endDate);
-                newCar.AddAvailabilitySchedule(schedule);
+                newCar.addAvailabilitySchedule(schedule);
                 return true;
             }
             else

@@ -15,7 +15,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10258143A
         /// </summary>
         /// <param name="iCarAdmin">The ICarAdmin object.</param>
-        public void ICarAdminMenu(ICarAdmin iCarAdmin)
+        public void iCarAdminMenu(ICarAdmin iCarAdmin)
         {
             Console.WriteLine("\n===============================================");
             Console.WriteLine("          ICarAdmin Menu (Not in Scope)");

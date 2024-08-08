@@ -105,7 +105,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10258143A
         /// </summary>
         /// <param name="photo">The photo to add.</param>
-        public void AddPhoto(Photo photo)
+        public void addPhoto(Photo photo)
         {
             photos.Add(photo);
         }
@@ -116,7 +116,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10258143A
         /// </summary>
         /// <param name="availabilitySchedule">The availability schedule to add.</param>
-        public void AddAvailabilitySchedule(AvailabilitySchedule availabilitySchedule)
+        public void addAvailabilitySchedule(AvailabilitySchedule availabilitySchedule)
         {
             availabilitySchedules.Add(availabilitySchedule);
         }
@@ -129,7 +129,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="newStartDateTime">The start date and time for the check.</param>
         /// <param name="newEndDateTime">The end date and time for the check.</param>
         /// <returns>True if the car is available, otherwise false.</returns>
-        public bool CheckCarAvailability(DateTime newStartDateTime, DateTime newEndDateTime)
+        public bool checkCarAvailability(DateTime newStartDateTime, DateTime newEndDateTime)
         {
             foreach (var schedule in availabilitySchedules)
             {

@@ -97,7 +97,7 @@ namespace SWAD_IT02_Team1_Assignment2
         {
             // Commit the new booking
             Booking booking = new Booking(id, renter, car, rentStartDateTime, rentEndDateTime,amount, payment, pickupLocation, returnLocation, status);
-            renter.AddBooking(booking);
+            renter.addBooking(booking);
             return booking;
         }
 

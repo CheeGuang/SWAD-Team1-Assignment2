@@ -21,16 +21,16 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="returnLocations">The list of return locations.</param>
         /// <param name="booking">The booking to modify.</param>
         /// <returns>True if the update is successful, otherwise false.</returns>
-        public bool EnterUpdated(Dictionary<string, string> updatedDetails, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations, Booking booking)
+        public bool enterUpdated(Dictionary<string, string> updatedDetails, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations, Booking booking)
         {
             bool isSuccessful = false;
 
-            bool isValid = ValidateUpdatedBookingDetails(updatedDetails, pickupLocations, returnLocations);
+            bool isValid = validateUpdatedBookingDetails(updatedDetails, pickupLocations, returnLocations);
 
             if (isValid)
             {
-                DateTime originalStartDateTime = booking.GetStartDateTime();
-                DateTime originalEndDateTime = booking.GetEndDateTime();
+                DateTime originalStartDateTime = booking.getStartDateTime();
+                DateTime originalEndDateTime = booking.getEndDateTime();
 
                 DateTime newStartDateTime = DateTime.ParseExact(updatedDetails["newStartDateTime"], "dd/MM/yyyy h:mm:ss tt", null);
                 DateTime newEndDateTime = DateTime.ParseExact(updatedDetails["newEndDateTime"], "dd/MM/yyyy h:mm:ss tt", null);
@@ -58,29 +58,29 @@ namespace SWAD_IT02_Team1_Assignment2
                 {
                     Car aCar = booking.Car;
 
-                    bool carIsAvailable = aCar.CheckCarAvailability(newStartDateTime, newEndDateTime);
+                    bool carIsAvailable = aCar.checkCarAvailability(newStartDateTime, newEndDateTime);
 
                     if (carIsAvailable)
                     {
                         decimal additionalHours = (decimal)(newEndDateTime - newStartDateTime - (originalEndDateTime - originalStartDateTime)).TotalHours;
-                        decimal paymentAmount = 5 * additionalHours;
+                        decimal paymentAmount = aCar.RentalPrice * additionalHours;
 
                         while (true)
                         {
-                            Console.WriteLine($"The total extra amount needed to pay is: ${paymentAmount}. It is $5 per additional hour.");
+                            Console.WriteLine($"The total extra amount needed to pay is: ${paymentAmount.ToString("0.00")}. It is SGD${aCar.RentalPrice} per additional hour.");
                             Console.Write("Do you want to proceed with the payment? (yes or no): ");
                             string userConfirmation = Console.ReadLine();
 
                             if (userConfirmation.ToLower() == "yes")
                             {
-                                booking.Payment.MakePayment(paymentAmount);
+                                booking.Payment.makePayment(paymentAmount);
                                 newAmount += paymentAmount;
                                 isSuccessful = true;
                                 break;
                             }
                             else if (userConfirmation.ToLower() == "no")
                             {
-                                DisplayUnsuccessfulPayment();
+                                displayUnsuccessfulPayment();
                                 return false; // Early return to prevent further messages
                             }
                             else
@@ -91,7 +91,7 @@ namespace SWAD_IT02_Team1_Assignment2
                     }
                     else
                     {
-                        DisplayCarNotAvailableErrorMessage();
+                        displayCarNotAvailableErrorMessage();
                         return false; // Early return to prevent further messages
                     }
                 }
@@ -99,15 +99,15 @@ namespace SWAD_IT02_Team1_Assignment2
                 if (isSuccessful)
                 {
                     // Retrieve new pickup and return location objects
-                    PickupLocation newPickupLocation = GetNewPickupLocationObject(updatedDetails, pickupLocations);
-                    ReturnLocation newReturnLocation = GetNewReturnLocationObject(updatedDetails, returnLocations);
+                    PickupLocation newPickupLocation = getNewPickupLocationObject(updatedDetails, pickupLocations);
+                    ReturnLocation newReturnLocation = getNewReturnLocationObject(updatedDetails, returnLocations);
 
                     // Proceed with updating the booking using valid details
-                    booking.ModifyBooking(newStartDateTime, newEndDateTime, newPickupLocation, newReturnLocation, newAmount);
+                    booking.modifyBooking(newStartDateTime, newEndDateTime, newPickupLocation, newReturnLocation, newAmount);
 
                     // Send confirmation emails
-                    string renterEmail = booking.GetRenterEmail();
-                    string carOwnerEmail = booking.GetCarOwnerEmail();
+                    string renterEmail = booking.getRenterEmail();
+                    string carOwnerEmail = booking.getCarOwnerEmail();
 
                     EmailSystem.sendModifyReservationConfirmationEmail(renterEmail, booking.User.Name, originalBooking, booking);
                     Console.ForegroundColor = ConsoleColor.Green;
@@ -121,13 +121,13 @@ namespace SWAD_IT02_Team1_Assignment2
                 }
                 else
                 {
-                    DisplayGenericErrorMessage();
+                    displayGenericErrorMessage();
                     return false; // Early return to prevent further messages
                 }
             }
             else
             {
-                DisplayGenericErrorMessage();
+                displayGenericErrorMessage();
                 return false; // Early return to prevent further messages
             }
 
@@ -142,7 +142,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="updatedDetails">The updated booking details.</param>
         /// <param name="pickupLocations">The list of pickup locations.</param>
         /// <returns>The new pickup location object.</returns>
-        private PickupLocation GetNewPickupLocationObject(Dictionary<string, string> updatedDetails, List<PickupLocation> pickupLocations)
+        private PickupLocation getNewPickupLocationObject(Dictionary<string, string> updatedDetails, List<PickupLocation> pickupLocations)
         {
             int pickupLocationId = int.Parse(updatedDetails["newPickupLocationId"]);
             return pickupLocations.FirstOrDefault(p => p.Id == pickupLocationId);
@@ -156,7 +156,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="updatedDetails">The updated booking details.</param>
         /// <param name="returnLocations">The list of return locations.</param>
         /// <returns>The new return location object.</returns>
-        private ReturnLocation GetNewReturnLocationObject(Dictionary<string, string> updatedDetails, List<ReturnLocation> returnLocations)
+        private ReturnLocation getNewReturnLocationObject(Dictionary<string, string> updatedDetails, List<ReturnLocation> returnLocations)
         {
             int returnLocationId = int.Parse(updatedDetails["newReturnLocationId"]);
             return returnLocations.FirstOrDefault(r => r.Id == returnLocationId);
@@ -171,7 +171,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="pickupLocations">The list of pickup locations.</param>
         /// <param name="returnLocations">The list of return locations.</param>
         /// <returns>True if the details are valid, otherwise false.</returns>
-        public bool ValidateUpdatedBookingDetails(Dictionary<string, string> updatedDetails, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
+        public bool validateUpdatedBookingDetails(Dictionary<string, string> updatedDetails, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             DateTime newStartDateTime;
             DateTime newEndDateTime;
@@ -232,7 +232,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Creator: Lee Guang Le, Jeffrey
         /// Student ID: S10258143A
         /// </summary>
-        public void DisplayCarNotAvailableErrorMessage()
+        public void displayCarNotAvailableErrorMessage()
         {
             Console.WriteLine("The car is not available for the selected time period.");
         }
@@ -242,7 +242,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Creator: Lee Guang Le, Jeffrey
         /// Student ID: S10258143A
         /// </summary>
-        public void DisplayGenericErrorMessage()
+        public void displayGenericErrorMessage()
         {
             Console.WriteLine("An error occurred while updating the booking. Please try again.");
         }
@@ -252,7 +252,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Creator: Lee Guang Le, Jeffrey
         /// Student ID: S10258143A
         /// </summary>
-        public void DisplayUnsuccessfulPayment()
+        public void displayUnsuccessfulPayment()
         {
             Console.WriteLine("Payment was unsuccessful. Booking update has been cancelled.");
         }

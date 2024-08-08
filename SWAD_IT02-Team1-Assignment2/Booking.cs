@@ -107,7 +107,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Creator: Lee Guang Le, Jeffrey
         /// Student ID: S10258143A
         /// </summary>
-        public void AddPickupTimeslot(PickupTimeslot pickupTimeslot)
+        public void addPickupTimeslot(PickupTimeslot pickupTimeslot)
         {
             pickupTimeslots.Add(pickupTimeslot);
         }
@@ -117,7 +117,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Creator: Lee Guang Le, Jeffrey
         /// Student ID: S10258143A
         /// </summary>
-        public void AddReturnTimeslot(ReturnTimeslot returnTimeslot)
+        public void addReturnTimeslot(ReturnTimeslot returnTimeslot)
         {
             returnTimeslots.Add(returnTimeslot);
         }
@@ -128,7 +128,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10258143A
         /// </summary>
         /// <returns>The start date and time.</returns>
-        public DateTime GetStartDateTime()
+        public DateTime getStartDateTime()
         {
             return rentStartDateTime;
         }
@@ -139,7 +139,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10258143A
         /// </summary>
         /// <returns>The end date and time.</returns>
-        public DateTime GetEndDateTime()
+        public DateTime getEndDateTime()
         {
             return rentEndDateTime;
         }
@@ -150,7 +150,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10258143A
         /// </summary>
         /// <returns>The renter's email.</returns>
-        public string GetRenterEmail()
+        public string getRenterEmail()
         {
             return user.Email;
         }
@@ -161,7 +161,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10258143A
         /// </summary>
         /// <returns>The car owner's email.</returns>
-        public string GetCarOwnerEmail()
+        public string getCarOwnerEmail()
         {
             return car.CarOwner.Email;
         }
@@ -171,7 +171,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Creator: Lee Guang Le, Jeffrey
         /// Student ID: S10258143A
         /// </summary>
-        public void ModifyBooking(DateTime newStartDateTime, DateTime newEndDateTime, PickupLocation newPickupLocation, ReturnLocation newReturnLocation, decimal newAmount)
+        public void modifyBooking(DateTime newStartDateTime, DateTime newEndDateTime, PickupLocation newPickupLocation, ReturnLocation newReturnLocation, decimal newAmount)
         {
             this.RentStartDateTime = newStartDateTime;
             this.RentEndDateTime = newEndDateTime;

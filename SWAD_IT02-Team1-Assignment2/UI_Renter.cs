@@ -18,7 +18,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="renter">The renter object.</param>
         /// <param name="pickupLocations">List of pickup locations.</param>
         /// <param name="returnLocations">List of return locations.</param>
-        public void RenterMenu(Renter renter, Car dummyCar, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
+        public void renterMenu(Renter renter, Car dummyCar, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             UI_ModifyBooking uiModifyBooking = new UI_ModifyBooking();
             CTL_BookCar ctlBookCar = new CTL_BookCar();
@@ -54,7 +54,7 @@ namespace SWAD_IT02_Team1_Assignment2
                         {
                             foreach (var booking in renter.Bookings)
                             {
-                                DisplayBookingDetails(booking);
+                                displayBookingDetails(booking);
                             }
                         }
                         else
@@ -66,7 +66,7 @@ namespace SWAD_IT02_Team1_Assignment2
                         ctlBookCar.ProcessBookingRequest(renter, dummyCar, pickupLocations, returnLocations);
                         break;
                     case "3":
-                        uiModifyBooking.InitialiseModifyBooking(renter, pickupLocations, returnLocations);
+                        uiModifyBooking.initialiseModifyBooking(renter, pickupLocations, returnLocations);
                         break;
                     case "4":
                         // Implement Pickup Car functionality here
@@ -93,16 +93,18 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10258143A
         /// </summary>
         /// <param name="aBooking">The booking to display.</param>
-        public void DisplayBookingDetails(Booking aBooking)
+        public void displayBookingDetails(Booking aBooking)
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\n\n===============================================");
             Console.WriteLine($"             Booking {aBooking.Id} Details");
             Console.WriteLine("===============================================");
+            Console.ResetColor();
             Console.WriteLine($"Booking ID:         {aBooking.Id}");
             Console.WriteLine($"Car ID:             {aBooking.Car.Id}");
             Console.WriteLine($"Start Date:         {aBooking.RentStartDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}");
             Console.WriteLine($"End Date:           {aBooking.RentEndDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}");
-            Console.WriteLine($"Amount:             {aBooking.Amount}");
+            Console.WriteLine($"Amount (SGD):       {aBooking.Amount}");
             Console.WriteLine($"Pickup Location:    {aBooking.PickupLocation.Address}");
             Console.WriteLine($"Return Location:    {aBooking.ReturnLocation.Address}");
             Console.WriteLine($"Status:             {aBooking.Status}");

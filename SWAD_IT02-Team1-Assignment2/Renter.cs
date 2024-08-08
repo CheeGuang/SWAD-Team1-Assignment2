@@ -68,7 +68,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10258143A
         /// </summary>
         /// <param name="booking">The booking to add.</param>
-        public void AddBooking(Booking booking)
+        public void addBooking(Booking booking)
         {
             bookings.Add(booking);
         }

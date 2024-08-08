@@ -17,7 +17,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10258143A
         /// </summary>
         /// <param name="carOwner">The car owner object.</param>
-        public void CarOwnerMenu(CarOwner carOwner)
+        public void carOwnerMenu(CarOwner carOwner)
         {
             UI_RegisterCar uiRegisterCar = new UI_RegisterCar();
 
@@ -26,11 +26,9 @@ namespace SWAD_IT02_Team1_Assignment2
                 Console.WriteLine("\n===============================================");
                 Console.WriteLine("                CarOwner Menu");
                 Console.WriteLine("===============================================");
-                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("1. View All Cars");
                 Console.WriteLine("2. Register Car");
                 Console.WriteLine("0. Logout");
-                Console.ResetColor(); // Reset to default console colour
                 Console.WriteLine("===============================================\n");
                 Console.Write("Please select an option: ");
 
@@ -41,7 +39,7 @@ namespace SWAD_IT02_Team1_Assignment2
                 {
                     case "1":
                         // Where the View All Cars functionality starts.
-                        ViewAllCars(carOwner);
+                        viewAllCars(carOwner);
                         continue;
                     case "2":
                         // Where the Register Car functionality starts.
@@ -63,7 +61,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10258143A
         /// </summary>
         /// <param name="carOwner">The car owner object.</param>
-        private void ViewAllCars(CarOwner carOwner)
+        private void viewAllCars(CarOwner carOwner)
         {
             if (carOwner.Cars.Count == 0)
             {
@@ -78,14 +76,14 @@ namespace SWAD_IT02_Team1_Assignment2
             for (int i = 0; i < carOwner.Cars.Count; i++)
             {
                 var car = carOwner.Cars[i];
-                Console.WriteLine($"ID: {car.Id}");
-                Console.WriteLine($"Make: {car.Make}");
-                Console.WriteLine($"Model: {car.Model}");
-                Console.WriteLine($"Year: {car.Year}");
-                Console.WriteLine($"Mileage: {car.Mileage}");
-                Console.WriteLine($"Rental Price: {car.RentalPrice:C}");
-                Console.WriteLine($"Number Plate: {car.NumberPlate}");
-                Console.WriteLine($"Verified: {car.IsVerified}");
+                Console.WriteLine($"ID:                            {car.Id}");
+                Console.WriteLine($"Make:                          {car.Make}");
+                Console.WriteLine($"Model:                         {car.Model}");
+                Console.WriteLine($"Year:                          {car.Year}");
+                Console.WriteLine($"Mileage:                       {car.Mileage}");
+                Console.WriteLine($"Rental Price Per Hour (SGD):   {car.RentalPrice:C}");
+                Console.WriteLine($"Number Plate:                  {car.NumberPlate}");
+                Console.WriteLine($"Verified:                      {car.IsVerified}");
 
                 if (carOwner.Cars.Count > 1 && i < carOwner.Cars.Count - 1)
                 {

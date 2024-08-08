@@ -25,12 +25,12 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="pickupLocations">List of pickup locations.</param>
         /// <param name="returnLocations">List of return locations.</param>
         /// <returns>Dictionary of updated booking details.</returns>
-        public Dictionary<string, string> RequestUpdatedBookingDetails(Booking aBooking, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
+        public Dictionary<string, string> requestUpdatedBookingDetails(Booking aBooking, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             Dictionary<string, string> updatedDetails = new Dictionary<string, string>();
 
             // Display availability schedule for the selected car
-            DisplayAvailabilitySchedule(aBooking.Car.NumberPlate, aBooking.Car.AvailabilitySchedules);
+            displayAvailabilitySchedule(aBooking.Car.NumberPlate, aBooking.Car.AvailabilitySchedules);
 
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\n===============================================");
@@ -44,7 +44,7 @@ namespace SWAD_IT02_Team1_Assignment2
             Console.Write("New End Date and Time (dd/MM/yyyy h:mm:ss tt): ");
             updatedDetails["newEndDateTime"] = Console.ReadLine();
 
-            DisplayLocations(pickupLocations, returnLocations);
+            displayLocations(pickupLocations, returnLocations);
 
             Console.Write("New Pickup Location ID: ");
             updatedDetails["newPickupLocationId"] = Console.ReadLine();
@@ -66,10 +66,10 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="pickupLocations">List of pickup locations.</param>
         /// <param name="returnLocations">List of return locations.</param>
         /// <returns>Dictionary of updated booking details.</returns>
-        public Dictionary<string, string> EnterUpdatedBookingDetails(Booking aBooking, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
+        public Dictionary<string, string> enterUpdatedBookingDetails(Booking aBooking, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
-            DisplayBookingDetails(aBooking);
-            return RequestUpdatedBookingDetails(aBooking, pickupLocations, returnLocations);
+            displayBookingDetails(aBooking);
+            return requestUpdatedBookingDetails(aBooking, pickupLocations, returnLocations);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="renter">The renter object.</param>
         /// <param name="pickupLocations">List of pickup locations.</param>
         /// <param name="returnLocations">List of return locations.</param>
-        public void InitialiseModifyBooking(Renter renter, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
+        public void initialiseModifyBooking(Renter renter, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             if (renter.Bookings.Count > 0)
             {
@@ -91,25 +91,25 @@ namespace SWAD_IT02_Team1_Assignment2
                 Console.ResetColor();
                 foreach (var booking in renter.Bookings)
                 {
-                    DisplayBookingDetails(booking);
+                    displayBookingDetails(booking);
                 }
 
-                int bookingId = SelectBooking();
+                int bookingId = selectBooking();
                 Booking aBooking = renter.Bookings.Find(b => b.Id == bookingId);
                 if (aBooking != null)
                 {
                     bool isSuccessful = false;
                     while (!isSuccessful)
                     {
-                        var updatedDetails = EnterUpdatedBookingDetails(aBooking, pickupLocations, returnLocations);
-                        isSuccessful = ctlModifyBooking.EnterUpdated(updatedDetails, pickupLocations, returnLocations, aBooking);
+                        var updatedDetails = enterUpdatedBookingDetails(aBooking, pickupLocations, returnLocations);
+                        isSuccessful = ctlModifyBooking.enterUpdated(updatedDetails, pickupLocations, returnLocations, aBooking);
                         if (!isSuccessful)
                         {
                             Console.WriteLine("Failed to update booking. Please try again.");
                         }
                         else
                         {
-                            DisplaySuccessMessage(aBooking);
+                            displaySuccessMessage(aBooking);
                         }
                     }
                 }
@@ -130,7 +130,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10258143A
         /// </summary>
         /// <returns>The Booking ID entered by the user.</returns>
-        private int SelectBooking()
+        private int selectBooking()
         {
             Console.Write("Enter the Booking ID you want to modify: ");
             int bookingId;
@@ -147,7 +147,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10258143A
         /// </summary>
         /// <param name="aBooking">The booking to display.</param>
-        public void DisplayBookingDetails(Booking aBooking)
+        public void displayBookingDetails(Booking aBooking)
         {
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\n\n===============================================");
@@ -158,7 +158,7 @@ namespace SWAD_IT02_Team1_Assignment2
             Console.WriteLine($"Car ID:             {aBooking.Car.Id}");
             Console.WriteLine($"Start Date:         {aBooking.RentStartDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}");
             Console.WriteLine($"End Date:           {aBooking.RentEndDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}");
-            Console.WriteLine($"Amount:             {aBooking.Amount}");
+            Console.WriteLine($"Amount (SGD):       {aBooking.Amount}");
             Console.WriteLine($"Pickup Location:    {aBooking.PickupLocation.Address}");
             Console.WriteLine($"Return Location:    {aBooking.ReturnLocation.Address}");
             Console.WriteLine($"Status:             {aBooking.Status}");
@@ -171,14 +171,14 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10258143A
         /// </summary>
         /// <param name="aBooking">The booking that was updated.</param>
-        public void DisplaySuccessMessage(Booking aBooking)
+        public void displaySuccessMessage(Booking aBooking)
         {
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\n===============================================");
             Console.WriteLine("         Booking Updated Successfully!");
             Console.WriteLine("===============================================");
             Console.ResetColor();
-            DisplayBookingDetails(aBooking);
+            displayBookingDetails(aBooking);
         }
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// </summary>
         /// <param name="numberPlate">The number plate of the car.</param>
         /// <param name="availabilitySchedules">List of availability schedules.</param>
-        public void DisplayAvailabilitySchedule(string numberPlate, List<AvailabilitySchedule> availabilitySchedules)
+        public void displayAvailabilitySchedule(string numberPlate, List<AvailabilitySchedule> availabilitySchedules)
         {
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\n===============================================");
@@ -211,7 +211,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// </summary>
         /// <param name="pickupLocations">List of pickup locations.</param>
         /// <param name="returnLocations">List of return locations.</param>
-        public void DisplayLocations(List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
+        public void displayLocations(List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\n===============================================");

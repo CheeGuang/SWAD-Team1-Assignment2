@@ -23,9 +23,9 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="dummyCar">The dummy car object.</param>
         /// <param name="pickupLocations">List of pickup locations.</param>
         /// <param name="returnLocations">List of return locations.</param>
-        public void MainMenu(Renter dummyRenter, CarOwner dummyCarOwner, ICarAdmin dummyICarAdmin, Car dummyCar, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
+        public void mainMenu(Renter dummyRenter, CarOwner dummyCarOwner, ICarAdmin dummyICarAdmin, Car dummyCar, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
-            DisplayWelcomeScreen(); // Display the ASCII art welcome screen
+            displayWelcomeScreen(); // Display the ASCII art welcome screen
 
             while (true)
             {
@@ -44,13 +44,13 @@ namespace SWAD_IT02_Team1_Assignment2
                 switch (choice)
                 {
                     case "1":
-                        LoginAsRenter(dummyRenter, dummyCar, pickupLocations, returnLocations);
+                        loginAsRenter(dummyRenter, dummyCar, pickupLocations, returnLocations);
                         break;
                     case "2":
-                        LoginAsCarOwner(dummyCarOwner);
+                        loginAsCarOwner(dummyCarOwner);
                         break;
                     case "3":
-                        LoginAsICarAdmin(dummyICarAdmin);
+                        loginAsICarAdmin(dummyICarAdmin);
                         break;
                     case "0":
                         return;
@@ -71,11 +71,11 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="dummyRenter">The dummy renter object.</param>
         /// <param name="pickupLocations">List of pickup locations.</param>
         /// <param name="returnLocations">List of return locations.</param>
-        public void LoginAsRenter(Renter dummyRenter, Car dummyCar, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
+        public void loginAsRenter(Renter dummyRenter, Car dummyCar, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             Console.WriteLine($"Logged in as Renter: {dummyRenter.Name}");
             UI_Renter uiRenter = new UI_Renter();
-            uiRenter.RenterMenu(dummyRenter, dummyCar, pickupLocations, returnLocations); // added dummyCar
+            uiRenter.renterMenu(dummyRenter, dummyCar, pickupLocations, returnLocations); // added dummyCar
         }
 
         /// <summary>
@@ -84,11 +84,11 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10258143A
         /// </summary>
         /// <param name="dummyCarOwner">The dummy car owner object.</param>
-        public void LoginAsCarOwner(CarOwner dummyCarOwner)
+        public void loginAsCarOwner(CarOwner dummyCarOwner)
         {
             Console.WriteLine($"Logged in as Car Owner: {dummyCarOwner.Name}");
             UI_CarOwner uiCarOwner = new UI_CarOwner();
-            uiCarOwner.CarOwnerMenu(dummyCarOwner);
+            uiCarOwner.carOwnerMenu(dummyCarOwner);
         }
 
         /// <summary>
@@ -97,17 +97,17 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10258143A
         /// </summary>
         /// <param name="dummyICarAdmin">The dummy ICarAdmin object.</param>
-        public void LoginAsICarAdmin(ICarAdmin dummyICarAdmin)
+        public void loginAsICarAdmin(ICarAdmin dummyICarAdmin)
         {
             Console.WriteLine($"Logged in as ICarAdmin: {dummyICarAdmin.Name}");
             UI_ICarAdmin uiICarAdmin = new UI_ICarAdmin();
-            uiICarAdmin.ICarAdminMenu(dummyICarAdmin);
+            uiICarAdmin.iCarAdminMenu(dummyICarAdmin);
         }
 
         /// <summary>
         /// Displays the ASCII art welcome screen.
         /// </summary>
-        private void DisplayWelcomeScreen()
+        private void displayWelcomeScreen()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(@"

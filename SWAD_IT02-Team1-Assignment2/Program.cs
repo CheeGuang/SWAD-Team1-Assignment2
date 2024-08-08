@@ -29,7 +29,7 @@ namespace SWAD_IT02_Team1_Assignment2
 
             // Main menu
             UI_Main uiMain = new UI_Main();
-            uiMain.MainMenu(dummyRenter, dummyCarOwner, dummyICarAdmin, dummyCar, pickupLocations, returnLocations);
+            uiMain.mainMenu(dummyRenter, dummyCarOwner, dummyICarAdmin, dummyCar, pickupLocations, returnLocations);
         }
 
         /// <summary>
@@ -45,10 +45,10 @@ namespace SWAD_IT02_Team1_Assignment2
             dummyICarAdmin = new ICarAdmin(1, "Emily Tan", "emilytan@example.com", "6677889900", "1988-04-04", true);
 
             // Create instance of Car
-            dummyCar = new Car(1, "Toyota", "Camry", 2020, 15000.0m, 50.0m, "SGX1234A", true, dummyCarOwner);
+            dummyCar = new Car(1, "Toyota", "Camry", 2020, 15000.0m, 10.0m, "SGX1234A", true, dummyCarOwner);
 
             // Add dummyCar to dummyCarOwner's list of cars
-            dummyCarOwner.AddCar(dummyCar);
+            dummyCarOwner.addCar(dummyCar);
 
             // Create instance of Insurance
             Insurance dummyInsurance = new Insurance(1, 10000.0m, dummyCar, new DateTime(2024, 12, 31));
@@ -56,11 +56,11 @@ namespace SWAD_IT02_Team1_Assignment2
 
             // Create instance of Photo
             Photo dummyPhoto = new Photo(1, "Front View", "http://example.com/front.jpg");
-            dummyCar.AddPhoto(dummyPhoto);
+            dummyCar.addPhoto(dummyPhoto);
 
             // Create instance of AvailabilitySchedule
             AvailabilitySchedule dummySchedule = new AvailabilitySchedule(1, new DateTime(2024, 08, 01), new DateTime(2024, 08, 31));
-            dummyCar.AddAvailabilitySchedule(dummySchedule);
+            dummyCar.addAvailabilitySchedule(dummySchedule);
 
             // Initialize locations list
             pickupLocations = new List<PickupLocation>
@@ -101,16 +101,16 @@ namespace SWAD_IT02_Team1_Assignment2
             booking2.PickupTimeslots.Add(pickupTimeslot2);
           
             
-            booking1.AddReturnTimeslot(returnTimeslot1);
-            booking2.AddReturnTimeslot(returnTimeslot2);
+            booking1.addReturnTimeslot(returnTimeslot1);
+            booking2.addReturnTimeslot(returnTimeslot2);
 
 
             Bookings.Add(booking1);
             Bookings.Add(booking2);
 
             // Add bookings to renter
-            dummyRenter.AddBooking(booking1);
-            dummyRenter.AddBooking(booking2);
+            dummyRenter.addBooking(booking1);
+            dummyRenter.addBooking(booking2);
 
             // Create instances of Accident and AssistanceReport
             Accident accident1 = new Accident(1, "Minor collision", new DateTime(2024, 07, 01, 10, 0, 0), true);

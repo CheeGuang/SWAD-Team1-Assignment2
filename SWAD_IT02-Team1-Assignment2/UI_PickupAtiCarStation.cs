@@ -99,24 +99,29 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="b">The booking to display.</param>
         public void displayBookingDetails(Booking b)
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\n\n===============================================");
-            Console.WriteLine($"             Booking Details");
+            Console.WriteLine($"             Booking {b.Id} Details");
             Console.WriteLine("===============================================");
+            Console.ResetColor();
             Console.WriteLine($"Booking ID:         {b.Id}");
             Console.WriteLine($"Car ID:             {b.Car.Id}");
             Console.WriteLine($"Start Date:         {b.RentStartDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}");
             Console.WriteLine($"End Date:           {b.RentEndDateTime.ToString("dd/MM/yyyy h:mm:ss tt")}");
+            Console.WriteLine($"Amount (SGD):       {b.Amount}");
             Console.WriteLine($"Pickup Location:    {b.PickupLocation.Address}");
+            Console.WriteLine($"Return Location:    {b.ReturnLocation.Address}");
+            Console.WriteLine($"Status:             {b.Status}");
             Console.WriteLine("===============================================\n");
         }
 
-        /// <summary>
-        /// Displays booking details.
-        /// Creator: Ong Yee Hen
-        /// Student ID: S10258759D
-        /// </summary>
-        /// <param name="b">The booking to confirm the pickup.</param>
-        public void confirmPickup(Booking b)
+            /// <summary>
+            /// Displays booking details.
+            /// Creator: Ong Yee Hen
+            /// Student ID: S10258759D
+            /// </summary>
+            /// <param name="b">The booking to confirm the pickup.</param>
+            public void confirmPickup(Booking b)
         {
             Console.Write("Do you want to continue with the pickup process? (Yes/No): ");
             string response = Console.ReadLine();
