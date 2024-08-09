@@ -80,10 +80,11 @@ namespace SWAD_IT02_Team1_Assignment2
 
                 // Assume Payment made
                 payment.makePayment(totalCost);
+                string status = "Created Successfully";
 
                 // Call method to create booking
                 Booking aBooking = createBooking(renter.Bookings.Count + 1, renter, car, DateTime.Parse(bookingDetails["startDateTime"]), DateTime.Parse(bookingDetails["endDateTime"]), totalCost,
-                payment, getPickupLocationById(int.Parse(bookingDetails["pickupLocation"]), pickupLocations), getReturnLocationById(int.Parse(bookingDetails["returnLocation"]), returnLocations), "Created Successfully");
+                payment, getPickupLocationById(int.Parse(bookingDetails["pickupLocation"]), pickupLocations), getReturnLocationById(int.Parse(bookingDetails["returnLocation"]), returnLocations), status);
 
                 // Console print booking summary
                 uiBookCar.printBookingSummary(aBooking);
@@ -100,6 +101,21 @@ namespace SWAD_IT02_Team1_Assignment2
            
         }
 
+        /// <summary>
+        /// Create booking object and add to renter
+        /// Creator: Zou Ruining, Raeanne
+        /// Student ID: S10258772G
+        /// </summary>
+        /// <param name="id">Booking ID</param>
+        /// <param name="renter">Renter object</param>
+        /// <param name="car">Selected car object</param>
+        /// <param name="rentStartDateTime">Start date time of rent</param>
+        /// <param name="renter">End date time of rent</param>
+        /// <param name="amount">Cost of rent</param>
+        /// <param name="payment">Payment object</param>
+        /// <param name="pickupLocation">Selected pickup location for car</param>
+        /// <param name="returnLocation">Selected return location for car</param>
+        /// <param name="status">Status of booking</param>
         private Booking createBooking(int id, Renter renter, Car car, DateTime rentStartDateTime, DateTime rentEndDateTime, decimal amount, Payment payment, PickupLocation pickupLocation, ReturnLocation returnLocation, string status)
         {
             // Commit the new booking
