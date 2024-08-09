@@ -29,42 +29,44 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="car">The car selected.</param>
         /// <param name="renter">The renter making the booking.</param>
         /// <returns>True if the update is successful, otherwise false.</returns> 
-        public bool ProcessBookingRequest(Renter renter, Car car, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
+        public bool processBookingRequest(Renter renter, Car car, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             try
             {
                 //validate booking availability slot
-                uiBookCar.DisplayAvailabilitySchedule(car.NumberPlate, car.AvailabilitySchedules);
-                int slotID;
+                uiBookCar.displayAvailabilitySchedule(car.NumberPlate, car.AvailabilitySchedules);
+                int slotID = -1;
                 AvailabilitySchedule selectedSlot = null;
                 do
                 {
-                    slotID = uiBookCar.PromptSelectedAvailabilitySlot();
-                    selectedSlot = GetAvailabilitySlot(slotID, car.AvailabilitySchedules);
+                    slotID = uiBookCar.promptSelectedAvailabilitySlot();
+                    selectedSlot = getAvailabilitySlot(slotID, car.AvailabilitySchedules);
 
                 } while (selectedSlot == null);
 
                 //validate bookingdates
-                Dictionary<string, string> bookingDetails;
+                Dictionary<string, string> bookingDetails = null;
+                bool isBookingDatesValid = false;
                 do
                 {
-                    bookingDetails = uiBookCar.PromptBookingDates();
+                    bookingDetails = uiBookCar.promptBookingDates();
+                    isBookingDatesValid = validateBookingDates(selectedSlot, bookingDetails);
+                } while (!isBookingDatesValid);
 
-                } while (!ValidateBookingDates(selectedSlot, bookingDetails));
-                
 
                 //validate pickup/return locations
-                uiBookCar.DisplayLocations(pickupLocations, returnLocations);
+                bool isLocValid = false;
+                uiBookCar.displayLocations(pickupLocations, returnLocations);
                 do
                 {
-                    bookingDetails = uiBookCar.PromptSelectedLocations();
-
-                } while (!ValidateBookingLocations(bookingDetails, pickupLocations, returnLocations));
+                    bookingDetails = uiBookCar.promptSelectedLocations();
+                    isLocValid = validateBookingLocations(bookingDetails, pickupLocations, returnLocations);
+                } while (!isLocValid);
 
 
                 // Call UI to confirm payment
-                decimal totalCost = CalculateCost(DateTime.Parse(bookingDetails["startDateTime"]), DateTime.Parse(bookingDetails["endDateTime"]));
-                bool commitPayment = uiBookCar.PromptPaymentConfirmation(totalCost);
+                decimal totalCost = calculateCost(DateTime.Parse(bookingDetails["startDateTime"]), DateTime.Parse(bookingDetails["endDateTime"]));
+                bool commitPayment = uiBookCar.promptPaymentConfirmation(totalCost);
 
                 if (!commitPayment)
                 {
@@ -72,17 +74,23 @@ namespace SWAD_IT02_Team1_Assignment2
                     return false; // Abort the booking
                 }
 
-                // Assume Payment handled
-                Payment payment = PaymentModel.Instance.MakePayment(totalCost);
+                // Dummy Data
+                Card card1 = new Card(1, "5520728801926284", "John Doe", new DateTime(2025, 12, 31), "Visa", "DBS");
+                Payment payment = new Payment(1, 120.00m, "Credit Card", DateTime.Now, card1);
 
-                Booking aBooking = CreateBooking(renter.Bookings.Count + 1, renter, car, DateTime.Parse(bookingDetails["startDateTime"]), DateTime.Parse(bookingDetails["endDateTime"]), totalCost,
-                payment, getPickupLocationById(int.Parse(bookingDetails["pickupLocation"]), pickupLocations), getReturnLocationById(int.Parse(bookingDetails["returnLocation"]), returnLocations), "Created Successfully");
+                // Assume Payment made
+                payment.makePayment(totalCost);
+                string status = "Created Successfully";
 
-                //Console print booking summary
-                uiBookCar.PrintBookingSummary(aBooking);
+                // Call method to create booking
+                Booking aBooking = createBooking(renter.Bookings.Count + 1, renter, car, DateTime.Parse(bookingDetails["startDateTime"]), DateTime.Parse(bookingDetails["endDateTime"]), totalCost,
+                payment, getPickupLocationById(int.Parse(bookingDetails["pickupLocation"]), pickupLocations), getReturnLocationById(int.Parse(bookingDetails["returnLocation"]), returnLocations), status);
+
+                // Console print booking summary
+                uiBookCar.printBookingSummary(aBooking);
 
                 // Send an Email
-                EmailSystem.SendBookingConfirmationEmail(renter.Email, renter.Name, aBooking);
+                EmailSystem.sendBookingConfirmationEmail(renter.Email, renter.Name, aBooking);
 
                 return true;
             } catch
@@ -93,7 +101,22 @@ namespace SWAD_IT02_Team1_Assignment2
            
         }
 
-        private Booking CreateBooking(int id, Renter renter, Car car, DateTime rentStartDateTime, DateTime rentEndDateTime, decimal amount, Payment payment, PickupLocation pickupLocation, ReturnLocation returnLocation, string status)
+        /// <summary>
+        /// Create booking object and add to renter
+        /// Creator: Zou Ruining, Raeanne
+        /// Student ID: S10258772G
+        /// </summary>
+        /// <param name="id">Booking ID</param>
+        /// <param name="renter">Renter object</param>
+        /// <param name="car">Selected car object</param>
+        /// <param name="rentStartDateTime">Start date time of rent</param>
+        /// <param name="renter">End date time of rent</param>
+        /// <param name="amount">Cost of rent</param>
+        /// <param name="payment">Payment object</param>
+        /// <param name="pickupLocation">Selected pickup location for car</param>
+        /// <param name="returnLocation">Selected return location for car</param>
+        /// <param name="status">Status of booking</param>
+        private Booking createBooking(int id, Renter renter, Car car, DateTime rentStartDateTime, DateTime rentEndDateTime, decimal amount, Payment payment, PickupLocation pickupLocation, ReturnLocation returnLocation, string status)
         {
             // Commit the new booking
             Booking booking = new Booking(id, renter, car, rentStartDateTime, rentEndDateTime,amount, payment, pickupLocation, returnLocation, status);
@@ -108,7 +131,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// </summary>
         /// <param name="slotID">Availability Schedule ID</param>
         /// <param name="availabilities">List of selected car's availability schedule</param>
-        private AvailabilitySchedule GetAvailabilitySlot(int slotID, List<AvailabilitySchedule> availabilities)
+        private AvailabilitySchedule getAvailabilitySlot(int slotID, List<AvailabilitySchedule> availabilities)
         {
             foreach (AvailabilitySchedule availability in availabilities)
             {
@@ -128,7 +151,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="availability">The updated booking details.</param>
         /// <param name="bookingDetails">The updated booking details.</param>
         /// <returns>True if the details are valid, otherwise false.</returns>
-        public bool ValidateBookingDates(AvailabilitySchedule availability, Dictionary<string, string> bookingDetails)
+        public bool validateBookingDates(AvailabilitySchedule availability, Dictionary<string, string> bookingDetails)
         {
             DateTime startDateTime;
             DateTime endDateTime;
@@ -175,7 +198,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// </summary>
         /// <param name="bookingDetails">The updated booking details.</param>
         /// <returns>True if the details are valid, otherwise false.</returns>
-        public bool ValidateBookingLocations(Dictionary<string, string> bookingDetails, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
+        public bool validateBookingLocations(Dictionary<string, string> bookingDetails, List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             int pickupLocation;
             int returnLocation;
@@ -254,7 +277,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// </summary>
         /// <param name="endDate">Booking End DateTime</param>
         /// <param name="startDate">Booking Start DateTime</param>
-        public decimal CalculateCost(DateTime endDate, DateTime startDate)
+        public decimal calculateCost(DateTime endDate, DateTime startDate)
         {
             return 5 * Math.Abs((decimal)(endDate - startDate).TotalHours);
         }

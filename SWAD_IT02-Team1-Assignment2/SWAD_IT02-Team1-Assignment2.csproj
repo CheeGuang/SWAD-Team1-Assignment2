@@ -60,7 +60,6 @@
     <Compile Include="ICarAdmin.cs" />
     <Compile Include="Insurance.cs" />
     <Compile Include="Payment.cs" />
-    <Compile Include="PaymentModel.cs" />
     <Compile Include="Photo.cs" />
     <Compile Include="PickupLocation.cs" />
     <Compile Include="PickupTimeslot.cs" />

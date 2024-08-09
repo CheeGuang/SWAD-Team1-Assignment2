@@ -24,7 +24,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// </summary>
         /// <param name="numberPlate">Selected car liscense plate</param>
         /// <param name="availabilitySchedules">All availability schedules of selected car</param>
-        public void DisplayAvailabilitySchedule(string numberPlate, List<AvailabilitySchedule> availabilitySchedules)
+        public void displayAvailabilitySchedule(string numberPlate, List<AvailabilitySchedule> availabilitySchedules)
         { 
             Console.WriteLine("Selected Car License Plate: " + numberPlate);
         
@@ -46,7 +46,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Creator: Zou Ruining, Raeanne
         /// Student ID: S10258772G
         /// </summary>
-        public int PromptSelectedAvailabilitySlot()
+        public int promptSelectedAvailabilitySlot()
         {
             Console.Write("Please enter availability slot ID: ");
             return int.Parse(Console.ReadLine());
@@ -57,7 +57,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Creator: Zou Ruining, Raeanne
         /// Student ID: S10258772G
         /// </summary>
-        public Dictionary<string, string> PromptBookingDates()
+        public Dictionary<string, string> promptBookingDates()
         {
             Console.Write("\nBooking Start Date and Time (dd/MM/yyyy h:mm:ss tt): ");
             bookingDetails["startDateTime"] = Console.ReadLine();
@@ -76,7 +76,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// </summary>
         /// <param name="pickupLocations">List of pickup locations.</param>
         /// <param name="returnLocations">List of return locations.</param>
-        public void DisplayLocations(List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
+        public void displayLocations(List<PickupLocation> pickupLocations, List<ReturnLocation> returnLocations)
         {
             Console.WriteLine("\n===============================================");
             Console.WriteLine("                Pickup Locations");
@@ -101,7 +101,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Creator: Zou Ruining, Raeanne
         /// Student ID: S10258772G
         /// </summary>
-        public Dictionary<string, string> PromptSelectedLocations()
+        public Dictionary<string, string> promptSelectedLocations()
         {
             Console.Write("\nEnter Pickup Location ID: ");
             bookingDetails["pickupLocation"] = Console.ReadLine();
@@ -111,14 +111,14 @@ namespace SWAD_IT02_Team1_Assignment2
             return bookingDetails;
 
         }
-
+        
         /// <summary>
         /// Get user to confirm payment
         /// Creator: Zou Ruining, Raeanne
         /// Student ID: S10258772G
         /// </summary>
         /// <param name="totalCost">Booking total cost</param>
-        public bool PromptPaymentConfirmation(decimal totalCost)
+        public bool promptPaymentConfirmation(decimal totalCost)
         {
             bool response = false;
             bool commitPayment = false;
@@ -141,11 +141,17 @@ namespace SWAD_IT02_Team1_Assignment2
                 }
                 else
                 {
-                    Console.WriteLine("Invalid input. Please enter 'y' or 'n'.");
+                    response = false;
+                    printInvalidInputNotification();
                 }
             } while (!response);
 
             return commitPayment;
+        }
+
+        public void printInvalidInputNotification()
+        {
+            Console.WriteLine("Invalid input. Please enter 'y' or 'n'.");
         }
 
         /// <summary>
@@ -154,7 +160,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Student ID: S10258772G
         /// </summary>
         /// <param name="booking">Booking made</param>
-        public void PrintBookingSummary(Booking booking)
+        public void printBookingSummary(Booking booking)
         {
             Console.WriteLine("\n****** Booking Summary ********");
             Console.WriteLine("  ID: " + booking.Id);

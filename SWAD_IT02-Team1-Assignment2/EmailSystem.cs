@@ -100,7 +100,7 @@ namespace SWAD_IT02_Team1_Assignment2
         /// <param name="receiverEmail">The receiver's email address.</param>
         /// <param name="userName">The user's name.</param>
         /// <param name="booking">The original booking details.</param>
-        static public void SendBookingConfirmationEmail(string receiverEmail, string userName, Booking booking)
+        static public void sendBookingConfirmationEmail(string receiverEmail, string userName, Booking booking)
         {
             Console.WriteLine($"Sending {receiverEmail}");
             // Sender Email Details
