@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Remoting.Lifetime;
 using System.Threading;
 
@@ -18,6 +19,8 @@ namespace SWAD_IT02_Team1_Assignment2
         {
             ctlRegisterCar = new CTL_RegisterCar();
         }
+
+        private Car newCar;
 
         /// <summary>
         /// Registers a car for the car owner.
@@ -40,7 +43,7 @@ namespace SWAD_IT02_Team1_Assignment2
 
             // Get car details from user input
             Console.WriteLine("\n\n===============================================");
-            Console.WriteLine($"Prepare the following car details to register a car.");
+            Console.WriteLine($"Car Details");
             Console.WriteLine("===============================================");
             Console.Write($"Make: ");
             string make = Console.ReadLine();
@@ -55,21 +58,32 @@ namespace SWAD_IT02_Team1_Assignment2
             Console.Write($"Number Plate: ");
             string numberPlate = Console.ReadLine();
 
-            bool isVerified = ctlRegisterCar.ValidateCarDetails(make, model, year, mileage, rentalPrice, numberPlate);
+            bool isVerified = submitCarDetails(make, model, year, mileage, rentalPrice, numberPlate);
 
             if (isVerified)
             {
-                ctlRegisterCar.CreateCar(carOwner, make, model, Convert.ToInt32(year), Convert.ToDecimal(mileage), Convert.ToDecimal(rentalPrice), numberPlate, isVerified);
-                uploadPhotos();
-                submitAvailabilitySchedule();
-                string choice = displayInsuranceForm();
-                submitInsuranceChoice(choice);
+                newCar = ctlRegisterCar.createCar(carOwner, make, model, Convert.ToInt32(year), Convert.ToDecimal(mileage), Convert.ToDecimal(rentalPrice), numberPlate, isVerified);
+                displayPhotoForm();
+                displayAvailabilityScheduleForm();
+                displayInsuranceForm();
                 displayRegistrationSuccess();
+                
             }
             else
             {
                 displayErrorMessage();
             }
+        }
+
+        /// <summary>
+        /// Informs user of error in registration
+        /// Creator: Cing Sian Kim
+        /// Student ID: S10257716F
+        /// </summary>
+        public bool submitCarDetails(string make, string model, string year, string mileage, string rentalPrice, string numberPlate)
+        {
+            bool isValid = ctlRegisterCar.validateCarDetails(make, model, year, mileage, rentalPrice, numberPlate);
+            return isValid;
         }
 
 
@@ -83,12 +97,29 @@ namespace SWAD_IT02_Team1_Assignment2
             Console.WriteLine("Error in registration, please try again.");
         }
 
+
+
         /// <summary>
         /// Displays photo upload form for users to input their information.
         /// Creator: Cing Sian Kim
         /// Student ID: S10257716F
         /// </summary>
-        private void uploadPhotos()
+        public void displayPhotoForm()
+        {
+
+            Console.WriteLine("\n===============================================");
+            Console.WriteLine($"Photo Upload Form");
+            Console.WriteLine("===============================================");
+            uploadPhoto();
+            
+        }
+
+        /// <summary>
+        /// Uploads one photo to the ctl
+        /// Creator: Cing Sian Kim
+        /// Student ID: S10257716F
+        /// </summary>
+        private void uploadPhoto()
         {
             int photoId = 1;
             while (true)
@@ -109,29 +140,43 @@ namespace SWAD_IT02_Team1_Assignment2
                     }
                 }
 
-                // Validation of the URL to ensure it ends with either .jpg or .png
-                if (photoUrl.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) || photoUrl.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
-                {
-                    Console.Write("Enter photo caption: ");
-                    string caption = Console.ReadLine();
-                    bool photoIsValid = ctlRegisterCar.processPhotoUpload(photoId, photoUrl, caption);
+                Console.Write("Enter photo caption: ");
+                string caption = Console.ReadLine();
+                bool photoIsValid = ctlRegisterCar.processPhotoUpload(photoId, photoUrl, caption);
 
-                    if (photoIsValid)
-                    {
-                        Console.WriteLine($"Photo {photoId} uploaded successfully.");
-                        photoId++;
-                    }
-                    else
-                    {
-                        displayInvalidPhotoMessage();
-                    }
-                }
-                else
+                if (!photoIsValid)
                 {
-                    // Notifies the user if the URL is not valid
-                    Console.WriteLine("Invalid URL. Please enter a URL that ends with .jpg or .png.");
+                    displayInvalidPhotoMessage();
+                } else
+                {
+                    photoId++;
                 }
             }
+        }
+
+        /// <summary>
+        /// Shows invalid photo message 
+        /// Creator: Cing Sian Kim
+        /// Student ID: S10257716F
+        /// </summary>
+        public void displayInvalidPhotoMessage()
+        {
+            Console.WriteLine("Photo upload failed. Please try again.");
+        }
+
+        /// <summary>
+        /// Displays Availability Schedule form for users to input their information.
+        /// Creator: Cing Sian Kim
+        /// Student ID: S10257716F
+        /// </summary>
+        public void displayAvailabilityScheduleForm()
+        {
+            Console.WriteLine("\n===============================================");
+            Console.WriteLine($"Availability Schedule Form");
+            Console.WriteLine("===============================================");
+            Console.WriteLine("Provide dates to add a schedule:");
+
+            submitAvailabilitySchedule();
         }
 
         /// <summary>
@@ -143,17 +188,17 @@ namespace SWAD_IT02_Team1_Assignment2
         {
             while (true)
             {
-                Console.WriteLine("Provide dates to add a schedule:");
-
                 Console.Write("Start date (YYYY-MM-DD): ");
                 string startInput = Console.ReadLine();
+
+                Console.Write("End date (YYYY-MM-DD): ");
+                string endInput = Console.ReadLine();
+
                 if (startInput.ToLower() == "done")
                 {
                     break; // Exit the loop and method if the user types "done"
                 }
 
-                Console.Write("End date (YYYY-MM-DD): ");
-                string endInput = Console.ReadLine();
                 if (endInput.ToLower() == "done")
                 {
                     break; // Exit the loop and method if the user types "done"
@@ -164,9 +209,9 @@ namespace SWAD_IT02_Team1_Assignment2
                     DateTime startDate = DateTime.Parse(startInput);
                     DateTime endDate = DateTime.Parse(endInput);
 
-                    bool isValid = ctlRegisterCar.validateAvailabilitySchedule(startDate, endDate);
+                    bool dateIsValid = ctlRegisterCar.validateAvailabilitySchedule(startDate, endDate);
 
-                    if (isValid)
+                    if (dateIsValid)
                     {
                         Console.WriteLine("Availability schedule added successfully.");
                         break;
@@ -174,6 +219,7 @@ namespace SWAD_IT02_Team1_Assignment2
                     else
                     {
                         Console.WriteLine("Invalid schedule. Please try again.");
+
                     }
                 }
                 catch (FormatException)
@@ -188,10 +234,13 @@ namespace SWAD_IT02_Team1_Assignment2
         /// Creator: Cing Sian Kim
         /// Student ID: S10257716F
         /// </summary>
-        private string displayInsuranceForm()
+        private void displayInsuranceForm()
         {
-            Console.Write("Do you want to apply for insurance? (yes/no): ");
-            return Console.ReadLine();
+            Console.WriteLine("\n===============================================");
+            Console.WriteLine($"Availability Schedule Form");
+            Console.WriteLine("===============================================");
+            Console.Write("Do you want to apply for iCar insurance? (yes/no): ");
+            submitInsuranceChoice(Console.ReadLine());
         }
 
         /// <summary>
@@ -205,16 +254,6 @@ namespace SWAD_IT02_Team1_Assignment2
         }
 
         /// <summary>
-        /// Shows invalid photo message 
-        /// Creator: Cing Sian Kim
-        /// Student ID: S10257716F
-        /// </summary>
-        public void displayInvalidPhotoMessage()
-        {
-            Console.WriteLine("Photo upload failed. Please try again.");
-        }
-
-        /// <summary>
         /// Shows registration success message 
         /// Creator: Cing Sian Kim
         /// Student ID: S10257716F
@@ -224,8 +263,27 @@ namespace SWAD_IT02_Team1_Assignment2
             Console.WriteLine("\n\n===============================================");
             Console.WriteLine("Car registration successful!");
             Console.WriteLine("===============================================");
-            ctlRegisterCar.displayCarDetails();
+            displayCarDetails(newCar);
         }
 
+        /// <summary>
+        /// Display Car Details
+        /// Creator: Cing Sian Kim
+        /// Student ID: S10257716F
+        /// </summary>
+        public void displayCarDetails(Car newCar)
+        {
+            Console.WriteLine($"Car Details:");
+            Console.WriteLine($"Car Id: {newCar.Id}");
+            Console.WriteLine($"Make: {newCar.Make}");
+            Console.WriteLine($"Model: {newCar.Model}");
+            Console.WriteLine($"Year: {newCar.Year}");
+            Console.WriteLine($"Number Plate: {newCar.NumberPlate}");
+            Console.WriteLine($"Rental Rate: {newCar.RentalPrice}");
+            Console.WriteLine($"Number of Photos: {newCar.Photos.Count}");
+            Console.WriteLine($"Insurance Applied: {(newCar.Insurance != null ? "Yes" : "No")}");
+            Console.WriteLine($"Car Owner: {newCar.CarOwner.Name}");
+            Console.WriteLine("===============================================");
+        }
     }
 }
