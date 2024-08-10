@@ -109,12 +109,12 @@ namespace SWAD_IT02_Team1_Assignment2
                     string renterEmail = booking.getRenterEmail();
                     string carOwnerEmail = booking.getCarOwnerEmail();
 
-                    EmailSystem.sendModifyReservationConfirmationEmail(renterEmail, booking.User.Name, originalBooking, booking);
+                    EmailSystem.sendModifyBookingEmail(renterEmail, booking.User.Name, originalBooking, booking);
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Renter confirmation email sent successfully.");
                     Console.ResetColor();
 
-                    EmailSystem.sendModifyReservationConfirmationEmail(carOwnerEmail, booking.Car.CarOwner.Name, originalBooking, booking);
+                    EmailSystem.sendModifyBookingEmail(carOwnerEmail, booking.Car.CarOwner.Name, originalBooking, booking);
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Car Owner confirmation email sent successfully.");
                     Console.ResetColor();

@@ -90,7 +90,7 @@ namespace SWAD_IT02_Team1_Assignment2
                 uiBookCar.printBookingSummary(aBooking);
 
                 // Send an Email
-                EmailSystem.sendBookingConfirmationEmail(renter.Email, renter.Name, aBooking);
+                EmailSystem.sendMakeBookingEmail(renter.Email, renter.Name, aBooking);
 
                 return true;
             } catch
