@@ -86,10 +86,10 @@ namespace SWAD_IT02_Team1_Assignment2
 
             // Create instances of PickupTimeslot
             PickupTimeslot pickupTimeslot1 = new PickupTimeslot(1, new DateTime(2024, 08, 05, 20, 0, 0), new DateTime(2024, 08, 05, 23, 0, 0), true, 1);
-            PickupTimeslot pickupTimeslot2 = new PickupTimeslot(1, new DateTime(2024, 08, 10, 20, 0, 0), new DateTime(2024, 08, 10, 23, 0, 0), true, 1);
+            PickupTimeslot pickupTimeslot2 = new PickupTimeslot(1, new DateTime(2025, 08, 10, 20, 0, 0), new DateTime(2025, 08, 10, 23, 0, 0), true, 1);
           
             // Create instances of ReturnTimeSlot
-            ReturnTimeslot returnTimeslot1 = new ReturnTimeslot(1, new DateTime(2024, 08, 05, 9, 0, 0), new DateTime(2024, 08, 08, 23, 0, 0), true, 1);
+            ReturnTimeslot returnTimeslot1 = new ReturnTimeslot(1, new DateTime(2025, 08, 05, 9, 0, 0), new DateTime(2025, 08, 08, 23, 0, 0), true, 1);
             ReturnTimeslot returnTimeslot2 = new ReturnTimeslot(2, new DateTime(2024, 08, 05, 9, 0, 0), new DateTime(2024, 08, 05, 20, 0, 0), true, 1);
 
             // Create instances of Booking
